@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/snackView"
+        style="@style/RelativeLayout">
+
+
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@drawable/splash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include android:id="@+id/toolbarLyt"
+            layout="@layout/custom_toolbar"/>
+
+        <RelativeLayout
+            android:layout_below="@+id/toolbarLyt"
+           android:layout_marginTop="30dp"
+            style="@style/RelativeLayout">
+
+            <LinearLayout
+                style="@style/VerticalLinearLayout"
+                android:id="@+id/topPanel"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp">
+
+                <com.pikopako.AppUtill.CustomTextInputLayout
+                    android:id="@+id/inputLytEmail"
+                    style="@style/TextInputLayoutStyle">
+
+                    <com.pikopako.AppUtill.CustomEditTextBold
+                        android:id="@+id/editEmail"
+                        android:paddingRight="10dp"
+                        android:drawableRight="@mipmap/icon_email"
+                        style="@style/EditTextStyle"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/string_enter_your_email"/>
+
+                </com.pikopako.AppUtill.CustomTextInputLayout>
+
+                <com.pikopako.AppUtill.CustomTextInputLayout
+                    android:id="@+id/inputLytPass"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleDrawable="@mipmap/icon_password"
+
+                    style="@style/TextInputLayoutStyle">
+
+                    <com.pikopako.AppUtill.CustomEditTextBold
+                        android:id="@+id/editPass"
+                        android:drawableRight="@mipmap/icon_password"
+                        android:imeOptions="actionDone"
+                        style="@style/EditTextStyle"
+                        android:inputType="textPassword"
+                        android:hint="@string/string_password"/>
+                </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginBottom="30dp"
+                style="@style/VerticalLinearLayout"
+                android:layout_below="@+id/topPanel"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/default_margen_screen"
+                android:layout_marginStart="@dimen/default_margen_screen">
+                <Button
+                    android:textAllCaps="true"
+                    android:id="@+id/btnLogin"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/login"
+                    android:textSize="@dimen/default_button_size"
+                    android:background="@drawable/login_drawable"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/view_forgot"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
+                    style="@style/HorizontalLinearLayout">
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_forgot_your_password"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_marginStart="8dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/click_here"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_signup"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    style="@style/HorizontalLinearLayout">
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_width="wrap_content"
+                        android:text="Don't have an Account"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:id="@+id/txt_signup"
+                        android:layout_marginStart="8dp"
+                        android:layout_width="wrap_content"
+                        android:text="Sign up"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+    </ScrollView>
+

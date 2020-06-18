@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:background="@color/lighter_gray">
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/expandedListItem"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingBottom="10dp" />-->
+
+
+
+
+
+        <LinearLayout
+            android:padding="8dp"
+            android:id="@+id/lytImage"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/Txt_food_name"
+                android:layout_width="match_parent"
+                android:text="Vegetable Burger"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/Txt_food_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$7.5"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+               />
+
+        </LinearLayout>
+
+        <com.pikopako.AppUtill.CustomTextViewNormal
+            android:id="@+id/Txt_food_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="dfsvjsdfg rdrg dr dfrg  re  dfsr gjfj"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+</LinearLayout>

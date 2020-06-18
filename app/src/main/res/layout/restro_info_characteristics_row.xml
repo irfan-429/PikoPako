@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linlyd"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_marginTop="2dp"
+    android:padding="5dp">
+
+
+
+    <com.pikopako.AppUtill.IconTextView
+        android:id="@+id/Img_serves_alcohol"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="@string/icon_close_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/image_detail"-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:src="@drawable/my_order" />-->
+
+    <com.pikopako.AppUtill.CustomTextViewBold
+        android:id="@+id/txt_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:text="Serves Alcohol and Drink"
+        android:textSize="12sp" />
+
+</LinearLayout>

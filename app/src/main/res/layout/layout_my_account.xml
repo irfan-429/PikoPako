@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/snackView"
+        style="@style/VerticalLinearLayout">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/Txt_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/edit"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/profileicon" />
+
+            <RelativeLayout
+                style="@style/RelativeLayout"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/llyt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal">
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text=""
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llyt"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgPhone"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_below="@+id/txtname"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/contact_icon" />
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:id="@+id/tvContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_toRightOf="@+id/imgPhone"
+                        android:padding="6dp"
+                        android:text=""
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/RelativeLayout"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgEmail"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/mail_icon" />
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@+id/imgEmail"
+                    android:padding="6dp"
+                    android:text=""
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:id="@+id/order_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_order" />
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/Txt_my_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/string_myorders"
+                    android:textColor="#202020"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/lighter_gray"
+                android:layout_below="@id/order_lay"
+                />
+
+            <LinearLayout
+                android:id="@+id/favou_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/order_lay"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/like" />
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/Txt_my_favourites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/string_myfavourites"
+                    android:textColor="#202020"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/lighter_gray"
+                android:layout_below="@id/favou_lay"
+                />
+
+
+
+            <LinearLayout
+                android:id="@+id/offers_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/favou_lay"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/discount" />
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/Txt_offers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/string_offers"
+                    android:textColor="#202020"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/lighter_gray"
+                android:layout_below="@id/offers_lay"
+                />
+
+            <LinearLayout
+                android:id="@+id/address_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/offers_lay"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/lock" />
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/Txt_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/change_password"
+                    android:textColor="#202020"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/lighter_gray"
+                android:layout_below="@id/address_lay"
+                />
+
+            <LinearLayout
+                android:id="@+id/contact_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/address_lay"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/callphone" />
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/Txt_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/contact"
+                    android:textColor="#202020"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/lighter_gray"
+                android:layout_below="@id/contact_lay"
+                />
+
+            <LinearLayout
+                android:id="@+id/logout_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contact_lay"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <!--<ImageView-->
+                    <!--android:layout_width="22dp"-->
+                    <!--android:layout_height="22dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:src="@mipmap/logout" />-->
+
+                <Button
+                    android:id="@+id/Txt_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/POS_LOGOUT"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_drawable"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

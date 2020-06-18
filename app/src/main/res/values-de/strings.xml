@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PikoPako</string>
+
+    //login_activity
+    <string name="string_enter_your_email">E-Mail Adresse eingeben</string>
+    <string name="string_password">Passwort eingeben</string>
+    <string name="click_here">Hier klicken</string>
+    <string name="string_forgot_your_password">Passwort vergessen ?</string>
+
+    //activity_register
+    <string name="string_first_name">Name eingeben</string>
+    <string name="string_last_name">Nachname eingeben</string>
+
+
+    <string name="sign_up_now">Jetzt registrieren</string>
+    <string name="sign_up_now_btn">Registrieren</string>
+    <string name="login">Anmelden</string>
+
+
+    <string name="login_pikopako">Anmelden PikoPako</string>
+    <string name="signup_pikopako">Registrieren Pikopako</string>
+
+    <string name="string_mailid">E-Mail-Adresse</string>
+    <string name="already_have_an_account">Haben Sie bereits ein Konto ?</string>
+
+    <string name="valid_msg_email">Geben Sie eine gültige E-Mail-Adresse ein </string>
+
+
+
+    <string name="valid_msg_phone_number_required">Telefonnummer ist erforderlich.</string>
+    <string name="valid_msg_phone">Die Telefonnummer sollte zwischen 7 und 16 Zeichen lang sein.</string>
+    <string name="valid_msg_full_name_required">Der vollständige Name ist erforderlich.</string>
+    <string name="valid_msg_full_name">Der vollständige Name sollte mindestens 4 Zeichen lang sein.</string>
+    <string name="password_required">Passwort erforderlich</string>
+    <string name="toolbar_title_login_in">Anmeldung</string>
+    <string name="toolbar_title_sign_up">Anmelden</string>
+    <string name="save_and_proceed">Speichern und fortfahren</string>
+    <string name="string_location">Ort eingeben</string>
+    <string name="string_street_address">Straße eingeben</string>
+    <string name="toolbar_title_set_location">Ort festlegen</string>
+    <string name="toolbar_title_manage_profile">Profil verwalten</string>
+    <string name="valid_msg_address_required">Adresse ist erforderlich.</string>
+    <string name="valid_msg_address_length_required">Die Adresse sollte mindestens 4 Zeichen lang sein.</string>
+    <string name="valid_msg_location_required">Ort ist erforderlich.</string>
+    <string name="valid_msg_location_length_required">Der Standort sollte mindestens 4 Zeichen lang sein.</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <string name="POS_DASHBOARD">In der Nähe</string>
+    <string name="POS_ACCOUNT">Konto</string>
+    <string name="POS_TOTAL_CART">Warenkorb</string>
+    <string name="POS_EXPLORE">Erkunden</string>
+    <string name="POS_LOGOUT">Abmelden</string>
+    <string name="POS_LOGIN">Anmeldung</string>
+    <string name="add_more_details">Fügen Sie weitere Details hinzu</string>
+    <string name="confirm_location">Bestätigen Sie den Standort</string>
+    <string name="string_address">Adresse eingeben</string>
+
+
+    <string name="gpsTitle">GPS deaktiviert</string>
+    <string name="gpsMessage">Bitte aktivieren Sie GPS um diese App zu benutzen.</string>
+    <string name="settingButton">Einstellung</string>
+    <string name="exitButton">Verlassen</string>
+    <string name="string_manage_profile">Adresse verwalten</string>
+    <string name="string_myfavourites">Meine Favoriten</string>
+    <string name="string_myorders">Meine Bestellungen</string>
+    <string name="string_offers">Angebote</string>
+
+    <string name="icon_check_circle">&#xf058;</string>
+    <string name="icon_close_circle">&#xf057;</string>
+
+    <string name="icon_close">&#xf410;</string>
+    <string name="close_string">&#xf410;</string>
+    <string name="timeIcon">&#xf017;</string>
+    <string name="icon_minus">&#xf068;</string>
+    <string name="icon_plus">&#xf067;</string>
+    <string name="google_api_key1">AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A</string>
+
+    <string name="please_login_first_msg">Bitte melden Sie sich zuerst mit Ihrem Konto an</string>
+    <string name="cancel">Stornieren</string>
+
+    <string name="update">Aktualisieren</string>
+    <string name="emailaddress">E-Mail-Addresse</string>
+    <string name="phonenumber">Telefonnummer</string>
+    <string name="name">Vollständiger Name</string>
+    <string name="string_search_location">Standort suchen</string>
+
+    <string name="cashncard">Nur Bar &amp; Kartenzahlung</string>
+    <string name="PaymentMethods">Zahlungsmethoden</string>
+    <string name="Ratingandrevie">Kundenbewertungen</string>
+    <string name="menu">Menü</string>
+
+    <string name="for_faster_checkout">Für schnelleren Bezahlvorgang</string>
+    <string name="to_quick_see_resto">Um schnell Restaurants zu sehen</string>
+
+
+    <string name="loginorcreate">Anmelden / Konto schnell erstellen, um eine Bestellung aufzugeben</string>
+    <string name="proceedwithphn">Weiter mit Telefonnummer</string>
+    <string name="deleiveryaddress">Lieferadresse</string>
+    <string name="extra_charges">Zusätzliche Gebühren können anfallen</string>
+
+    <string name="enteryourname">Name</string>
+    <string name="entercontact">Kontakt Nr.</string>
+    <string name="shipping_address">Lieferanschrift</string>
+    <string name="address">Anschrift</string>
+
+    <string name="pick_image_intent_text">wählen Sie ein</string>
+    <string name="oldpassword">Altes Passwort</string>
+    <string name="newpassword">Neues Kennwort</string>
+    <string name="cnfrmpass">Bestätigen Sie das Passwort</string>
+    <string name="update_password">Kennwort aktualisieren</string>
+    <string name="contact">Uns kontaktieren</string>
+    <string name="spinner_title">Allgemeines</string>
+
+    //splash
+    <string name="online_food_delivery">Online-Lieferung von Lebensmitteln</string>
+
+    //set Deleivery location
+    <string name="string_order_from_a_wide_range">Bestellung aus einer breiten</string>
+    <string name="string_order_from_a_wide_restaurants">Auswahl an Restaurants</string>
+    <string name="string_ready_to_see_top_restrorents">Top-Restaurants <anzeigen></anzeigen></string>
+    <string name="string_set_delivery_location">Legen Sie den Lieferort fest</string>
+    <string name="string_create_an_account">Ein Konto erstellen</string>
+    <string name="string_cotact_number">Geben Sie die Kontaktnummer ein</string>
+    <string name="dont_have_account">Haben Sie bereits ein Konto ?</string>
+
+
+    <string name="apply_coupon_code">Gutscheincode einlösen</string>
+    <string name="promo_coupon_list">Gutscheinliste</string>
+    <string name="pay">Bezahlen</string>
+    <string name="set_shipping_address">Lieferadresse festlegen</string>
+    <string name="house_flat_no">Adresszusatz</string>
+    <string name="landmark">Wahrzeichen</string>
+    <string name="home">Zuhause</string>
+    <string name="work">Arbeit</string>
+    <string name="email">Email</string>
+    <string name="contact_number">Kontakt Nummer</string>
+    <string name="subject">Betreff</string>
+    <string name="write_your_message_here">Hier Nachrichtentext eingeben</string>
+    <string name="order_id">Auftragsnummer</string>
+
+
+    <string name="repeat_last_used_customization">Letzte verwendete Anpassung wiederholen?</string>
+    <string name="without_customization">Ohne Anpassung</string>
+    <string name="repeat_last">Wiederholen</string>
+    <string name="i_ll_choose">Ich wähle</string>
+    <string name="search_restaurant">Restaurant suchen</string>
+    <string name="apply">Anwenden</string>
+    <string name="add">Hinzufügen</string>
+    <string name="food_detail">Essensdetails</string>
+    <string name="view_cart">Warenkorb anzeigen</string>
+    <string name="closed">Geschlossen</string>
+    <string name="make_your_own">Mach dein eigenes</string>
+    <string name="toppings">Toppings</string>
+    <string name="ingredients">Zutaten</string>
+    <string name="description">Beschreibung</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="change_password">Passwort ändern</string>
+    <string name="open">Öffnen</string>
+
+    <string name="apply_coupon">Gutschein einlösen</string>
+    <string name="restaurant_bill">Restaurantrechnung</string>
+    <string name="item_total">Anzahl Artikel</string>
+    <string name="restaurant_discount">Rabatt (Restaurant)</string>
+    <string name="total_discount">Rabatt (gesamt)</string>
+    <string name="deleivery_charges">Liefergebühren</string>
+    <string name="to_pay">Bezahlen</string>
+    <string name="change">ÄNDERN</string>
+    <string name="your_cart_is_empty">Ihr Warenkorb ist leer</string>
+    <string name="paypal">Paypal</string>
+    <string name="cash_on_deleivery">Barzahlung bei Lieferung</string>
+    <string name="credit_debit_card">Kredit/Debitkarte</string>
+    <string name="valid_till">Gültig bis</string>
+    <string name="min_order">Mindestbestellwert</string>
+    <string name="reorder">Nachbestellen</string>
+    <string name="order_confirmed">Bestellung bestätigt</string>
+    <string name="our_deleivery_boy_meet_you_in">Unser Lieferant trifft Sie in</string>
+    <string name="details">Details</string>
+    <string name="total">Gesamt</string>
+    <string name="rating">Bewertung</string>
+    <string name="write_your_review_here">Schreiben Sie Ihre Bewertung hier</string>
+    <string name="submit_review">Bewertung abschicken</string>
+    <string name="items_already_in_cart">Artikel bereits im Warenkorb</string>
+    <string name="your_cart_contains_items_would_you_like_to_reset_your_cart_before_reordering">Ihr Warenkorb enthält Artikel. Möchten Sie Ihren Warenkorb vor einer neuen Bestellung leeren?</string>
+    <string name="no">Nein</string>
+    <string name="yes">Ja</string>
+    <string name="ratings">Lieferzeit</string>
+    <string name="deleivery_time">Lieferzeit</string>
+    <string name="minorder">Min Auftrag</string>
+    <string name="alcohol">Alkohol</string>
+    <string name="seating">Sitzplätze</string>
+    <string name="services">Dienstleistungen</string>
+    <string name="please_enter_coupon">Bitte geben Sie einen Gutschein ein</string>
+    <string name="please_enter_location">Bitte geben Sie einen Ort ein</string>
+    <string name="pls_entr_homeno">Bitte geben Sie eine Hausummer ein</string>
+    <string name="pls_entr_landmark">Bitte geben Sie ein Wahrzeichen ein</string>
+    <string name="choose_topping">Toppings wählen</string>
+    <string name="minutes">min</string>
+    <string name="pls_entr_mesage">Bitte Nachricht eingeben</string>
+    <string name="pls_enter_name">Bitte Name eingeben</string>
+    <string name="name_should_3minimum_chrcters">Der Name sollte mindestens 3 Zeichen lang sein</string>
+    <string name="name_cannot_exceed">Der Name darf nicht länger als 35 Zeichen sein</string>
+    <string name="pls_enter_email">E-Mail-Adresse eingeben</string>
+    <string name="pls_provide_valid_email">Bitte geben Sie eine gültige E-Mail Adresse an.</string>
+    <string name="pls_enter_contact_no">Bitte Telefonnummer eingeben</string>
+    <string name="pls_entr_subject">Bitte Betreff eingeben</string>
+    <string name="cancel_order">Bestellung stornieren</string>
+    <string name="order_not_received">Bestellung nicht erhalten</string>
+    <string name="Are_u_sure_to_logout">Möchten Sie sich wirklich abmelden?</string>
+    <string name="filter">Filter</string>
+    <string name="pls_login_first">Bitte zuerst anmelden</string>
+    <string name="you_are_not_allowed_toorder">Sie können nicht von einem anderen Restaurant aus bestellen</string>
+    <string name="item">Artikel</string>
+    <string name="pay_using_paypal">Mit PAYPAL bezahlen</string>
+    <string name="pay_using_cash">Mit Bargeld bezahlen</string>
+    <string name="cash">Bargeld</string>
+    <string name="pay_using_credit_debit">Mit Kredit-/Debit-Karte bezahlen</string>
+    <string name="credit_debitcard">Kredit-/Debit-Karte</string>
+    <string name="payment_option">Zahlungsoptionen</string>
+    <string name="my_offers">Meine Angebote</string>
+    <string name="choose_order">Bestellung wählen</string>
+    <string name="paid_via">Bezahlt mit</string>
+    <string name="order_requested_on">Bestellung aufgegeben am</string>
+    <string name="order_accepted_on">Bestellung akzeptiert am</string>
+    <string name="order_cancelled_on">Bestellung storniert am</string>
+    <string name="order_deleieverd_on">Bestellung geliefert am</string>
+    <string name="pls_enter_some_comment">Bitte geben Sie einen Kommentar ein</string>
+    <string name="reviews">Bewertungen</string>
+    <string name="pls_enter_old_pass">Bitte altes Passwort eingeben</string>
+    <string name="old_pass_should_be_minimum">Altes Passwort sollte mindestens 6 Zeichen lang sein</string>
+    <string name="pls_enter_new_pass">Bitte neues Passwort eingeben</string>
+    <string name="new_pass_should_be_minimum">Neues Passwort sollte mindestens 6 Zeichen lang sei</string>
+    <string name="pls_enter_confirm_pass">Neues Passwort bestätigen</string>
+    <string name="confirm_password_should_be_minimum">Passwortbestätigung sollte mindestens 6 Zeichen lang sein</string>
+    <string name="new_password_and_confirm_notmatch">Passwort und Passwortbestätigung stimmen nicht überein</string>
+    <string name="make_payment">Zahlung durchführen</string>
+    <string name="your_coupon">Ihr Gutschein</string>
+    <string name="is_appiled_by">ist verwendet durch</string>
+    <string name="you_have_saved">Sie haben gespeichert</string>
+    <string name="pls_login_first_to_apply_copon">Bitte zuerst anmelden um Gutschein einzulösen</string>
+    <string name="pls_enter_shipping_address">Bitte Lieferadresse eingeben</string>
+    <string name="your_order_amount_is_less">Ihre Bestellmenge ist zu klein. Bestellung nicht möglich</string>
+    <string name="pls_check_your_internet">Bitte prüfen Ihre Internet-Verbindung</string>
+    <string name="restaurant_menu">Restaurant-Menü</string>
+    <string name="restaurant_detail">Restaurant-Details</string>
+    <string name="customized">ANGEPASST</string>
+    <string name="off">Aus</string>
+    <string name="general">Allgemeines</string>
+    <string name="checkout_as_guest">Als Gast abmelden</string>
+    <string name="checkout">Abmelden</string>
+    <string name="submit">Abschicken</string>
+    <string name="customize">Anpassen</string>
+    <string name="remarks">Anmerkungen (optional)</string>
+    <string name="delivery_time">Lieferzeit</string>
+    <string name="extras">Extras</string>
+    <string name="original_ingredients">Original-Zutaten</string>
+    <string name="pls_give_some_rating">Bitte vergeben Sie Bewertungssterne</string>
+    <string name="skip_rating">Bewertung überspringen</string>
+    <string name="we_sent_you_a_code_to_verify_your_phone_number">Wir haben Ihnen eine E-Mail zur Bestätigung Ihrer E-Mail-Adresse gesendet. Bitte überprüfen Sie Ihren E-Mail-Eingang</string>
+    <string name="continuee">Fortsetzen</string>
+    <string name="backtohome">Zurück zur Startseite</string>
+    <string name="resend">Erneut senden</string>
+    <string name="i_didn_t_receive_a_code">Ich habe keinen Code erhalten!</string>
+
+
+
+    <string name="sendto">Gesendet an </string>
+    <string name="otpverification">OTP-Überprüfung</string>
+    <string name="your_account_is_not_verified">Ihr Konto ist noch nicht verifiziert. Bitte überprüfen Sie Ihr Konto</string>
+    <string name="selectAll">Wählen Sie Alle</string>
+    <string name="pls_enter_otp">Bitte geben Sie OTP ein</string>
+    <string name="our_deleivery_boy_meet_you_at">Unser Delivery Boy trifft Sie an</string>
+    <string name="Please_check_your_time">Bitte überprüfen Sie Datum und Uhrzeit Ihres Geräts</string>
+    <string name="choose_categories">Choose Categories</string>
+    <string name="deselectAll">DeSelect All</string>
+    <string name="cart">Cart</string>
+    <string name="coupon">Coupon</string>
+    <string name="address_is_not_set">Address is not set</string>
+    <string name="password_should_be_atleast">Password should be at least 6 characters</string>
+    <string name="on_this_bill">on this bill</string>
+    <string name="pls_enter_address">Please Enter Address</string>
+
+
+    <string name="thankyou_for_your_order_please_follow_your_email_for_delivery_updates">Dankeschön für Ihre Bestellung. Bitte folgen Sie die email für Ihre Bestellung Updates.</string>
+
+
+</resources>

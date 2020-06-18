@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "1054796245815",
+    "firebase_url": "https://pikopako-211112.firebaseio.com",
+    "project_id": "pikopako-211112",
+    "storage_bucket": "pikopako-211112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054796245815:android:b9e3df8fa63df00f",
+        "android_client_info": {
+          "package_name": "com.pikopako"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054796245815-m8b65vfsei2k5umukaghlfe464kvsf7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054796245815:android:63aa6b8cffcc791c",
+        "android_client_info": {
+          "package_name": "com.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054796245815-m8b65vfsei2k5umukaghlfe464kvsf7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

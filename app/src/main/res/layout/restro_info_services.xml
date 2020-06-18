@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroolView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:fillViewport="true">
+
+
+    <RelativeLayout
+        android:id="@+id/toprelativelyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/linly"
+            style="@style/HorizontalLinearLayout"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/beer" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/alcohol"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linlyd"
+            style="@style/HorizontalLinearLayout"
+            android:layout_below="@id/linly"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="2dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview_characteristics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/lindly"
+            style="@style/HorizontalLinearLayout"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@id/linlyd"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/chair" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/seating"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/seatnglyt"
+            style="@style/HorizontalLinearLayout"
+            android:layout_below="@id/lindly"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="2dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview_seating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/servicetxtlyt"
+            style="@style/HorizontalLinearLayout"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@id/seatnglyt"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_order" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/services"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/seatingrecyclyt"
+            style="@style/HorizontalLinearLayout"
+            android:layout_below="@id/servicetxtlyt"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="2dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+
+
+
+
+        <View
+        android:id="@+id/lidnd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/seatingrecyclyt"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/lighter_gray" />
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/paymenttextlyt"
+            style="@style/HorizontalLinearLayout"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@id/lidnd"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_order" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/PaymentMethods"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/paymentrecyclyt"
+            style="@style/HorizontalLinearLayout"
+            android:layout_below="@id/paymenttextlyt"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="2dp">
+
+
+            <com.pikopako.AppUtill.CustomTextViewNormal
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cashncard"
+                android:textSize="12sp"/>
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycleview_payment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:nestedScrollingEnabled="false"-->
+                <!--android:orientation="vertical" />-->
+        </LinearLayout>
+
+
+
+        <View
+            android:id="@+id/lidddnd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/paymentrecyclyt"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/lighter_gray" />
+
+        <LinearLayout
+        android:id="@+id/ratinglyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lidddnd"
+        android:layout_margin="10dp"
+        android:padding="5dp">
+
+        <com.pikopako.AppUtill.CustomTextViewNormal
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Ratingandrevie"
+        android:textSize="16sp" />
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/rating1"
+            android:layout_below="@id/ratinglyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageProfile1"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/profileicon" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/txt_name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Willie Schimdt"
+                    android:layout_marginLeft="7dp"
+                    android:padding="5dp"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:padding="1dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/star"/>
+
+                    <com.pikopako.AppUtill.CustomTextViewNormal
+                        android:id="@+id/txt_rating1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4.1"
+                        android:layout_marginLeft="2dp"/>
+
+                </LinearLayout>
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_comments1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="jsdfgbhdsikbgshkjdfbksadhjfbdsakfbdshkfbdshkfbdshjfdshkfbshkdfbdshkfbdshfbdshjfbdshjfbsjhfbdshjfbdshjfbshdfbdshj"/>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/rating2"
+            android:layout_below="@+id/rating1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageProfile2"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/profileicon" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/txt_name2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Willie Schimdt"
+                    android:layout_marginLeft="7dp"
+                    android:padding="5dp"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:padding="1dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/star"/>
+
+                    <com.pikopako.AppUtill.CustomTextViewNormal
+                        android:id="@+id/txt_rating2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4.1"
+                        android:layout_marginLeft="2dp"/>
+
+                </LinearLayout>
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_comments2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="jsdfgbhdsikbgshkjdfbksadhjfbdsakfbdshkfbdshkfbdshjfdshkfbshkdfbdshkfbdshfbdshjfbdshjfbsjhfbdshjfbdshjfbshdfbdshj"/>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/rating3"
+            android:layout_below="@id/rating2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageProfile3"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/profileicon" />
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/txt_name3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Willie Schimdt"
+                    android:layout_marginLeft="7dp"
+                    android:padding="5dp"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:padding="1dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/star"/>
+
+                    <com.pikopako.AppUtill.CustomTextViewNormal
+                        android:id="@+id/txt_rating3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4.1"
+                        android:layout_marginLeft="2dp"/>
+
+                </LinearLayout>
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_comments3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="jsdfgbhdsikbgshkjdfbksadhjfbdsakfbdshkfbdshkfbdshjfdshkfbshkdfbdshkfbdshfbdshjfbdshjfbsjhfbdshjfbdshjfbshdfbdshj"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:id="@+id/txt_show_reviews"
+            android:layout_below="@id/rating3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Load more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
+

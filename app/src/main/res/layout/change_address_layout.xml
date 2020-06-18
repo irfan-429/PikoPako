@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/snackView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+
+            android:id="@+id/mapLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                tools:context=".MapsActivity" />
+
+
+            <ImageView
+                android:id="@+id/centerMarker"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/source_marker" />
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:visibility="visible"
+                app:indicatorColor="@color/black"
+                app:indicatorName="BallScaleRippleIndicator" />
+
+
+        </RelativeLayout>
+
+        <!--
+            <ProgressBar
+                android:layout_below="@+id/mapLyt"
+                android:id="@+id/progressBar4"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:progress="20"
+                android:secondaryProgress="50"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"/>
+        -->
+
+
+        <include
+            android:id="@+id/toolbarLyt"
+            layout="@layout/custom_toolbar" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mapLyt">
+
+
+
+        <LinearLayout
+            style="@style/VerticalLinearLayout"
+            android:layout_alignParentBottom="true">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/set_shipping_address"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <com.pikopako.AppUtill.CustomTextInputLayout style="@style/TextInputLayoutStyle">
+
+                <AutoCompleteTextView
+                    android:id="@+id/setshippinglocation"
+                    style="@style/EditTextStyle"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:focusable="false"
+                    android:hint="@string/string_location"
+                    android:imeOptions="actionDone"
+
+                    android:paddingRight="10dp" />
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+            <com.pikopako.AppUtill.CustomTextInputLayout style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/ed_flatno"
+                    style="@style/EditTextStyle"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/house_flat_no"
+                    android:imeOptions="actionDone"
+                    android:paddingRight="10dp" />
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/ed_landmark"
+                    style="@style/EditTextStyle"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/landmark"
+                    android:imeOptions="actionDone"
+                    android:paddingRight="10dp" />
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <RadioButton
+                    android:id="@+id/radiobutton_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/home" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_work"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:text="@string/work" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnsaveandproceed"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/login_drawable"
+                android:text="@string/save_and_proceed"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/scroolView"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/snackView"
+        style="@style/RelativeLayout">
+
+        <include android:id="@+id/toolbarLyt"
+            layout="@layout/custom_toolbar"/>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_below="@+id/toolbarLyt"
+            android:id="@+id/mapLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.pikopako.AppUtill.ScrollGoogleMap"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/centerMarker"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/source_marker" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_below="@+id/mapLyt"
+            style="@style/VerticalLinearLayout"
+            android:id="@+id/topPanel"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="@string/string_set_delivery_location"
+                android:layout_height="wrap_content" />
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:focusable="false"
+                    android:id="@+id/editLocation"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/icons_location"
+                    android:inputType="textPersonName"
+                    android:hint="@string/string_location"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editName"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/icon_fullname"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/string_first_name"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editEmail"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/icon_email"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/string_enter_your_email"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editContact"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:imeOptions="actionDone"
+                    android:drawableRight="@mipmap/icon_phone"
+                    android:inputType="phone"
+                    android:hint="@string/string_cotact_number"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/topPanel"
+            android:layout_marginBottom="30dp"
+            style="@style/VerticalLinearLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen">
+            <Button
+                android:id="@+id/btnRegister"
+                android:textAllCaps="true"
+                android:layout_marginTop="20dp"
+                android:textSize="@dimen/default_button_size"
+                android:text="@string/save_and_proceed"
+                android:background="@drawable/login_drawable"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+

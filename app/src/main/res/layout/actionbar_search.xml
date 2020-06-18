@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill_horizontal"
+    android:focusable="true">
+
+    <include
+        android:id="@+id/lytToolbar"
+        layout="@layout/custom_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/searchFrame"
+        android:layout_below="@+id/lytToolbar"
+        android:layout_margin="1dp"
+        android:background="@drawable/rounded_corner_gray_bg"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="6dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/imgLocation"
+
+            android:src="@drawable/location_search"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content" />
+
+        <com.pikopako.AppUtill.CustomAutoCompleteTextView
+            android:layout_margin="6dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imgLocation"
+            android:id="@+id/search_box"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/string_search_location"
+            android:imeOptions="actionDone"
+            android:layout_gravity="center"
+            android:dropDownVerticalOffset="5dp"
+            android:dropDownWidth="wrap_content"
+            android:inputType="textAutoComplete|textAutoCorrect"
+            android:popupBackground="@android:color/white"
+            android:textColor="@android:color/black">
+        </com.pikopako.AppUtill.CustomAutoCompleteTextView>
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/searchFrame"
+        android:id="@+id/placeRecycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>

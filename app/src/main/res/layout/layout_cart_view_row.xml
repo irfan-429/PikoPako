@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/lyt"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+       >
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/veg" />
+
+
+        <LinearLayout
+            android:id="@+id/leftlyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.3">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/txt_foodname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Double Layer Burge"
+                android:layout_marginLeft="7dp"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/lyt_custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:padding="1dp">
+
+
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_food_toppings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chilli Sauce,Mayog"
+                    android:layout_marginLeft="2dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyt_customized"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:visibility="gone"
+                android:padding="1dp">
+
+            <com.pikopako.AppUtill.CustomTextViewNormal
+                android:id="@+id/txt_customized"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/login_drawable"
+                android:text="@string/customized"/>
+
+        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lyt_withoutcustomize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:visibility="gone"
+                android:padding="1dp">
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_customiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:background="@drawable/login_drawable"
+                    android:text="@string/customize"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_height="40dp"
+            android:minWidth="60dp"
+            android:layout_gravity="end|right"
+            android:padding="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_border">
+
+
+
+            <com.pikopako.AppUtill.CustomTextViewNormal
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:paddingRight="5dp"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/txt_Less"/>
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:paddingLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/txtTotalProductQuantity"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <com.pikopako.AppUtill.CustomTextViewNormal
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textSize="24sp"
+                android:paddingRight="5dp"
+                android:text="+"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/txt_max"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            >
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:id="@+id/txtTotalProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$1362"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

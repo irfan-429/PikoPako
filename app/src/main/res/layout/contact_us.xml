@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/toplinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/custom_toolbar"/>
+
+
+            <Spinner
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:textAlignment="center"
+                android:prompt="@string/spinner_title"
+                android:background="@drawable/edittext_message_border"
+
+                />
+
+            <LinearLayout
+                android:id="@+id/general_layout"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="4dp"
+                android:orientation="horizontal">
+                
+                
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/enteryourname"/>
+
+            
+        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/l2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:elevation="4dp"
+                    android:orientation="horizontal">
+               
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="4dp"
+                android:orientation="horizontal">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/edt_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/contact_number"
+                    android:inputType="number"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="4dp"
+                android:orientation="horizontal">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/edt_subject"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/subject"/>
+                
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="4dp"
+                android:orientation="horizontal">
+
+                <!--<com.pikopako.AppUtill.CustomEditTextBold-->
+                    <!--android:id="@+id/edt_message"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:hint="Message"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:maxLength="250"-->
+                    <!--android:backgroundTint="@color/transparent"-->
+                    <!--android:background="@drawable/edittext_message_border"-->
+                    <!--android:gravity="top"/>-->
+
+                <EditText
+
+                    android:id="@+id/edt_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:digits="QWERTYUIOPASDFGHJKLMNBVCXZqwertyuioplkjhgfdsazxcvbnm0123456789 -,/ @"
+                    android:background="@drawable/edittext_message_border"
+                    android:backgroundTint="@color/transparent"
+                    android:gravity="top"
+                    android:maxLength="250"
+                    android:hint="@string/write_your_message_here"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/order_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/dd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:elevation="4dp"
+                    android:orientation="horizontal">
+
+                    <com.pikopako.AppUtill.CustomEditTextBold
+                        android:id="@+id/edt_order_id"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:clickable="true"
+                        android:hint="@string/order_id"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lgg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:elevation="4dp"
+                    android:orientation="horizontal">
+
+                    <!--<com.pikopako.AppUtill.CustomEditTextBold-->
+                    <!--android:id="@+id/edt_message"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:hint="Message"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:maxLength="250"-->
+                    <!--android:backgroundTint="@color/transparent"-->
+                    <!--android:background="@drawable/edittext_message_border"-->
+                    <!--android:gravity="top"/>-->
+
+                    <EditText
+
+                        android:id="@+id/edt_message_orderid"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:digits="QWERTYUIOPASDFGHJKLMNBVCXZqwertyuioplkjhgfdsazxcvbnm0123456789 -,/ @"
+                        android:background="@drawable/edittext_message_border"
+                        android:gravity="top"
+                        android:maxLength="250"
+                        android:hint="@string/write_your_message_here"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:textAllCaps="true"
+                android:id="@+id/btnUpdatecontact"
+                android:layout_marginTop="30dp"
+                android:text="@string/submit"
+                android:textSize="@dimen/default_button_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/login_drawable"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    
+</ScrollView>

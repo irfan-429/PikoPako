@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+    
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imageProfil"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/profileicon" />
+
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/txt_nameuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Willie Schimdt"
+                android:layout_marginLeft="7dp"
+                android:padding="5dp"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star"/>
+
+                <com.pikopako.AppUtill.CustomTextViewNormal
+                    android:id="@+id/txt_ratingg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4.1"
+                    android:layout_marginLeft="2dp"/>
+
+            </LinearLayout>
+
+            <com.pikopako.AppUtill.CustomTextViewNormal
+                android:id="@+id/txt_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="jsdfgbhdsikbgshkjdfbksadhjfbdsakfbdshkfbdshkfbdshjfdshkfbshkdfbdshkfbdshfbdshjfbdshjfbsjhfbdshjfbdshjfbshdfbdshj"/>
+
+
+        </LinearLayout>
+        
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:padding="5dp">
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="3dp">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:buttonTint="@color/colorPrimary"
+        android:text="ghfhfdffgdfgdfgdfdtghgghfgddfgdfg"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:maxLength="25"
+        android:layout_weight="0.6"
+        />
+
+    <com.pikopako.AppUtill.CustomTextViewBold
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:layout_marginLeft="7dp"
+        android:textStyle="bold"
+        android:id="@+id/txt_ingre_price"/>
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ff"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<include android:id="@+id/fff"-->
+        <!--layout="@layout/custom_toolbar"/>-->
+        <!--<RelativeLayout-->
+        <!---->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/linear">-->
+
+        <RelativeLayout
+            android:id="@+id/topPanel1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/gradient">
+
+
+            <LinearLayout
+                android:id="@+id/topPanel"
+                style="@style/VerticalLinearLayout"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_confirmed"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/delivery_location"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="120dp"
+            android:src="@mipmap/set_delivery_location" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/delivery_location"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_above="@id/btn_proceed"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/txt_meet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/our_deleivery_boy_meet_you_in"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/txt_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="45 MIN"
+                android:visibility="gone"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:text="@string/thankyou_for_your_order_please_follow_your_email_for_delivery_updates"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/login_drawable"
+            android:text="@string/backtohome"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_button_size" />
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

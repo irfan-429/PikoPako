@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/snackView"
+        style="@style/RelativeLayout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splash" />
+
+
+        <include android:id="@+id/toolbarLyt"
+            layout="@layout/custom_toolbar"/>
+
+
+        <!--<include
+            android:id="@+id/splash_content"
+            layout="@layout/layout_splash_content"/>-->
+
+        <LinearLayout
+            android:layout_below="@+id/toolbarLyt"
+            style="@style/VerticalLinearLayout"
+            android:id="@+id/topPanel"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen">
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editName"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/icon_fullname"
+                    android:inputType="textPersonName"
+                    android:hint="@string/string_first_name"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editEmail"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/icon_email"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/string_enter_your_email"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                android:id="@+id/inputLytPass"
+                app:passwordToggleDrawable="@mipmap/icon_password"
+                app:passwordToggleEnabled="true"
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editPass"
+                    style="@style/EditTextStyle"
+                    android:inputType="textPassword"
+                    android:hint="@string/string_password"/>
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editContact"
+                    style="@style/EditTextStyle"
+                    android:paddingRight="10dp"
+                    android:imeOptions="actionDone"
+                    android:drawableRight="@mipmap/icon_phone"
+                    android:inputType="phone"
+                    android:digits="0123456789"
+                    android:hint="@string/string_cotact_number"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+        </LinearLayout>
+
+       <!-- <LinearLayout
+            style="@style/VerticalLinearLayout"
+            android:layout_below="@+id/topPanel"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen">
+            <Button
+                android:id="@+id/btnRegister"
+                android:textAllCaps="true"
+                android:layout_marginTop="20dp"
+                android:textSize="@dimen/default_button_size"
+                android:text="@string/sign_up_now_btn"
+                android:background="@drawable/login_drawable"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>-->
+
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:textAllCaps="true"
+            android:layout_below="@+id/topPanel"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen"
+            android:textSize="@dimen/default_button_size"
+            android:text="@string/sign_up_now_btn"
+            android:background="@drawable/login_drawable"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/building"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+
+        <ImageView
+            android:layout_marginBottom="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/scooter"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <FrameLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_below="@+id/image1"
+                android:background="@drawable/base"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"/>
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:paddingTop="20dp"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:text="@string/online_food_delivery"
+                android:layout_height="wrap_content" />
+
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

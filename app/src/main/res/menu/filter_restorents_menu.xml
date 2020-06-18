@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.learn2crack.recyclerviewsearch.MainActivity">
+    <item
+        android:id="@+id/search"
+        android:icon="@mipmap/search"
+        android:title="Search"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_filter"
+        android:title="filter"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@drawable/funnel" />
+
+</menu>

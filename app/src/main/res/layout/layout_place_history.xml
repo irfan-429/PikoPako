@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp">
+
+
+    <ImageView
+        android:padding="6dp"
+        android:id="@+id/removeIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:src="@drawable/icon_close_data"/>
+
+
+    <ImageView
+        android:padding="10dp"
+        android:src="@mipmap/icons_location"
+        android:id="@+id/recentIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/timeIcon"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <com.pikopako.AppUtill.CustomTextViewBold
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/removeIcon"
+        android:layout_toRightOf="@id/recentIcon"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="location"
+        android:textColor="@color/black"
+        android:textSize="16sp"></com.pikopako.AppUtill.CustomTextViewBold>>
+
+</RelativeLayout>

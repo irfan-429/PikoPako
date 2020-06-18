@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stripe="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/snackView"
+        style="@style/RelativeLayout">
+
+
+        <include android:id="@+id/toolbarLyt"
+            layout="@layout/custom_toolbar"/>
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_below="@+id/toolbarLyt"
+           android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topPanel"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/default_margen_screen">
+
+
+            <com.stripe.android.view.CardInputWidget
+                android:id="@+id/card_input_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                stripe:cardTint="@android:color/holo_purple"
+                android:layout_marginTop="0dp"
+                stripe:cardTextErrorColor="@android:color/holo_orange_dark"
+
+                />
+
+            <Button
+                android:textAllCaps="true"
+                android:id="@+id/btn_Pay"
+                android:layout_marginTop="30dp"
+                android:text="@string/pay"
+                android:textSize="@dimen/default_button_size"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/login_drawable"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

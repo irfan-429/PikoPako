@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:id="@+id/toplinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/custom_toolbar"/>
+
+        <LinearLayout
+
+            style="@style/VerticalLinearLayout"
+            android:id="@+id/topPanel"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp">
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                android:id="@+id/textinput"
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/ed_apply_code"
+                    style="@style/EditTextStyle"
+                    android:importantForAutofill="noExcludeDescendants"
+                    android:hint="@string/coupon"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+
+
+
+        </LinearLayout>
+        <Button
+            android:textAllCaps="true"
+            android:id="@+id/btnUpdatecode"
+            android:layout_marginTop="30dp"
+            android:text="@string/apply_coupon"
+            android:textSize="@dimen/default_button_size"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/login_drawable"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:text="@string/promo_coupon_list"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:id="@+id/fragment_container">
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@+id/recycleviewtool"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/snackView"
+        style="@style/VerticalLinearLayout">
+
+        <include layout="@layout/custom_toolbar"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/gradient"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:visibility="gone"
+                android:src="@drawable/profileicon" />
+
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profileicon"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:id="@+id/imageView"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/pencil"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/VerticalLinearLayout"
+            android:id="@+id/topPanel"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp">
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                android:id="@+id/textinput_name"
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editname"
+                    style="@style/EditTextStyle"
+                    android:importantForAutofill="noExcludeDescendants"
+                    android:hint="@string/enteryourname"/>
+
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                android:id="@+id/textinput_phoneno"
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editcontactno"
+                    style="@style/EditTextStyle"
+                    android:inputType="phone"
+                    android:importantForAutofill="noExcludeDescendants"
+                    android:hint="@string/entercontact"/>
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+            <com.pikopako.AppUtill.CustomTextInputLayout
+                android:id="@+id/textinput_addres"
+
+                style="@style/TextInputLayoutStyle">
+
+                <com.pikopako.AppUtill.CustomEditTextBold
+                    android:id="@+id/editaddress"
+                    style="@style/EditTextStyle"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:editable="false"
+                    android:importantForAutofill="noExcludeDescendants"
+                    android:hint="@string/address"/>
+            </com.pikopako.AppUtill.CustomTextInputLayout>
+
+
+            <!--<com.pikopako.AppUtill.CustomTextInputLayout-->
+                <!--android:id="@+id/textinput_shippingaddres"-->
+
+                <!--style="@style/TextInputLayoutStyle">-->
+
+                <!--<com.pikopako.AppUtill.CustomEditTextBold-->
+                    <!--android:id="@+id/editshippingaddress"-->
+                    <!--android:imeOptions="actionDone"-->
+                    <!--style="@style/EditTextStyle"-->
+                    <!--android:importantForAutofill="noExcludeDescendants"-->
+                    <!--android:hint="@string/shipping_address"/>-->
+            <!--</com.pikopako.AppUtill.CustomTextInputLayout>-->
+
+
+        </LinearLayout>
+
+        <Button
+            android:textAllCaps="true"
+            android:id="@+id/btnUpdate"
+            android:layout_marginTop="30dp"
+            android:text="@string/update"
+            android:textSize="@dimen/default_button_size"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/login_drawable"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

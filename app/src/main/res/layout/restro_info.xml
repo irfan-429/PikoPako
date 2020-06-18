@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/htab_maincontent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/htab_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/htab_collapse_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:expandedTitleMarginEnd="4dp"
+            app:expandedTitleMarginStart="48dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+          >
+
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="72dp"
+                app:layout_collapseMode="none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/lighter_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/mainView"
+                    style="@style/RelativeLayout"
+                    android:gravity="center"
+                   >
+
+                    <LinearLayout
+                        android:id="@+id/lytImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+
+                        <ImageView
+                            android:id="@+id/cafe_image"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:background="@drawable/image_rounded"
+                            android:padding="2dp"
+                            android:src="@drawable/profileicon" /></LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@+id/lytImage"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+
+                        <com.pikopako.AppUtill.CustomTextViewBold
+                            android:id="@+id/Txt_cafename"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="Dreamer's Cafe"
+                            android:textColor="@color/red"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@mipmap/icons_location" />
+
+                            <com.pikopako.AppUtill.CustomTextViewNormal
+                                android:id="@+id/txt_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:text="Anaj Mandi,Sikar Road" />
+                        </LinearLayout>
+
+                        <com.pikopako.AppUtill.CustomTextViewBold
+                            android:id="@+id/txt_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Open"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="16sp"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/view"
+                    style="@style/HorizontalLinearLayout"
+                    android:layout_below="@id/mainView"
+                    android:padding="5dp"
+                    android:background="@android:color/white"
+                  >
+
+                    <LinearLayout
+                        android:id="@+id/llyt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/star" />
+
+                            <com.pikopako.AppUtill.CustomTextViewBold
+                                android:id="@+id/txt_rating"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:textColor="@color/black"
+                                android:text="4.1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <com.pikopako.AppUtill.CustomTextViewNormal
+                               android:id="@+id/txt_totalrating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/black"
+                                android:singleLine="true"
+                                android:text="1 " />
+
+                            <com.pikopako.AppUtill.CustomTextViewNormal
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rating"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="12dp"
+                        android:background="@color/lighter_gray" />
+
+
+                    <LinearLayout
+                        android:id="@+id/llyt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+
+                            <com.pikopako.AppUtill.CustomTextViewBold
+                                android:id="@+id/txt_minordertime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:textColor="@color/black"
+                                android:text="46 MIn" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <com.pikopako.AppUtill.CustomTextViewNormal
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:singleLine="true"
+                                android:text="@string/deleivery_time" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:background="@color/lighter_gray" />
+
+                    <LinearLayout
+                        android:id="@+id/llyt3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+
+                            <com.pikopako.AppUtill.CustomTextViewBold
+                                android:id="@+id/txt_minorderprice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:textColor="@color/black"
+                                android:text="$15" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <com.pikopako.AppUtill.CustomTextViewNormal
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:singleLine="true"
+                                android:text="@string/minorder" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:layout_gravity="top|center"
+                app:layout_collapseMode="none"
+                >
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="top"
+                    app:layout_collapseMode="none"
+                    android:background="@color/transparent"
+                    >
+
+                </androidx.appcompat.widget.Toolbar>
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/tvTitle"
+                    android:visibility="visible"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/food_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
+                app:tabTextColor="@color/black"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

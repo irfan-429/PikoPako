@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/snackView"
+    style="@style/RelativeLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_above="@+id/topPanel"
+        android:orientation="vertical"
+        android:id="@+id/mapLyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.MapFragment" />
+
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/centerMarker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/source_marker" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+           android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            style="@style/AVLoadingIndicatorView"
+            android:visibility="visible"
+            app:indicatorName="BallScaleRippleIndicator"
+            app:indicatorColor="@color/black"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+    <!--
+        <ProgressBar
+            android:layout_below="@+id/mapLyt"
+            android:id="@+id/progressBar4"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:progress="20"
+            android:secondaryProgress="50"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"/>
+    -->
+
+
+    <include android:id="@+id/toolbarLyt"
+        layout="@layout/custom_toolbar"/>
+
+
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        style="@style/VerticalLinearLayout"
+        android:id="@+id/topPanel"
+        android:layout_marginTop="30dp"
+        >
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="@string/string_set_delivery_location"
+            android:layout_height="wrap_content" />
+
+        <com.pikopako.AppUtill.CustomTextInputLayout
+            style="@style/TextInputLayoutStyle">
+
+            <AutoCompleteTextView
+                android:focusable="false"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/editLocation"
+                style="@style/EditTextStyle"
+                android:paddingRight="10dp"
+                android:drawableRight="@mipmap/icons_location"
+                android:hint="@string/string_location"/>
+
+        </com.pikopako.AppUtill.CustomTextInputLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
+            style="@style/VerticalLinearLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_marginStart="@dimen/default_margen_screen">
+
+            <LinearLayout
+                android:id="@+id/add_more_lyt"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnAddMore"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:text="@string/add_more_details"
+                    android:background="@drawable/edittext_drawble"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/darker_gray"
+                    android:text="@string/for_faster_checkout"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnConfirmLocation"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:text="@string/confirm_location"
+                    android:background="@drawable/login_drawable"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/darker_gray"
+                    android:text="@string/to_quick_see_resto"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+

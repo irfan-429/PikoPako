@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--<RelativeLayout-->
+        <!---->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/linear">-->
+
+        <RelativeLayout
+            android:background="@drawable/gradient"
+            android:id="@+id/topPanel1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+
+            <LinearLayout
+                android:id="@+id/topPanel"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                style="@style/VerticalLinearLayout">
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="26sp"
+                    android:text="@string/string_order_from_a_wide_range"
+                    android:layout_height="wrap_content" />
+
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="26sp"
+                    android:text="@string/string_order_from_a_wide_restaurants"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginTop="120dp"
+            android:id="@+id/delivery_location"
+            android:layout_width="match_parent"
+            android:src="@mipmap/set_delivery_location"
+            android:layout_height="200dp" />
+
+
+
+
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/default_margen_screen"
+            android:layout_marginEnd="@dimen/default_margen_screen"
+            android:layout_below="@id/delivery_location"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="@string/string_ready_to_see_top_restrorents"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnLocation"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/login_drawable"
+                android:textSize="@dimen/default_button_size"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:text="@string/string_set_delivery_location"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:id="@+id/tvCreateAccount"
+                android:layout_marginTop="@dimen/default_margen_screen"
+                android:background="@drawable/login_drawable"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_button_size"
+                android:layout_width="match_parent"
+                android:text="@string/string_create_an_account"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginBottom="30dp"
+                android:id="@+id/view_signin"
+                android:padding="6dp"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                style="@style/HorizontalLinearLayout">
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_width="wrap_content"
+                    android:text="@string/dont_have_account"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/login"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        android:background="@color/white"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:background="@color/colorPrimary"
+                android:id="@+id/topPanel1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/topPanel"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    style="@style/VerticalLinearLayout">
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:text="@string/string_order_from_a_wide_range"
+                        android:layout_height="wrap_content" />
+
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:text="@string/string_order_from_a_wide_restaurants"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_below="@+id/topPanel"
+                    android:id="@+id/delivery_location"
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/set_delivery_location"
+                    android:layout_height="200dp" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/default_margen_screen"
+                android:layout_marginEnd="@dimen/default_margen_screen"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_below="@+id/topPanel1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/string_ready_to_see_top_restrorents"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btnLocation"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/login_drawable"
+                    android:textSize="@dimen/default_button_size"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:text="@string/string_set_delivery_location"
+                    android:layout_height="wrap_content" />
+
+
+                <Button
+                    android:id="@+id/tvCreateAccount"
+                    android:layout_marginTop="@dimen/default_margen_screen"
+                    android:background="@drawable/login_drawable"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_button_size"
+                    android:layout_width="match_parent"
+                    android:text="@string/string_create_an_account"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_marginBottom="30dp"
+                    android:id="@+id/view_signin"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
+                    style="@style/HorizontalLinearLayout">
+
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_width="wrap_content"
+                        android:text="@string/dont_have_account"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                    <com.pikopako.AppUtill.CustomTextViewBold
+                        android:layout_marginStart="8dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/login_now"
+                        android:textStyle="bold"
+                        android:textSize="19sp"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    -->

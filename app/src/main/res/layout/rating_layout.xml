@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/building"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="300dp"/>
+
+    <RelativeLayout
+        android:id="@+id/mainView"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        style="@style/RelativeLayout">
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/lytImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_food"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/profileicon"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/lytImage"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/txt_restroname"
+                    android:layout_width="match_parent"
+                    android:text="Dreamer's Cafe"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:maxLength="25"
+                    android:singleLine="true"
+                    android:layout_weight="0.2"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content" />
+
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/Iv_cross"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/multiply"/>-->
+
+                <!--<com.pikopako.AppUtill.CustomTextViewBold-->
+                <!--android:id="@+id/txt_restrodetails"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="@color/darker_gray"-->
+                <!--android:paddingLeft="6dp"-->
+                <!--android:paddingRight="6dp"-->
+                <!--android:text="Open"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="35dp" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/location_marker" />
+
+                    <com.pikopako.AppUtill.CustomTextViewNormal
+                        android:id="@+id/txt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Anaj Mandi,Sikar Road" />
+                </LinearLayout>
+
+                <com.pikopako.AppUtill.CustomTextViewBold
+                    android:id="@+id/txt_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open"
+                    android:visibility="gone"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/rating_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainView"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:textSize="22sp"
+            android:textColor="@color/black"/>
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingstar"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_gravity="left"
+            android:rating="0"
+            android:numStars="5"
+            android:elevation="10dp"
+            />
+
+    </LinearLayout>
+
+        <View
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_below="@+id/rating_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/lighter_gray"/>
+
+    <LinearLayout
+        android:id="@+id/edit_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rating_lyt">
+
+        <EditText
+            android:layout_below="@+id/edtHeadline"
+            android:id="@+id/edtReviewTxt"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:digits="QWERTYUIOPASDFGHJKLMNBVCXZqwertyuioplkjhgfdsazxcvbnm0123456789 -,/ @"
+            android:background="@drawable/edittext_message_border"
+            android:gravity="top"
+            android:maxLength="350"
+            android:hint="@string/write_your_review_here"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_lyt">
+    <Button
+        android:textAllCaps="true"
+        android:id="@+id/btnSubmit"
+        android:padding="5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/submit_review"
+        android:textSize="@dimen/default_button_size"
+        android:background="@drawable/login_drawable"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+        <com.pikopako.AppUtill.CustomTextViewBold
+            android:id="@+id/txt_skip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skip_rating"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
+

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+
+    <LinearLayout
+        android:id="@+id/dd"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.pikopako.AppUtill.CustomTextViewNormal
+            android:id="@+id/textDialog"
+            android:layout_width="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/items_already_in_cart"
+            />
+
+
+
+        <com.pikopako.AppUtill.CustomTextViewNormal
+            android:id="@+id/textDial"
+            android:layout_width="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/your_cart_contains_items_would_you_like_to_reset_your_cart_before_reordering"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iid"
+        android:layout_below="@+id/dd"
+        android:orientation="horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:gravity="bottom"
+        android:layout_marginEnd="@dimen/default_margen_screen"
+        android:layout_marginStart="@dimen/default_margen_screen">
+
+        <LinearLayout
+            android:id="@+id/add_more_lyt"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/btn_no"
+                android:textSize="12dp"
+                android:text="@string/no"
+                android:background="@drawable/login_drawable"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+
+
+            <Button
+                android:id="@+id/btn_yes"
+                android:textSize="12dp"
+                android:text="@string/yes"
+                android:background="@drawable/edittext_drawble"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
