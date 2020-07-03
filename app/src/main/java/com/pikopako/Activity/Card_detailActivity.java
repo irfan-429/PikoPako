@@ -1,18 +1,23 @@
 package com.pikopako.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.klarna.checkout.KlarnaCheckout;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
 import com.pikopako.AppUtill.Constant;
@@ -20,9 +25,17 @@ import com.pikopako.AppUtill.CustomTextViewBold;
 import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.Fragment.ProgressDialog;
 import com.pikopako.R;
+import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
+import com.stripe.android.exception.APIConnectionException;
+import com.stripe.android.exception.APIException;
+import com.stripe.android.exception.AuthenticationException;
+import com.stripe.android.exception.CardException;
+import com.stripe.android.exception.InvalidRequestException;
 import com.stripe.android.model.Card;
+import com.stripe.android.model.Source;
+import com.stripe.android.model.SourceParams;
 import com.stripe.android.model.Token;
 import com.stripe.android.view.CardInputWidget;
 
@@ -30,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -37,6 +51,13 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 
 public class Card_detailActivity extends BaseActivity implements View.OnClickListener {
+
+    private static final String QUERY_CLIENT_SECRET = "src_client_secret_2W5tMszMDbtmR7j1HYibZ4SQ";
+    private static final String QUERY_SOURCE_ID = "src_1GxZ6mKKZN07cdYUChUfkQBH";
+
+//    String PK_key = "pk_test_qfC5950mqdxZ4VnEWG0QaRoV00f7qDCGVz"; //test
+    String PK_key = "pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA";
+    String SK_key = "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";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -66,14 +87,25 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
     private int month, year;
     private JsonObject payload = new JsonObject();
     private String stripe_token = "";
+    Stripe stripe;
+    Source giropaySource;
+    SourceParams giropayParams;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card_detail_layout);
+
+        PaymentConfiguration.init(
+                PK_key
+        );
+
+//        final KlarnaCheckout checkout = new KlarnaCheckout(this, "yourapp://post-authentication-return-url");
+//        checkout.setSnippet(snippet);
+
+
         ButterKnife.bind(this);
-
-
         mCardInputWidget = (CardInputWidget) findViewById(R.id.card_input_widget);
 
         if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
@@ -83,10 +115,12 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
 
         listners();
         getCartData();
-        mPublicKey = " pk_test_rLlkAeTE94hTOk6SPjZxRnHM ";
+        mPublicKey = " pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA";
         mPrivateKey = "sk_test_1V4T5UXM2odNyjEHAqBA9vt8";
 
+
     }
+
 
     @Override
     public void onClick(View view) {
@@ -94,7 +128,88 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_Pay:
                 //TODO Add Delay
                 StartPay();
+//                Sofort();
                 break;
+        }
+    }
+
+
+
+
+    private void onSourceCreated(@NonNull Source source) {
+        // handle created Source object
+    }
+
+    private void Sofort() {
+        stripe = new Stripe(this, PK_key);
+//        Card card = mCardInputWidget.getCard();
+//        SourceParams cardSourceParams = SourceParams.createCardParams(card);
+//// The asynchronous way to do it. Call this method on the main thread.
+//        stripe.createSource(
+//                cardSourceParams, new SourceCallback() {
+//                    @Override
+//                    public void onError(Exception error) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Source source) {
+//                        Log.d(TAG, "onSuccess: "+ source);
+//                    }
+//                });
+
+
+        giropayParams = SourceParams.createGiropayParams(
+                100,
+                "Customer Name",
+                "yourapp://post-authentication-return-url",
+                "a purchase description");
+
+        new UpdateTask().execute();
+
+    }
+
+    private class UpdateTask extends AsyncTask<String, String, Source> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = UiHelper.generateProgressDialog(Card_detailActivity.this, false);
+            dialog.show();
+        }
+
+        protected Source doInBackground(String... urls) {
+
+            try {
+                giropaySource = stripe.createSourceSynchronous(giropayParams);
+            } catch (AuthenticationException e) {
+                e.printStackTrace();
+            } catch (InvalidRequestException e) {
+                e.printStackTrace();
+            } catch (APIConnectionException e) {
+                e.printStackTrace();
+            } catch (CardException e) {
+                e.printStackTrace();
+            } catch (APIException e) {
+                e.printStackTrace();
+            }
+
+            return giropaySource;
+        }
+
+        @Override
+        protected void onPostExecute(Source source) {
+            super.onPostExecute(source);
+
+//            Log.e(TAG, "REDIRECT: "+Source.REDIRECT+  " flow "+giropaySource.getFlow()  );
+
+            if (Source.REDIRECT.equals(giropaySource.getFlow())) {
+                String redirectUrl = giropaySource.getRedirect().getUrl();
+                // then go to this URL, as shown below.
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(redirectUrl));
+                startActivity(browserIntent);
+            }
+
         }
     }
 
@@ -111,7 +226,7 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
             final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
             progressDialog.show();
 
-            Stripe stripe = new Stripe(this, "pk_test_X1w6crndFSEl4GiwRDzMs6uI");
+            Stripe stripe = new Stripe(this, PK_key);
 
 
             stripe.createToken(mCardInputWidget.getCard(), new TokenCallback() {
@@ -292,8 +407,10 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
                 if (jsonObject != null) {
                     try {
 
+                        Log.e(TAG, "Success: "+ jsonObject );
+
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
-                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        if (jsonObject1.getString("success").equalsIgnoreCase("true")) {
 
 
                             UiHelper.showToast(Card_detailActivity.this, jsonObject1.getString("message"));
@@ -341,6 +458,36 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getData() != null && intent.getData().getQuery() != null) {
+            // The client secret and source ID found here is identical to
+            // that of the source used to get the redirect URL.
+
+            Log.d(TAG, "onNewIntent: " + giropaySource.getClientSecret() + " -- " + giropaySource.getId());
+            String host = intent.getData().getHost();
+            // Note: you don't have to get the client secret
+            // and source ID here. They are the same as the
+            // values already in your source.
+            String clientSecret = intent.getData().getQueryParameter(QUERY_CLIENT_SECRET);
+            String sourceId = intent.getData().getQueryParameter(QUERY_SOURCE_ID);
+            if (clientSecret != null
+                    && sourceId != null
+                    && clientSecret.equals(giropaySource.getClientSecret())
+                    && sourceId.equals(giropaySource.getId())) {
+                // Then this is a redirect back for the original source.
+                // You should poll your own backend to update based on
+                // source status change webhook events it may receive, and display the results
+                // of that here.
+                Toast.makeText(this, "tetee", Toast.LENGTH_SHORT).show();
+
+            }
+            // If you had a dialog open when your user went elsewhere, remember to close it here.
+            dialog.dismiss();
+        }
+    }
 
 }
 

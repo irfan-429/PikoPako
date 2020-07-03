@@ -1,6 +1,7 @@
 package com.pikopako.AppUtill;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.Spannable;
@@ -31,6 +33,7 @@ import com.pikopako.Fragment.ProgressDialog;
 import com.pikopako.R;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -157,4 +160,50 @@ public class UiHelper {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    public static boolean isGPSConnected(Context context) {
+        boolean isGpsOn = false;
+
+        LocationManager locMgr = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        boolean isGpsEnabled = false;
+        boolean isNetworkEnabled = false;
+
+        try {
+            isGpsEnabled = locMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ignored) {
+        }
+
+        try {
+            isNetworkEnabled = locMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ignored) {
+        }
+
+        if (isGpsEnabled && isNetworkEnabled) {
+            //if connected, Do something
+            isGpsOn = true;
+        } else if (!isGpsEnabled && !isNetworkEnabled) {
+            isGpsOn = false;
+
+//            AppGlobalFunctions.gotoDialog(context, "GPSFailed");
+        }
+
+        return isGpsOn;
+    }
+
+    public static boolean isAppOnForeground(Context context, String appPackageName) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null) {
+            return false;
+        }
+        final String packageName = appPackageName;
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND && appProcess.processName.equals(packageName)) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

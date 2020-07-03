@@ -750,8 +750,6 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.btn_proceed:
-
-
                 DateFormat formatter1 = new SimpleDateFormat("dd");
 
                 String datee1=   formatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
@@ -801,6 +799,8 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                 if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5,16))) {
 
+                    Log.e(TAG, "onClick: "+ device_date1+ " : "+ SplashActivity.InternetTime.substring(5,16) );
+
                 String fff = txt_itemTotal.getText().toString();
                 String[] diss = fff.split("\\€");
 
@@ -814,6 +814,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                     UiHelper.showToast(this, getString(R.string.your_order_amount_is_less));
                 }
                 else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
+                        Log.e(TAG, "chk out: " );
                     Intent intent1 = new Intent(this, CheckoutActivity.class);
 
                     String fffs = txt_discount.getText().toString();
@@ -844,6 +845,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                     intent1.putExtra("delivery_time",ed_timepicker.getText().toString());
                     startActivity(intent1);
                 } else {
+                        Log.e(TAG, "Make_payment: " );
 
                     Intent intent1 = new Intent(ViewCartActivity.this, Make_payment.class);
 

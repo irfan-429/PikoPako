@@ -1,15 +1,22 @@
 package com.pikopako.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pikopako.AppDelegate.BaseApplication;
+import com.pikopako.AppUtill.ConnectivityReceiver;
 import com.pikopako.AppUtill.Constant;
+import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.R;
 
 import org.apache.http.HttpResponse;
@@ -28,26 +35,69 @@ import java.util.Date;
 
 
 public class SplashActivity extends BaseActivity {
-    private static int SPLASH_TIME_OUT=2000;
-    ArrayList<String> permissionToAsk=new ArrayList<>();
-   public static String InternetTime="";
-  public static  Date DeviceTime;
+    private static int SPLASH_TIME_OUT = 2000;
+    ArrayList<String> permissionToAsk = new ArrayList<>();
+    public static String InternetTime = "";
+    public static Date DeviceTime;
+
+    public static ConnectivityReceiver connectivityReceiver;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                getDateAndTime();
+        checkConnectivity();
 
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                getDateAndTime();
+//
+//            }
+//        }).start();
+//
+//        callInitApi();
 
-        callInitApi();
     }
+
+
+    private void checkConnectivity() {
+//        if (!AppGlobalFunctions.isInternetConnected(context)) {
+//            CustomAlertDialog.showAlertDialog(context, R.drawable.ic_arab_red, "Network Connection Error", "Please connect to the internet then try again later.", "OK", "", Splash.this, "InternetFailed");
+//        } else
+        if (!UiHelper.isGPSConnected(this)) {
+            showDialogForGPS();
+        } else {
+            startConnectivityReceiver();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    getDateAndTime();
+
+                }
+            }).start();
+
+            callInitApi();
+        }
+    }
+
+
+    private void startConnectivityReceiver() {
+        if (connectivityReceiver == null) {
+            connectivityReceiver = new ConnectivityReceiver(); //creating instance
+            IntentFilter filter = new IntentFilter();
+//            filter.addAction("android.net.conn.CONNECTIVITY_CHANGE"); //internet connectivity
+            filter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION); //GPS connectivity
+            getApplicationContext().registerReceiver(connectivityReceiver, filter); //registering by whole app
+        }
+    }
+
 
     private void callInitApi() {
         new Handler().postDelayed(new Runnable() {
@@ -62,40 +112,40 @@ public class SplashActivity extends BaseActivity {
 
     private void getDateAndTime() {
 
-        try{
+        try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpResponse response = httpclient.execute(new HttpGet("https://google.com/"));
             org.apache.http.StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 InternetTime = response.getFirstHeader("Date").getValue();
 //Here I do something with the Date String
                 DeviceTime = Calendar.getInstance().getTime();
                 System.out.println("Current time from device => " + DeviceTime);
-                System.out.println("current time from internet =>"+InternetTime);
+                System.out.println("current time from internet =>" + InternetTime);
 
-            } else{
+            } else {
 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
-        }catch (ClientProtocolException e) {
+        } catch (ClientProtocolException e) {
             Log.d("Response", e.getMessage());
-        }catch (IOException e) {
+        } catch (IOException e) {
             Log.d("Response", e.getMessage());
         }
 
     }
 
     private void CheckUserIsLoginOrNot() {
-        Intent intent=new Intent() ;
-        if(BaseApplication.getInstance().getSession().isLoggedIn()){
+        Intent intent = new Intent();
+        if (BaseApplication.getInstance().getSession().isLoggedIn()) {
             try {
                 JSONObject jsonObject = new JSONObject(BaseApplication.getInstance().getSession().getProfileData());
 //                if (jsonObject.getString("latitude").equalsIgnoreCase("null") && BaseApplication.getInstance().getSession().getDeliveryLatitude().isEmpty()) {
 //                    intent = new Intent(SplashActivity.this, ConfirmLocationActivity.class);
 //                    intent.putExtra(Constant.IS_SIGNUP, true);
 //                } else {
-                    intent = new Intent(SplashActivity.this, MainActivity.class);
+                intent = new Intent(SplashActivity.this, MainActivity.class);
 //                }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -105,9 +155,8 @@ public class SplashActivity extends BaseActivity {
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        }
-        else {
-            intent= new Intent(SplashActivity.this, LocationOptionActivity.class);
+        } else {
+            intent = new Intent(SplashActivity.this, LocationOptionActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
@@ -145,5 +194,27 @@ public class SplashActivity extends BaseActivity {
         }
     }*/
 
+
+    private void showDialogForGPS() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.gpsTitle));
+        builder.setCancelable(false);
+        builder.setMessage(getString(R.string.gpsMessage));
+        builder.setPositiveButton(getResources().getString(R.string.settingButton), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+                finish();
+                Log.e("tag", "delivery_address :" + BaseApplication.getInstance().getSession().getDeliveryAddress());
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
 
 }

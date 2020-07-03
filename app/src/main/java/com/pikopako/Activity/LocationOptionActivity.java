@@ -158,6 +158,7 @@ public class LocationOptionActivity extends BaseActivity {
                 Intent intent= new Intent(LocationOptionActivity.this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+//                showDialogForSignin();
 
 
             }
@@ -337,11 +338,14 @@ public class LocationOptionActivity extends BaseActivity {
             }
             else {
               //  finish();
-                BaseApplication.getInstance().getSession().setExit("Exit");
-                Intent intent= new Intent(LocationOptionActivity.this, ConfirmLocationActivity.class);
-                intent.putExtra(Constant.IS_SIGNUP,false);
-                startActivity(intent);
-                overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                askPermissions();
+
+                Log.e("tag", "else grantednRequestPermissionsResult: " );
+//                BaseApplication.getInstance().getSession().setExit("Exit");
+//                Intent intent= new Intent(LocationOptionActivity.this, ConfirmLocationActivity.class);
+//                intent.putExtra(Constant.IS_SIGNUP,false);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
             }
         }
 

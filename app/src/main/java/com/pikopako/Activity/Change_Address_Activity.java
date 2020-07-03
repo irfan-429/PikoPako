@@ -173,7 +173,6 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
 
@@ -222,6 +221,9 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
         }else
             coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
+
+        latitude= gpsTracker.getLatitude();
+        longitude= gpsTracker.getLongitude();
 
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
         Log.e("TAG", "YOUR LOCATION: "+yourLocation+"Coordinate:"+coordinate );

@@ -82,7 +82,8 @@ public class Make_payment extends BaseActivity {
     String user_contact="";
     String user_email="";
     //Paypal Configuration Object
-    private static PayPalConfiguration config;
+    private static PayPalConfiguration payPalConfiguration;
+   String PAYPAL_CLIENT_ID="AWenZtgj2qX5Z2je9ukBJuGNbEhgLvFWDZxsCqQhJ2nqvUUrXptFmMmEEjpW4LYDQbUIRGX23ayzjMhv";
 
     private RadioButton radioButton;
 
@@ -210,9 +211,9 @@ public class Make_payment extends BaseActivity {
         ButterKnife.bind(this);
         listners();
 
-         config = new PayPalConfiguration()
-                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-                .clientId("AS41xi3OmE37P2yoBJ32g5S1JTIY4-xFWVfdLMFo00pTl87GIamLupNAyfJSXdLsAzOOHxtqJkO8ISyz");
+         payPalConfiguration = new PayPalConfiguration()
+                .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
+                .clientId(PAYPAL_CLIENT_ID);
 
         if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
             language="German";
@@ -240,7 +241,7 @@ public class Make_payment extends BaseActivity {
                 rb_creditcard.setTextColor(getResources().getColor(R.color.black));
 
                 Intent intent = new Intent(Make_payment.this, PayPalService.class);
-                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
                 startService(intent);
 
                 rb_casOnDeleivery.setChecked(false);
@@ -305,6 +306,7 @@ public class Make_payment extends BaseActivity {
              btn_makePayment.setText(R.string.pay_using_credit_debit);
 
         }
+
         btn_makePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -381,7 +383,7 @@ public class Make_payment extends BaseActivity {
         Intent intent = new Intent(this, PaymentActivity.class);
 
         //putting the paypal configuration to the intent
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
 
         //Puting paypal payment to the intent
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
@@ -497,7 +499,7 @@ public class Make_payment extends BaseActivity {
                             Intent intent = new Intent(Make_payment.this, PaymentActivity.class);
 
                             //putting the paypal configuration to the intent
-                            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
 
                             //Puting paypal payment to the intent
                             intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
@@ -553,6 +555,7 @@ public class Make_payment extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //If the result is from paypal
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PAYPAL_REQUEST_CODE) {
 
             //If the result is OK i.e. user has not canceled the payment
@@ -570,7 +573,7 @@ public class Make_payment extends BaseActivity {
                         //Starting a new activity for the payment details and also putting the payment details with intent
                         startActivity(new Intent(this, ConfirmedOrder.class)
                                 .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("delivery_time",delivery_time)
+                                .putExtra("delivery_time", delivery_time)
                                 .putExtra("PaymentAmount", paymentAmount));
 
                     } catch (JSONException e) {

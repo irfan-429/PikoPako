@@ -492,4 +492,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
                     }
                 });
     }
+
+
+
 }

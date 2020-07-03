@@ -329,6 +329,7 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
+            Log.e("else", "makePayload: " + payload.toString());
 
         } else {
             Log.e("else", "makePayload: " + payload.toString());
@@ -344,6 +345,7 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
             payload.addProperty("latitude", latitude);
             payload.addProperty("longitude", longitude);
         }
+
         Log.e("cndition bahar", "makePayload: " + payload.toString());
 //        TimeZone tz = TimeZone.getDefault();
 //        payload.addProperty("timezone", tz.getID());

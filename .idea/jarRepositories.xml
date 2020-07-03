@@ -26,5 +26,10 @@
       <option name="name" value="maven" />
       <option name="url" value="https://mint.splunk.com/gradle/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://x.klarnacdn.net/mobile-sdk/" />
+    </remote-repository>
   </component>
 </project>

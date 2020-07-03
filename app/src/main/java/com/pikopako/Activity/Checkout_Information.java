@@ -149,25 +149,27 @@ public class Checkout_Information extends BaseActivity implements View.OnClickLi
                         if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Checkout_Information.this);
-                            builder.setTitle(getString(R.string.app_name));
-                            builder.setMessage(getResources().getString(R.string.your_account_is_not_verified));
-                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    senddetail();
-                                }
-                            });
-                            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                           AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+                            senddetail();
 
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(Checkout_Information.this);
+//                            builder.setTitle(getString(R.string.app_name));
+//                            builder.setMessage(getResources().getString(R.string.your_account_is_not_verified));
+//                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                    senddetail();
+//                                }
+//                            });
+//                            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                           AlertDialog alertDialog = builder.create();
+//                            alertDialog.show();
+//
 
 
 
@@ -237,7 +239,7 @@ public class Checkout_Information extends BaseActivity implements View.OnClickLi
         String contact = edt_contact.getText().toString().trim();
 
 
-        Intent intent = new Intent(this, OtpVerificationActivity.class);
+        Intent intent = new Intent(this, Make_payment.class); //OTP ver ACT
         intent.putExtra("name", name);
         intent.putExtra("email", email);
         intent.putExtra("contact", contact);
@@ -264,6 +266,7 @@ public class Checkout_Information extends BaseActivity implements View.OnClickLi
         Log.e("tag", "senddetail: " + restro_image + "  ff" + paid_amount);
 
         startActivity(intent);
+        finish();
 
     }
 

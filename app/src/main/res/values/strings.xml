@@ -160,7 +160,7 @@
     <string name="change">CHANGE</string>
     <string name="your_cart_is_empty">Your Cart is Empty</string>
     <string name="paypal">Paypal</string>
-    <string name="cash_on_deleivery">Cash On Deleivery</string>
+    <string name="cash_on_deleivery">Cash On Delivery</string>
     <string name="credit_debit_card">Credit/Debit Card</string>
     <string name="valid_till">Valid Till -</string>
     <string name="min_order">Min order -</string>
@@ -177,7 +177,7 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="ratings">ratings</string>
-    <string name="deleivery_time">Deleivery Time</string>
+    <string name="deleivery_time">Delivery Time</string>
     <string name="minorder">Min Order</string>
     <string name="alcohol">Alcohol</string>
     <string name="seating">Seating</string>
@@ -215,7 +215,7 @@
     <string name="order_requested_on">Order Requested on</string>
     <string name="order_accepted_on">Order Accepted on</string>
     <string name="order_cancelled_on">Order Cancelled on</string>
-    <string name="order_deleieverd_on">Order Deleiverd on</string>
+    <string name="order_deleieverd_on">Order Delivered on</string>
     <string name="pls_enter_some_comment">Please Enter Some Comment</string>
     <string name="reviews">Reviews</string>
     <string name="pls_enter_old_pass">Please enter old password</string>
@@ -259,7 +259,7 @@
     <string name="your_account_is_not_verified">Your account is not verified so far please verify your account</string>
     <string name="selectAll">Select All</string>
     <string name="pls_enter_otp">Please Enter OTP</string>
-    <string name="our_deleivery_boy_meet_you_at">Our Deleivery Boy meet you at</string>
+    <string name="our_deleivery_boy_meet_you_at">Our Delivery Boy meet you at</string>
     <string name="Please_check_your_time">Please Check your Device Date and Time</string>
     <string name="choose_categories">Choose Categories</string>
     <string name="deselectAll">DeSelect All</string>
