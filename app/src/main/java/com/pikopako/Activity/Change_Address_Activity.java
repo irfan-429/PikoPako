@@ -58,7 +58,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Change_Address_Activity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback,GeocoderLocation.AddressRecieved {
+public class Change_Address_Activity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -103,36 +103,36 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
     List<Place.Field> fields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.NAME);
 
     String home;
-    float deleivery_charge,coordinate_id;
-    String language="";
-    boolean move=false;
+    float deleivery_charge, coordinate_id;
+    String language = "";
+    boolean move = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_address_layout);
         Places.initialize(this, getResources().getString(R.string.google_api_key1)); //init auto complete places API
         ButterKnife.bind(this);
-        if (getIntent().hasExtra("location")){
-            move=true;}
-            else move=false;
+        if (getIntent().hasExtra("location")) {
+            move = true;
+        } else move = false;
         initilizeMap();
         listners();
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
+            language = "German";
+        } else
+            language = "English";
 
-        Intent intent=getIntent();
+        Intent intent = getIntent();
 
-        if (intent.hasExtra("location")){
+        if (intent.hasExtra("location")) {
             mEditLocation.setText(intent.getStringExtra("location"));
-            Log.e("TAGG", "onCreate: "+getIntent().getStringExtra("location") );
+            Log.e("TAGG", "onCreate: " + getIntent().getStringExtra("location"));
         }
 
-        restaurant_id=intent.getStringExtra("restaurant_id");
-        Log.e("restro id", "onCreate: "+intent.getStringExtra("restaurant_id") );
+        restaurant_id = intent.getStringExtra("restaurant_id");
+        Log.e("restro id", "onCreate: " + intent.getStringExtra("restaurant_id"));
 //        if (intent.hasExtra("houseno")&& intent.hasExtra("landmark")&& intent.hasExtra("title")){
 //            ed_flatno.setText(intent.getStringExtra("houseno"));
 //            ed_landmark.setText(intent.getStringExtra("landmark"));
@@ -145,12 +145,12 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
 //                radioButton_work.setChecked(true);
 //        }
 
-        if (BaseApplication.getInstance().getSession().getAddress()!=null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()){
+        if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
             try {
-                JSONObject dd=new JSONObject(BaseApplication.getInstance().getSession().getAddress());
+                JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
                 ed_landmark.setText(dd.getString("landmark"));
                 ed_flatno.setText(dd.getString("houseno"));
-                String tit=dd.getString("address_title");
+                String tit = dd.getString("address_title");
 
                 if (tit.equalsIgnoreCase("Home"))
                     radioButton_home.setChecked(true);
@@ -158,14 +158,14 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
                     radioButton_work.setChecked(true);
 
                 mEditLocation.setText(dd.getString("location"));
-                latitude=dd.getDouble("latitude");
-                longitude=dd.getDouble("longitude");
-                Log.e("dd", "onCreate: "+dd.toString());
+                latitude = dd.getDouble("latitude");
+                longitude = dd.getDouble("longitude");
+                Log.e("dd", "onCreate: " + dd.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        Log.e("id restro", "onCreate: "+restaurant_id );
+        Log.e("id restro", "onCreate: " + restaurant_id);
     }
 
 
@@ -207,7 +207,7 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
         GPSTracker gpsTracker = new GPSTracker(this);
 
         LatLng coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-        if (BaseApplication.getInstance().getSession().getAddress()!=null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
+        if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
             try {
                 JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
                 if (dd.has("latitude") && dd.getString("latitude") != null) {
@@ -218,15 +218,15 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }else
+        } else
             coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
 
-        latitude= gpsTracker.getLatitude();
-        longitude= gpsTracker.getLongitude();
+        latitude = gpsTracker.getLatitude();
+        longitude = gpsTracker.getLongitude();
 
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
-        Log.e("TAG", "YOUR LOCATION: "+yourLocation+"Coordinate:"+coordinate );
+        Log.e("TAG", "YOUR LOCATION: " + yourLocation + "Coordinate:" + coordinate);
         googleMap.animateCamera(yourLocation);
         if (googleMap != null) {
             googleMap.clear();
@@ -269,16 +269,21 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             List<Address> addresses;
 
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-         //   if (addresses.size()>0)
-            if (!getIntent().getStringExtra("location").equalsIgnoreCase("")) {
+            //   if (addresses.size()>0)
+//            if (!getIntent().getStringExtra("location").equalsIgnoreCase("")) {
+//
+//                mEditLocation.setText(getIntent().getStringExtra("location"));
+//            }
+//            //   if (getIntent().getStringExtra("location").equalsIgnoreCase("")) {
+//            else {
+//                mEditLocation.setText(addresses.get(0).getAddressLine(0).toString());
+//                Log.e("GET ADDRESS", "getAddress: " + addresses.get(0).getAddressLine(0).toString());
+//
+//                mEditLocation.setText(addresses.get(0).getAddressLine(0).toString());
+//
+//            }
 
-                mEditLocation.setText(getIntent().getStringExtra("location"));
-            }
-         //   if (getIntent().getStringExtra("location").equalsIgnoreCase("")) {
-               else {
-                mEditLocation.setText(addresses.get(0).getAddressLine(0).toString());
-                Log.e("GET ADDRESS", "getAddress: " + addresses.get(0).getAddressLine(0).toString());
-            }
+            mEditLocation.setText(addresses.get(0).getAddressLine(0));
 
 
             this.latLng = latLng;
@@ -310,14 +315,22 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
     public boolean validate() {
         boolean valid = true;
         String location = mEditLocation.getText().toString().trim();
+        String house = ed_flatno.getText().toString().trim();
+        String landmark = ed_landmark.getText().toString().trim();
+
         if (location.isEmpty()) {
+//            mEditLocation.requestFocus()
             mEditLocation.setError(getString(R.string.valid_msg_location_required));
+            valid = false;
+        } else if (house.isEmpty()) {
+            ed_flatno.setError(getString(R.string.valid_msg_required));
+            valid = false;
+        } else if (landmark.isEmpty()) {
+            ed_landmark.setError(getString(R.string.valid_msg_required));
             valid = false;
         } else if (location.length() < 3) {
             mEditLocation.setError(getString(R.string.valid_msg_location_length_required));
             valid = false;
-        } else {
-            mEditLocation.setError(null);
         }
 
         return valid;
@@ -326,26 +339,28 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         Intent intent;
-            switch (view.getId()){
-                case R.id.setshippinglocation:
-                    Intent intent1 = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-                            .setCountry(UiHelper.COUNTRY_RESTRICTION) //restriction on specific country (UAE) ae
-                            .build(this);
-                    startActivityForResult(intent1, AUTOCOMPLETE_REQUEST_CODE);
+        switch (view.getId()) {
+            case R.id.setshippinglocation:
+                Intent intent1 = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                        .setCountry(UiHelper.COUNTRY_RESTRICTION) //restriction on specific country (UAE) ae
+                        .build(this);
+                startActivityForResult(intent1, AUTOCOMPLETE_REQUEST_CODE);
 
 //                    intent = new Intent(Change_Address_Activity.this, CommonSearchActivity.class);
 //                    startActivityForResult(intent, 10001);
 //                    overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-                    break;
+                break;
 
-                case R.id.btnsaveandproceed:
+            case R.id.btnsaveandproceed:
+//                if (mEditLocation.getText().toString().trim().isEmpty()){
+//                        mEditLocation.setError(getString(R.string.please_enter_location));
+//                    }
 
-                    if (mEditLocation.getText().toString().trim().isEmpty()){
-                        mEditLocation.setError(getString(R.string.please_enter_location));
-                    }else
-                        callApi();
-                    break;
-            }
+                if (validate()) callApi();
+
+//
+                break;
+        }
     }
 
 
@@ -419,11 +434,12 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
 //
 //                setResult(4,intent1);
 //                finish();
-              //  overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                //  overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void addressRecieved(final String longAdd, final LatLng latlng, final boolean needCamera) {
         runOnUiThread(
@@ -432,31 +448,32 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
                     public void run() {
                         latitude = latlng.latitude;
                         longitude = latlng.longitude;
-                        if (!move){
-                        mEditLocation.setText(longAdd);}
-                        else
-                            move=false;
-                    //    callApi();
+                        if (!move) {
+                            mEditLocation.setText(longAdd);
+                        } else
+                            move = false;
+                        //    callApi();
                         Log.e("tag", "location move" + longAdd);
                         if (needCamera)
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                     }
                 });
     }
-    private void callApi(){
-        final ProgressDialog progressDialog= UiHelper.generateProgressDialog(this,false);
+
+    private void callApi() {
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
 
-             JsonObject jsonObject = new JsonObject();
+        JsonObject jsonObject = new JsonObject();
 
-           jsonObject.addProperty("latitude", latitude);
-           jsonObject.addProperty("longitude",longitude);
-        jsonObject.addProperty("restaurant_id",restaurant_id);
-        jsonObject.addProperty("language",language);
+        jsonObject.addProperty("latitude", latitude);
+        jsonObject.addProperty("longitude", longitude);
+        jsonObject.addProperty("restaurant_id", restaurant_id);
+        jsonObject.addProperty("language", language);
 
-          Log.e("lat,longres",""+latitude+" long:-"+longitude+" restid:- "+restaurant_id);
+        Log.e("lat,longres", "" + latitude + " long:-" + longitude + " restid:- " + restaurant_id);
 
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkDeliveryLocation(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkDeliveryLocation(BaseApplication.getInstance().getSession().getToken(), jsonObject);
 
 
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
@@ -465,40 +482,39 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
-                            Log.e("json objecxt", "Success: "+jsonObject1.toString() );
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                            Log.e("json objecxt", "Success: " + jsonObject1.toString());
 
-                     deleivery_charge= Float.parseFloat(jsonObject1.getJSONObject("data").getString("delivery_amount"));
-                            coordinate_id= Float.parseFloat(jsonObject1.getJSONObject("data").getString("coordinate_id"));
-                            String minimum_order_amount= jsonObject1.getJSONObject("data").getString("minimum_order_amount");
+                            deleivery_charge = Float.parseFloat(jsonObject1.getJSONObject("data").getString("delivery_amount"));
+                            coordinate_id = Float.parseFloat(jsonObject1.getJSONObject("data").getString("coordinate_id"));
+                            String minimum_order_amount = jsonObject1.getJSONObject("data").getString("minimum_order_amount");
 
                             BaseApplication.getInstance().getSession().setCoordinateId(String.valueOf(coordinate_id));
-                            Intent intent1=new Intent();
-                            intent1.putExtra("location",mEditLocation.getText().toString());
-                            intent1.putExtra("houseno",ed_flatno.getText().toString());
-                            intent1.putExtra("landmark",ed_landmark.getText().toString());
-                            intent1.putExtra("longitude",longitude);
-                            intent1.putExtra("latitude",latitude);
-                            intent1.putExtra("deleivery_charge",deleivery_charge);
-                            intent1.putExtra("minimum_order_amount",minimum_order_amount);
+                            Intent intent1 = new Intent();
+                            intent1.putExtra("location", mEditLocation.getText().toString());
+                            intent1.putExtra("houseno", ed_flatno.getText().toString());
+                            intent1.putExtra("landmark", ed_landmark.getText().toString());
+                            intent1.putExtra("longitude", longitude);
+                            intent1.putExtra("latitude", latitude);
+                            intent1.putExtra("deleivery_charge", deleivery_charge);
+                            intent1.putExtra("minimum_order_amount", minimum_order_amount);
                             if (radioButton_home.isChecked())
-                                home= String.valueOf(radioButton_home.getText());
+                                home = String.valueOf(radioButton_home.getText());
                             else
-                                home= String.valueOf(radioButton_work.getText());
+                                home = String.valueOf(radioButton_work.getText());
 
-                            intent1.putExtra("address_title",home);
+                            intent1.putExtra("address_title", home);
 
-                            Log.e("intent data", "onClick: "+intent1.toString() );
-                            setResult(Activity.RESULT_OK,intent1);
+                            Log.e("intent data", "onClick: " + intent1.toString());
+                            setResult(Activity.RESULT_OK, intent1);
                             finish();
 
 
-                        }
-                        else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")){
-                                Intent intent=new Intent(Change_Address_Activity.this,LoginActivity.class);
+                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")) {
+                                Intent intent = new Intent(Change_Address_Activity.this, LoginActivity.class);
                                 startActivity(intent);
 
                             }
@@ -513,7 +529,7 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
 
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
 //                UiHelper.showErrorMessage(mSnackView,error);
             }
@@ -521,13 +537,12 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
 //                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
                 }
                 Log.e("Tag", "isConnected : " + isConnected);
             }
-
 
 
         });

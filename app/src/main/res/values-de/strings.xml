@@ -44,6 +44,7 @@
     <string name="valid_msg_address_required">Adresse ist erforderlich.</string>
     <string name="valid_msg_address_length_required">Die Adresse sollte mindestens 4 Zeichen lang sein.</string>
     <string name="valid_msg_location_required">Ort ist erforderlich.</string>
+    <string name="valid_msg_required">erforderlich</string>
     <string name="valid_msg_location_length_required">Der Standort sollte mindestens 4 Zeichen lang sein.</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>

@@ -430,7 +430,7 @@
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -454,10 +454,9 @@
 
                     <com.pikopako.AppUtill.CustomTextViewNormal
                         android:id="@+id/txt_deleivery_address"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:maxLength="45"
                         android:text="@string/address_is_not_set" />
 
 

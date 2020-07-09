@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.JsonObject;
+import com.pikopako.Adapter.Choose_topping_adapter;
 import com.pikopako.Adapter.FoodDetailAdapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
@@ -202,7 +203,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
             tv_closed.setVisibility(View.GONE);
         }
 
-        if (getIntent().hasExtra("statusFromFavourite")){
+        if (getIntent().hasExtra("statusFromFavourite")) {
 
             if (getIntent().getStringExtra("statusFromFavourite").equalsIgnoreCase("Closed")) {
                 tv_closed.setVisibility(View.VISIBLE);
@@ -213,6 +214,73 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
             }
 
         }
+
+
+        /** check food ingredients*/
+//        callIngradApi();
+
+    }
+
+    private void callIngradApi() {
+        if (getIntent().hasExtra("food_id")) {
+            Log.e(TAG, "callIngradApi: IF ");
+            food_id = getIntent().getStringExtra("food_id");
+        } else {
+            Log.e(TAG, "callIngradApi: ELSE ");
+            food_id = id;
+        }
+
+
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
+        progressDialog.show();
+
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("food_id", food_id);
+        jsonObject.addProperty("language", language);
+        Log.e("food_idd", "" + food_id);
+
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getIngredients(BaseApplication.getInstance().getSession().getToken(), jsonObject);
+        new NetworkController().post(this, call, new NetworkController.APIHandler() {
+            @Override
+            public void Success(Object jsonObject) {
+                progressDialog.dismiss();
+                if (jsonObject != null) {
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                            JSONObject data = jsonObject1.getJSONObject("data");
+                            JSONArray toppingarray = data.getJSONArray("food_toppings");
+
+                            Log.e(TAG, "Success>>>: " + toppingarray.length());
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void Error(String error) {
+                if (progressDialog != null)
+                    progressDialog.dismiss();
+//                UiHelper.showErrorMessage(mSnackView,error);
+            }
+
+            @Override
+            public void isConnected(boolean isConnected) {
+                if (!isConnected) {
+                    if (progressDialog != null)
+                        progressDialog.dismiss();
+//                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
+                }
+                Log.e("Tag", "isConnected : " + isConnected);
+            }
+
+        });
 
     }
 
@@ -313,7 +381,6 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
                 break;
 
             case R.id.tv_add:
-
                 if (SystemClock.elapsedRealtime() - click_time < delay)
                     return;
                 click_time = SystemClock.elapsedRealtime();
@@ -952,7 +1019,6 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
         Log.e(TAG, "" + id);
 
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getIngredients(BaseApplication.getInstance().getSession().getToken(), jsonObject);
-
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {

@@ -1,6 +1,7 @@
 package com.pikopako.Activity;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -180,7 +181,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
     String restro_name = "";
     String restro_location = "";
     String restro_status = "";
-    String restro_id_cart="";
+    String restro_id_cart = "";
 
     String houseno = "";
     String landmark = "";
@@ -191,11 +192,11 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
     float deleivery_charge, minimum_order_amount;
     String isPromoApplied = "No";
 
-    String TAG = "ViewCartActivity";
+    String TAG = "==ViewCartActivity";
 
     String language = "";
 
-    ArrayList<String> permissionToAsk=new ArrayList<>();
+    ArrayList<String> permissionToAsk = new ArrayList<>();
 
     private final static int TIME_PICKER_INTERVAL = 5;
 
@@ -220,16 +221,14 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         mRecycleview.setFocusable(false);
 
 
-
-
         if (BaseApplication.getInstance().getSession().isLoggedIn()) {
             try {
 
                 JSONObject profileData = new JSONObject(BaseApplication.getInstance().getSession().getProfileData());
                 if (profileData.has("address"))
-                address = profileData.getString("address");
+                    address = profileData.getString("address");
                 else
-                    address=BaseApplication.getInstance().getSession().getDeliveryAddress();
+                    address = BaseApplication.getInstance().getSession().getDeliveryAddress();
                 //     txt_deleivery_address.setText(address);
                 Log.e(TAG, "onCreateView: " + address);
             } catch (JSONException e) {
@@ -245,17 +244,17 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         restaurant_id = intent.getStringExtra("restaurant_id");
         coordinate_id = intent.getStringExtra("coordinate_id");
 
-        if (BaseApplication.getInstance().getSession().getminimum_order_amount()!=null)
-        minimum_order_amount= Float.parseFloat(BaseApplication.getInstance().getSession().getminimum_order_amount());
+        if (BaseApplication.getInstance().getSession().getminimum_order_amount() != null)
+            minimum_order_amount = Float.parseFloat(BaseApplication.getInstance().getSession().getminimum_order_amount());
 
-        Log.e(TAG, "onCreate: restro id " + restaurant_id+"coordinateId"+coordinate_id);
-        Log.e(TAG, "onCreate: "+BaseApplication.getInstance().getSession().getCoordinateId() );
+        Log.e(TAG, "onCreate: restro id " + restaurant_id + "coordinateId" + coordinate_id);
+        Log.e(TAG, "onCreate: " + BaseApplication.getInstance().getSession().getCoordinateId());
 
 //        Bundle args = intent.getBundleExtra("BUNDLE");
 //        Log.e("bundle", "onCreate: " + args.toString());
 //        ArrayList<Ingrediants_modal> arrayList = (ArrayList<Ingrediants_modal>) args.getSerializable("ARRAYLIST");
 //        Log.e(TAG, "onCreate: " + arrayList.toString());
-    //    getData();
+        //    getData();
 //        buildSimplified_JSONArray();
 //        load_Adapter();
         //  txt_itemTotal.setText();
@@ -288,6 +287,24 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //            }
 //
 //       }
+
+
+        ed_timepicker.setText(addMinutesInDate("15")); // show time by adding 15 min in it
+    }
+
+    public String addMinutesInDate(String addedMinutes) {
+        String newTime = null;
+        try {
+            Calendar date = Calendar.getInstance();
+            Date afterAddingMins = new Date(date.getTimeInMillis() + (Long.parseLong(addedMinutes) * 60000)); //min*sec
+
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
+
+            newTime = dateFormatter.format(afterAddingMins); //first format and get String val
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return newTime;
     }
 
     @Override
@@ -298,41 +315,44 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         load_Adapter();
     }
 
-    private void resetUi(){
+    private void resetUi() {
         txt_itemTotal.setText("");
         txt_restro_discount.setText("");
         txt_discount.setText("");
         txt_deleiveryCharges.setText("");
         txt_toPay.setText("");
         txt_discountkey.setText("");
-     //   txt_deleivery_address.setText("");
+        //   txt_deleivery_address.setText("");
     }
 
     private void buildSimplified_JSONArray() {
         try {
 
 
-            if (BaseApplication.getInstance().getSession().getAddress()!=null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()){
+            if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
                 try {
-                    JSONObject dd=new JSONObject(BaseApplication.getInstance().getSession().getAddress());
-                    txt_deleivery_address.setText(dd.getString("location"));
+                    JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
+//                    txt_deleivery_address.setText(dd.getString("location"));
+                    Log.e(TAG, "buildSimplified_JSONArray: " );
+//                    txt_deleivery_address.setText(dd.getString("location"));
                     deleivery_charge = (float) dd.getDouble("deleivery_charge");
-                    txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
-                    location=dd.getString("location");
-                    houseno=dd.getString("houseno");
-                    landmark=dd.getString("landmark");
-                    address_title=dd.getString("address_title");
-                    latitude=dd.getDouble("latitude");
-                    longitude=dd.getDouble("longitude");
-                    Log.e(TAG, "Session me address: "+deleivery_charge);
+                    txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
+                    location = dd.getString("location");
+                    houseno = dd.getString("houseno");
+                    landmark = dd.getString("landmark");
+                    address_title = dd.getString("address_title");
+                    latitude = dd.getDouble("latitude");
+                    longitude = dd.getDouble("longitude");
+                    txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+
+                    Log.e(TAG, "Session me address: " + deleivery_charge);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
 
-
-            String carts =BaseApplication.getInstance().getSession().getCartItems();
+            String carts = BaseApplication.getInstance().getSession().getCartItems();
             cart = new JSONObject();
             simlified_products_array = new JSONArray();
 
@@ -354,7 +374,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
             restro_name = cart_data_array.getJSONObject(0).getString("restro_name");
             restro_location = cart_data_array.getJSONObject(0).getString("restro_location");
             restro_status = cart_data_array.getJSONObject(0).getString("restro_status");
-            restro_id_cart=cart_data_array.getJSONObject(0).getString("restro_id");
+            restro_id_cart = cart_data_array.getJSONObject(0).getString("restro_id");
             Log.e("tag", "buildSimplified_JSONArray: " + BaseApplication.getInstance().getSession().getRestroName());
             Log.e("tag", "buildSimplified_JSONArray: " + restro_name);
 
@@ -519,7 +539,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                 } else {
                     isPromoApplied = getString(R.string.yes);
-                    Txt_coupondetails.setText(getString(R.string.your_coupon) +""+ couponCode + getString(R.string.is_appiled_by) + couponDiscount);
+                    Txt_coupondetails.setText(getString(R.string.your_coupon) + "" + couponCode + getString(R.string.is_appiled_by) + couponDiscount);
                     img_coupn.setVisibility(View.GONE);
                     Iv_applyCoupon.setVisibility(View.GONE);
                     img_coupnclose.setVisibility(View.VISIBLE);
@@ -540,8 +560,11 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 address_title = deliveryData.getString("address_title");
                 deleivery_charge = (float) deliveryData.getDouble("deleivery_charge");
 
-                txt_deleivery_address.setText(location);
-                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
+//                txt_deleivery_address.setText(location);
+                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+
+                Log.e(TAG, "buildSimplified_JSONArray: IF" );
+                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
             }
 
@@ -550,11 +573,11 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
             toPay = (itemTotal + toppings_price + deleivery_charge) - (restroDiscount + couponDiscount);
 
             Log.e(TAG, "toPay" + toPay);
-            txt_restro_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount));
-            txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount + couponDiscount));
-            txt_itemTotal.setText("€" + String.format(Locale.ENGLISH,"%.2f", itemTotal + toppings_price));
-            txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", toPay));
-            txt_discountkey.setText(getString(R.string.you_have_saved) +" "+ "€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount + couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+            txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
+            txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+            txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", itemTotal + toppings_price));
+            txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPay));
+            txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
 
             //
 
@@ -588,10 +611,10 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         TimeZone tz = TimeZone.getDefault();
         JsonObject jsonObject = new JsonObject();
 
-        Log.e(TAG, "session restro id : "+ BaseApplication.getInstance().getSession().getRestroId());
-       // Log.e(TAG, "intent me restro id: "+getIntent().getStringExtra("coordinate_id") );
+        Log.e(TAG, "session restro id : " + BaseApplication.getInstance().getSession().getRestroId());
+        // Log.e(TAG, "intent me restro id: "+getIntent().getStringExtra("coordinate_id") );
         jsonObject.addProperty("restaurant_id", BaseApplication.getInstance().getSession().getRestroId());
-      //  jsonObject.addProperty("coordinate_id", getIntent().getStringExtra("coordinate_id"));
+        //  jsonObject.addProperty("coordinate_id", getIntent().getStringExtra("coordinate_id"));
 
         jsonObject.addProperty("timezone", tz.getID());
         jsonObject.addProperty("time", String.valueOf(Calendar.getInstance().getTime()));
@@ -667,13 +690,13 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         String[] diss = fff.split("\\€");
         Log.e(TAG, "diss length: " + diss[1]);
         float remaningDis = Float.parseFloat(diss[1]) - productDiscount;
-        txt_itemTotal.setText("€" + String.format(Locale.ENGLISH,"%.2f", Total_price));
-        txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", remaningDis));
-        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", remaningDis - couponDiscount));
+        txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price));
+        txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
+        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
         Log.e(TAG, "product disCount : " + productDiscount);
 
         txt_toPay.setText("€" + String.format("%.2f", Total_price + deleivery_charge - remaningDis));
-        txt_discountkey.setText(getString(R.string.you_have_saved)+" " + " €" + String.format(Locale.ENGLISH,"%.2f", remaningDis)+" "+getResources().getString(R.string.on_this_bill));
+        txt_discountkey.setText(getString(R.string.you_have_saved) + " " + " €" + String.format(Locale.ENGLISH, "%.2f", remaningDis) + " " + getResources().getString(R.string.on_this_bill));
         if (Total_price == 0) {
             showcart.setVisibility(View.GONE);
             txt_cartempty.setVisibility(View.VISIBLE);
@@ -712,19 +735,18 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.txt_changeaddress:
 
-                if (BaseApplication.getInstance().getSession().getExit().equalsIgnoreCase("Exit")){
+                if (BaseApplication.getInstance().getSession().getExit().equalsIgnoreCase("Exit")) {
                     Intent intent = new Intent(ViewCartActivity.this, Change_Address_Activity.class);
-                    intent.putExtra("restaurant_id",restro_id_cart);
+                    intent.putExtra("restaurant_id", restro_id_cart);
                     intent.putExtra("latitude", latitude);
                     intent.putExtra("longitude", longitude);
                     intent.putExtra("houseno", houseno);
                     intent.putExtra("landmark", landmark);
                     intent.putExtra("title", address_title);
-                    intent.putExtra("location",location);
+                    intent.putExtra("location", location);
                     Log.e(TAG, "onClick: location" + location);
                     startActivityForResult(intent, 4);
-                }
-                else askPermissions();
+                } else askPermissions();
 
 //                Intent intent = new Intent(ViewCartActivity.this, Change_Address_Activity.class);
 //                intent.putExtra("restaurant_id",restro_id_cart);
@@ -752,42 +774,42 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_proceed:
                 DateFormat formatter1 = new SimpleDateFormat("dd");
 
-                String datee1=   formatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String datee1 = formatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
                 int month1 = Calendar.getInstance().get(Calendar.MONTH);
-                String month_name1="";
-                if (month1==0)
-                    month_name1="Jan";
-                else if (month1==1)
-                    month_name1="Feb";
-                else if (month1==2)
-                    month_name1="Mar";
-                else if (month1==3)
-                    month_name1="Apr";
-                else if (month1==4)
-                    month_name1="May";
-                else if (month1==5)
-                    month_name1="Jun";
-                else if (month1==6)
-                    month_name1="Jul";
-                else if (month1==7)
-                    month_name1="Aug";
-                else if (month1==8)
-                    month_name1="Sep";
-                else if (month1==9)
-                    month_name1="Oct";
-                else if (month1==10)
-                    month_name1="Nov";
-                else if (month1==11)
-                    month_name1="Dec";
+                String month_name1 = "";
+                if (month1 == 0)
+                    month_name1 = "Jan";
+                else if (month1 == 1)
+                    month_name1 = "Feb";
+                else if (month1 == 2)
+                    month_name1 = "Mar";
+                else if (month1 == 3)
+                    month_name1 = "Apr";
+                else if (month1 == 4)
+                    month_name1 = "May";
+                else if (month1 == 5)
+                    month_name1 = "Jun";
+                else if (month1 == 6)
+                    month_name1 = "Jul";
+                else if (month1 == 7)
+                    month_name1 = "Aug";
+                else if (month1 == 8)
+                    month_name1 = "Sep";
+                else if (month1 == 9)
+                    month_name1 = "Oct";
+                else if (month1 == 10)
+                    month_name1 = "Nov";
+                else if (month1 == 11)
+                    month_name1 = "Dec";
 
 
                 DateFormat yearformatter1 = new SimpleDateFormat("yyyy");
 
-                String year1=   yearformatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String year1 = yearformatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
 
 
-                String device_date1=datee1+" "+month_name1+" "+year1;
-                Log.e(TAG, "Device Date: "+device_date1 );
+                String device_date1 = datee1 + " " + month_name1 + " " + year1;
+                Log.e(TAG, "Device Date: " + device_date1);
 
 //                String gg1= "";
 //                try {
@@ -797,95 +819,94 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                }
 //                Log.e(TAG, "Internet time: "+gg1 );
 
-                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5,16))) {
+                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
 
-                    Log.e(TAG, "onClick: "+ device_date1+ " : "+ SplashActivity.InternetTime.substring(5,16) );
+                    Log.e(TAG, "onClick: " + device_date1 + " : " + SplashActivity.InternetTime.substring(5, 16));
 
-                String fff = txt_itemTotal.getText().toString();
-                String[] diss = fff.split("\\€");
+                    String fff = txt_itemTotal.getText().toString();
+                    String[] diss = fff.split("\\€");
 
-                float t = Float.parseFloat(diss[1]);
-                //    if (btn_proceed.getText() == "MAKE PAYMENT") {
+                    float t = Float.parseFloat(diss[1]);
+                    //    if (btn_proceed.getText() == "MAKE PAYMENT") {
 
 
                     if (txt_deleivery_address.getText().toString().trim().isEmpty() || txt_deleivery_address.getText().toString().equalsIgnoreCase(getResources().getString(R.string.address_is_not_set))) {
                         UiHelper.showToast(this, getString(R.string.pls_enter_shipping_address));
-                    }else if (t < minimum_order_amount) {
-                    UiHelper.showToast(this, getString(R.string.your_order_amount_is_less));
-                }
-                else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
-                        Log.e(TAG, "chk out: " );
-                    Intent intent1 = new Intent(this, CheckoutActivity.class);
+                    } else if (t < minimum_order_amount) {
+                        UiHelper.showToast(this, getString(R.string.your_order_amount_is_less));
+                    } else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
+                        Log.e(TAG, "chk out: ");
+                        Intent intent1 = new Intent(this, CheckoutActivity.class);
 
-                    String fffs = txt_discount.getText().toString();
-                    String toppaayy = txt_toPay.getText().toString();
-                    String[] disss = fffs.split("\\€");
-                    String[] sss = toppaayy.split("\\€");
-
-
-                    intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
-                    intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
-                    intent1.putExtra("delivery_charge", deleivery_charge);
-                    intent1.putExtra("is_promo_code_applied", isPromoApplied);
-                    intent1.putExtra("house_number", houseno);
-                    intent1.putExtra("landmark", landmark);
-                    intent1.putExtra("address", location);
-                    intent1.putExtra("latitude", latitude);
-                    intent1.putExtra("longitude", longitude);
-                    intent1.putExtra("restaurant_id", restro_id_cart);
-                    intent1.putExtra("address_title", address_title);
-                    intent1.putExtra("coordinate_id", coordinate_id);
-                    intent1.putExtra("promo_code_id", promo_code_id);
-                    intent1.putExtra("promo_code_price", couponDiscount);
-                    intent1.putExtra("restro_image", restro_image);
-                    intent1.putExtra("restro_location", restro_location);
-                    intent1.putExtra("restro_name", restro_name);
-                    intent1.putExtra("restro_status", restro_status);
-                    intent1.putExtra("remarks",edt_remarks.getText().toString());
-                    intent1.putExtra("delivery_time",ed_timepicker.getText().toString());
-                    startActivity(intent1);
-                } else {
-                        Log.e(TAG, "Make_payment: " );
-
-                    Intent intent1 = new Intent(ViewCartActivity.this, Make_payment.class);
+                        String fffs = txt_discount.getText().toString();
+                        String toppaayy = txt_toPay.getText().toString();
+                        String[] disss = fffs.split("\\€");
+                        String[] sss = toppaayy.split("\\€");
 
 
-                    String fffs = txt_discount.getText().toString();
-                    String toppaayy = txt_toPay.getText().toString();
-                    String[] disss = fffs.split("\\€");
-                    String[] sss = toppaayy.split("\\€");
+                        intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
+                        intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
+                        intent1.putExtra("delivery_charge", deleivery_charge);
+                        intent1.putExtra("is_promo_code_applied", isPromoApplied);
+                        intent1.putExtra("house_number", houseno);
+                        intent1.putExtra("landmark", landmark);
+                        intent1.putExtra("address", location);
+                        intent1.putExtra("latitude", latitude);
+                        intent1.putExtra("longitude", longitude);
+                        intent1.putExtra("restaurant_id", restro_id_cart);
+                        intent1.putExtra("address_title", address_title);
+                        intent1.putExtra("coordinate_id", coordinate_id);
+                        intent1.putExtra("promo_code_id", promo_code_id);
+                        intent1.putExtra("promo_code_price", couponDiscount);
+                        intent1.putExtra("restro_image", restro_image);
+                        intent1.putExtra("restro_location", restro_location);
+                        intent1.putExtra("restro_name", restro_name);
+                        intent1.putExtra("restro_status", restro_status);
+                        intent1.putExtra("remarks", edt_remarks.getText().toString());
+                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
+                        startActivity(intent1);
+                    } else {
+                        Log.e(TAG, "Make_payment: ");
+
+                        Intent intent1 = new Intent(ViewCartActivity.this, Make_payment.class);
 
 
-                    intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
-                    intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
-                    intent1.putExtra("delivery_charge", deleivery_charge);
-                    intent1.putExtra("is_promo_code_applied", isPromoApplied);
-                    intent1.putExtra("house_number", houseno);
-                    intent1.putExtra("landmark", landmark);
-                    intent1.putExtra("address", location);
-                    intent1.putExtra("latitude", latitude);
-                    intent1.putExtra("longitude", longitude);
-                    intent1.putExtra("restaurant_id", restro_id_cart);
-                    intent1.putExtra("address_title", address_title);
-                    intent1.putExtra("coordinate_id", BaseApplication.getInstance().getSession().getCoordinateId());
-                    intent1.putExtra("promo_code_id", promo_code_id);
-                    intent1.putExtra("promo_code_price", couponDiscount);
-                    intent1.putExtra("restro_image", restro_image);
-                    intent1.putExtra("restro_location", restro_location);
-                    intent1.putExtra("restro_name", restro_name);
-                    intent1.putExtra("restro_status", restro_status);
-                    intent1.putExtra("remarks", edt_remarks.getText().toString());
-                    intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
-
-                    Log.e(TAG, "on click make payment: " + isPromoApplied + "Houseno" + houseno);
+                        String fffs = txt_discount.getText().toString();
+                        String toppaayy = txt_toPay.getText().toString();
+                        String[] disss = fffs.split("\\€");
+                        String[] sss = toppaayy.split("\\€");
 
 
-                    startActivity(intent1);
-                }}
-                else {
+                        intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
+                        intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
+                        intent1.putExtra("delivery_charge", deleivery_charge);
+                        intent1.putExtra("is_promo_code_applied", isPromoApplied);
+                        intent1.putExtra("house_number", houseno);
+                        intent1.putExtra("landmark", landmark);
+                        intent1.putExtra("address", location);
+                        intent1.putExtra("latitude", latitude);
+                        intent1.putExtra("longitude", longitude);
+                        intent1.putExtra("restaurant_id", restro_id_cart);
+                        intent1.putExtra("address_title", address_title);
+                        intent1.putExtra("coordinate_id", BaseApplication.getInstance().getSession().getCoordinateId());
+                        intent1.putExtra("promo_code_id", promo_code_id);
+                        intent1.putExtra("promo_code_price", couponDiscount);
+                        intent1.putExtra("restro_image", restro_image);
+                        intent1.putExtra("restro_location", restro_location);
+                        intent1.putExtra("restro_name", restro_name);
+                        intent1.putExtra("restro_status", restro_status);
+                        intent1.putExtra("remarks", edt_remarks.getText().toString());
+                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
 
-                    UiHelper.showToast(this,getResources().getString(R.string.Please_check_your_time));
+                        Log.e(TAG, "on click make payment: " + isPromoApplied + "Houseno" + houseno);
+
+
+                        startActivity(intent1);
                     }
+                } else {
+
+                    UiHelper.showToast(this, getResources().getString(R.string.Please_check_your_time));
+                }
 
                 break;
             //     }
@@ -910,9 +931,9 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                 float dis = Float.parseFloat(disss[1]);
                 float toPAy = Float.parseFloat(sss[1]);
-                txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", dis - couponDiscount));
-                txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", toPAy + couponDiscount));
-                txt_discountkey.setText(getString(R.string.you_have_saved)+" " + " €" + String.format(Locale.ENGLISH,"%.2f", dis - couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+                txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", dis - couponDiscount));
+                txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPAy + couponDiscount));
+                txt_discountkey.setText(getString(R.string.you_have_saved) + " " + " €" + String.format(Locale.ENGLISH, "%.2f", dis - couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
                 couponDiscount = 0;
                 isPromoApplied = getString(R.string.no);
                 break;
@@ -922,42 +943,42 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                 DateFormat formatter = new SimpleDateFormat("dd");
 
-             String datee=   formatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String datee = formatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
                 int month = Calendar.getInstance().get(Calendar.MONTH);
-                String month_name="";
-               if (month==0)
-                   month_name="Jan";
-               else if (month==1)
-                   month_name="Feb";
-               else if (month==2)
-                   month_name="Mar";
-               else if (month==3)
-                   month_name="Apr";
-               else if (month==4)
-                   month_name="May";
-               else if (month==5)
-                   month_name="Jun";
-               else if (month==6)
-                   month_name="Jul";
-               else if (month==7)
-                   month_name="Aug";
-               else if (month==8)
-                   month_name="Sep";
-               else if (month==9)
-                   month_name="Oct";
-               else if (month==10)
-                   month_name="Nov";
-               else if (month==11)
-                   month_name="Dec";
+                String month_name = "";
+                if (month == 0)
+                    month_name = "Jan";
+                else if (month == 1)
+                    month_name = "Feb";
+                else if (month == 2)
+                    month_name = "Mar";
+                else if (month == 3)
+                    month_name = "Apr";
+                else if (month == 4)
+                    month_name = "May";
+                else if (month == 5)
+                    month_name = "Jun";
+                else if (month == 6)
+                    month_name = "Jul";
+                else if (month == 7)
+                    month_name = "Aug";
+                else if (month == 8)
+                    month_name = "Sep";
+                else if (month == 9)
+                    month_name = "Oct";
+                else if (month == 10)
+                    month_name = "Nov";
+                else if (month == 11)
+                    month_name = "Dec";
 
 
                 DateFormat yearformatter = new SimpleDateFormat("yyyy");
 
-                String year=   yearformatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String year = yearformatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
 
 
-               String device_date=datee+" "+month_name+" "+year;
-                Log.e(TAG, "Device Date: "+device_date );
+                String device_date = datee + " " + month_name + " " + year;
+                Log.e(TAG, "Device Date: " + device_date);
 
 //                String gg= "";
 //                try {
@@ -967,50 +988,49 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                }
 //                Log.e(TAG, "Internet time: "+gg );
 
-                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5,16))) {
+                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
                     Log.e(TAG, "equals ");
 
 
                     Calendar mcurrentTime = Calendar.getInstance();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                     int minute = mcurrentTime.get(Calendar.MINUTE);
-                    Log.e(TAG, "onClick:minute "+minute );
-                    if (minute>30) {
-                        minute = 00;
-                        hour=hour+1;
-                    }else {
+                    Log.e(TAG, "onClick:minute " + minute);
 
-                        minute=30;
-
-                    }
-                    Log.e(TAG, "onClick: "+minute+" hour:"+hour );
-                    CustomTimePickerDialog mTimePicker;
-                    mTimePicker = new CustomTimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker timePicker, int i, int i1) {
-
-                            Log.e(TAG, "onTimeSet:i1" + i1+" i:"+i);
-                            callAPiForTime(i, i1);
-                        }
-                    }, hour, minute, true);
-                    mTimePicker.setButton(TimePickerDialog.BUTTON_POSITIVE, getResources().getString(R.string.login_ok), mTimePicker);
-                    mTimePicker.setButton(TimePickerDialog.BUTTON_NEGATIVE, getResources().getString(R.string.cancel), mTimePicker);
-                    mTimePicker.show();
-//
-//                mTimePicker = new TimePickerDialog(ViewCartActivity.this,android.R.style.Theme_Holo_Light_Dialog, new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-//
-//                        callAPiForTime(selectedHour,selectedMinute);
-//                      //  ed_timepicker.setText( selectedHour + ":" + selectedMinute);
+//                    if (minute>30) {
+//                        minute = 00;
+//                        hour=hour+1;
+//                    }else {
+//                        minute=30;
 //                    }
-//                }, hour, minute, true);//Yes 24 hour time
-//                mTimePicker.setTitle("Select Time");
-//                mTimePicker.show();
 
-                }
-                else {
-                    UiHelper.showToast(this,getResources().getString(R.string.Please_check_your_time));
+                    Log.e(TAG, "onClick: " + minute + " hour:" + hour);
+//                    CustomTimePickerDialog mTimePicker;
+//                    mTimePicker = new CustomTimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+//                        @Override
+//                        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+//
+//                            Log.e(TAG, "onTimeSet:i1" + i1+" i:"+i);
+//                            callAPiForTime(i, i1);
+//                        }
+//                    }, hour, minute, true);
+//
+//                    mTimePicker.setButton(TimePickerDialog.BUTTON_POSITIVE, getResources().getString(R.string.login_ok), mTimePicker);
+//                    mTimePicker.setButton(TimePickerDialog.BUTTON_NEGATIVE, getResources().getString(R.string.cancel), mTimePicker);
+//                    mTimePicker.show();
+
+
+                    TimePickerDialog timePicker;
+                    timePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            callAPiForTime(selectedHour, selectedMinute);
+                        }
+                    }, hour, minute, true);//Yes 24 hour time
+                    timePicker.show();
+
+                } else {
+                    UiHelper.showToast(this, getResources().getString(R.string.Please_check_your_time));
                 }
 
                 break;
@@ -1018,48 +1038,44 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-
-
-
-    private void callAPiForTime(int time,int mints){
-        final ProgressDialog progressDialog= UiHelper.generateProgressDialog(this,false);
+    private void callAPiForTime(int time, int mints) {
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
 
-        int currentDay=Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        String[]days = new String[]{"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        String[] days = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         String day = days[currentDay];
-        final String sTime = time +":"+String.format("%02d",mints);
+        final String sTime = time + ":" + String.format("%02d", mints);
 
-        Log.e(TAG, "callAPiForTime: "+day +"timee:"+sTime );
+        Log.e(TAG, "callAPiForTime: " + day + "timee:" + sTime);
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("time",sTime);
-        jsonObject.addProperty("day",day);
-        jsonObject.addProperty("restaurant_id",restro_id_cart);
+        jsonObject.addProperty("time", sTime);
+        jsonObject.addProperty("day", day);
+        jsonObject.addProperty("restaurant_id", restro_id_cart);
         //   jsonObject.addProperty("food_id", id);
         //  Log.e("food_id",""+id);
 
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkRestaurantStatus(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkRestaurantStatus(BaseApplication.getInstance().getSession().getToken(), jsonObject);
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 //
-                           JSONObject jsonObject2=jsonObject1.getJSONObject("data");
-                           if (jsonObject2.getString("restaurant_status").equalsIgnoreCase("Closed")){
+                            JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                            if (jsonObject2.getString("restaurant_status").equalsIgnoreCase("Closed")) {
 
-                               UiHelper.showToast(ViewCartActivity.this,"Restaurant don't Deleiver food at selected time");
-                           }else
-                            ed_timepicker.setText(sTime);
-                        }
-                        else {
+                                UiHelper.showToast(ViewCartActivity.this, "Restaurant don't Deliver food at selected time");
+                            } else
+                                ed_timepicker.setText(sTime);
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")){
-                                Intent intent=new Intent(ViewCartActivity.this,LoginActivity.class);
+                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")) {
+                                Intent intent = new Intent(ViewCartActivity.this, LoginActivity.class);
                                 startActivity(intent);
 
                             }
@@ -1074,7 +1090,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
 //                UiHelper.showErrorMessage(mSnackView,error);
             }
@@ -1082,7 +1098,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
 //                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
                 }
@@ -1090,11 +1106,11 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
             }
 
 
-
         });
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1131,7 +1147,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                     Log.e(TAG, "onActivityResult: couponCode" + couponCode);
 
-                    Txt_coupondetails.setText(getString(R.string.your_coupon)+" " + couponCode + " " +getString(R.string.is_appiled_by)+""+ "€" + couponDiscount);
+                    Txt_coupondetails.setText(getString(R.string.your_coupon) + " " + couponCode + " " + getString(R.string.is_appiled_by) + "" + "€" + couponDiscount);
 //                  img_coupn.setImageDrawable(getResources().getDrawable(R.drawable.funnel));
                     img_coupn.setVisibility(View.GONE);
                     img_coupnclose.setVisibility(View.VISIBLE);
@@ -1146,9 +1162,9 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                     float current_disc = Float.parseFloat(diss[1]);
                     float current_toPay = Float.parseFloat(sss[1]);
 
-                    txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", current_toPay - couponDiscount));
-                    txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", current_disc + couponDiscount));
-                    txt_discountkey.setText(getString(R.string.you_have_saved)+" " + "€" + String.format(Locale.ENGLISH,"%.2f", current_disc + couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+                    txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", current_toPay - couponDiscount));
+                    txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", current_disc + couponDiscount));
+                    txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", current_disc + couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
                     isPromoApplied = "Yes";
                     //Add Applied Coupon data to cart
                     JSONObject couponData = new JSONObject();
@@ -1178,16 +1194,20 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 deleivery_charge = data.getFloatExtra("deleivery_charge", 0);
                 minimum_order_amount = Float.parseFloat(data.getStringExtra("minimum_order_amount"));
 
-                Log.e(TAG, "onActivityResult minimum_order_amount: "+minimum_order_amount );
+                Log.e(TAG, "onActivityResult minimum_order_amount: " + minimum_order_amount);
 
-                txt_deleivery_address.setText(location);
+                Log.e(TAG, " :" + houseno+ " landmark "+ landmark+ " location "+ location);
+
+//                txt_deleivery_address.setText("just sat Hi");
+                Log.e(TAG, "onActivityResult: " );
+                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
 
                 String fff = txt_toPay.getText().toString();
                 String[] diss = fff.split("\\€");
                 float current_toPay = Float.parseFloat(diss[1]);
 
 
-                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
+                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
                 try {
 
@@ -1206,7 +1226,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                    cart.put("total_price",temp_total);
                     BaseApplication.getInstance().getSession().setCartItmes(cart.toString());
                     BaseApplication.getInstance().getSession().setAddress(String.valueOf(delivery_location_object));
-                    Log.e(TAG, "adres onActivityResult: "+BaseApplication.getInstance().getSession().getAddress() );
+                    Log.e(TAG, "adres onActivityResult: " + BaseApplication.getInstance().getSession().getAddress());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -1222,9 +1242,9 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 ArrayList<Ingrediants_modal> newToppingsList = (ArrayList<Ingrediants_modal>) data.getSerializableExtra("data");
                 String product_id = data.getStringExtra("product_id");
                 String customize = data.getStringExtra("customize");
-                Log.e(TAG, "onActivityResult Customize: "+data.getStringExtra("customize"));
+                Log.e(TAG, "onActivityResult Customize: " + data.getStringExtra("customize"));
                 int pos = data.hasExtra("pos") ? data.getIntExtra("pos", -1) : -1;
-                Log.e(TAG, "new topping list: "+newToppingsList.toString() +"position:"+pos );
+                Log.e(TAG, "new topping list: " + newToppingsList.toString() + "position:" + pos);
                 addProduct(newToppingsList, product_id, customize, pos);
 
             }
@@ -1297,9 +1317,8 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                                             }
                                         }
                                     }//matching array double loop
-                                }
-                                else
-                                    match =false;
+                                } else
+                                    match = false;
 
                                 //match found
                                 if (match) {
@@ -1311,7 +1330,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                                     items_array.put(k, toppingsArray);
                                     Log.e(TAG, "Toppings Price new old :" + toppings_price + " " + old_Toppings_price);
                                     cart.put("total_price", cart.getDouble("total_price") - (old_Toppings_price - toppings_price));
-                                }else {
+                                } else {
                                     Log.e(TAG, "View tem");
                                     //and new item copy
                                     old_Toppings_price = 0;
@@ -1319,23 +1338,23 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                                        old_Toppings_price = old_Toppings_price + (float) toppingsArray.getJSONObject(y).getDouble("price");
 //                                        Log.e(TAG, "LOOP PRICE: "+old_Toppings_price );
 //                                    }
-                                    items_array.put(pos,toppingsArray);
+                                    items_array.put(pos, toppingsArray);
 
                                     for (int y = 0; y < items_array.getJSONArray(k).length(); y++) {
                                         old_Toppings_price = old_Toppings_price + (float) items_array.getJSONArray(k).getJSONObject(y).getDouble("price");
-                                        Log.e(TAG, "LOOP PRICE: "+old_Toppings_price );
+                                        Log.e(TAG, "LOOP PRICE: " + old_Toppings_price);
                                     }
-                                    Log.e(TAG, "ITEMS Array: "+items_array +"Toppings Array:"+toppingsArray.toString() +"OLD ARRAY:"+oldArray.toString());
-                                    Log.e(TAG, "addProduct: "+cart.getDouble("total_price")+" toppingPrice:"+toppings_price+ "oldToppin:g"+old_Toppings_price );
+                                    Log.e(TAG, "ITEMS Array: " + items_array + "Toppings Array:" + toppingsArray.toString() + "OLD ARRAY:" + oldArray.toString());
+                                    Log.e(TAG, "addProduct: " + cart.getDouble("total_price") + " toppingPrice:" + toppings_price + "oldToppin:g" + old_Toppings_price);
 
-                                   float itemsPrice=(float)cart_product_object.getDouble("price") *(float) cart.getDouble("total_items");
-                                    Log.e(TAG, "addProduct:ITEMSPRICE: "+itemsPrice );
-                                    cart.put("total_price", itemsPrice+toppings_price+old_Toppings_price);
+                                    float itemsPrice = (float) cart_product_object.getDouble("price") * (float) cart.getDouble("total_items");
+                                    Log.e(TAG, "addProduct:ITEMSPRICE: " + itemsPrice);
+                                    cart.put("total_price", itemsPrice + toppings_price + old_Toppings_price);
 
                                 }
 //
                             }
-                            Log.e(TAG, "addProductBAHAR: "+cart.getDouble("total_price")+" toppingPrice:"+toppings_price+ "oldToppin:g"+old_Toppings_price );
+                            Log.e(TAG, "addProductBAHAR: " + cart.getDouble("total_price") + " toppingPrice:" + toppings_price + "oldToppin:g" + old_Toppings_price);
 
                         }
 
@@ -1370,50 +1389,50 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    private void askPermissions(){
+    private void askPermissions() {
         permissionToAsk.clear();
-        for (String s : Constant.askForLocationPermission)
-        {
-            if (ContextCompat.checkSelfPermission(this, s) == PackageManager.PERMISSION_DENIED){
+        for (String s : Constant.askForLocationPermission) {
+            if (ContextCompat.checkSelfPermission(this, s) == PackageManager.PERMISSION_DENIED) {
                 permissionToAsk.add(s);
-                Log.e("tag", "if askPermissions: " );
+                Log.e("tag", "if askPermissions: ");
             }
 
         }
         if (!permissionToAsk.isEmpty()) {
             Log.e("tag", "if empty askPermissions: ");
             ActivityCompat.requestPermissions((Activity) this, permissionToAsk.toArray(new String[permissionToAsk.size()]), Constant.requestcodeForPermission);
-        } else{
-            Log.e("tag", "else access askPermissions: " );
+        } else {
+            Log.e("tag", "else access askPermissions: ");
             accessPermission();
         }
     }
+
     private void accessPermission() {
-        GPSTracker gpsTracker=new GPSTracker(ViewCartActivity.this);
-        if(gpsTracker.canGetLocation()){
-            Log.e("tag", "if can get locationaccessPermission: " );
+        GPSTracker gpsTracker = new GPSTracker(ViewCartActivity.this);
+        if (gpsTracker.canGetLocation()) {
+            Log.e("tag", "if can get locationaccessPermission: ");
             Intent intent = new Intent(ViewCartActivity.this, Change_Address_Activity.class);
-            intent.putExtra("restaurant_id",restro_id_cart);
+            intent.putExtra("restaurant_id", restro_id_cart);
             intent.putExtra("latitude", latitude);
             intent.putExtra("longitude", longitude);
             intent.putExtra("houseno", houseno);
             intent.putExtra("landmark", landmark);
             intent.putExtra("title", address_title);
-            intent.putExtra("location",location);
+            intent.putExtra("location", location);
             Log.e(TAG, "onClick: restaurant_id" + restaurant_id);
             startActivityForResult(intent, 4);
-        }
-        else {
-            Log.e("tag", "else cannot get locationaccessPermission: " );
+        } else {
+            Log.e("tag", "else cannot get locationaccessPermission: ");
 //            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 //            startActivity(intent);
             showDialog();
-            Log.e("tag","delivery_address :"+ BaseApplication.getInstance().getSession().getDeliveryAddress());
+            Log.e("tag", "delivery_address :" + BaseApplication.getInstance().getSession().getDeliveryAddress());
 
         }
     }
+
     private void showDialog() {
-       AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.gpsTitle));
         builder.setMessage(getString(R.string.gpsMessage));
         builder.setPositiveButton(getResources().getString(R.string.settingButton), new DialogInterface.OnClickListener() {
@@ -1422,7 +1441,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 dialog.dismiss();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
-                Log.e("tag","delivery_address :"+ BaseApplication.getInstance().getSession().getDeliveryAddress());
+                Log.e("tag", "delivery_address :" + BaseApplication.getInstance().getSession().getDeliveryAddress());
 
             }
         });
@@ -1432,13 +1451,13 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 BaseApplication.getInstance().getSession().setExit("Exit");
                 dialog.dismiss();
                 Intent intent = new Intent(ViewCartActivity.this, Change_Address_Activity.class);
-                intent.putExtra("restaurant_id",restro_id_cart);
+                intent.putExtra("restaurant_id", restro_id_cart);
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("houseno", houseno);
                 intent.putExtra("landmark", landmark);
                 intent.putExtra("title", address_title);
-                intent.putExtra("location",location);
+                intent.putExtra("location", location);
                 startActivityForResult(intent, 4);
 
             }
@@ -1447,34 +1466,34 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         alertDialog.show();
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         permissionToAsk.clear();
-        if (requestCode==Constant.requestcodeForPermission){
-            boolean allGranted=true;
-            for (int i=0;i<grantResults.length;i++){
-                if (grantResults[i]==PackageManager.PERMISSION_DENIED) {
-                    Log.e("tag", "Permission denied onRequestPermissionsResult: " );
+        if (requestCode == Constant.requestcodeForPermission) {
+            boolean allGranted = true;
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    Log.e("tag", "Permission denied onRequestPermissionsResult: ");
                     allGranted = false;
 
                 }
             }
-            if (allGranted){
-                Log.e("tag", "All grantednRequestPermissionsResult: " );
+            if (allGranted) {
+                Log.e("tag", "All grantednRequestPermissionsResult: ");
                 accessPermission();
-            }
-            else {
+            } else {
                 //  finish();
                 BaseApplication.getInstance().getSession().setExit("Exit");
                 Intent intent = new Intent(ViewCartActivity.this, Change_Address_Activity.class);
-                intent.putExtra("restaurant_id",restro_id_cart);
+                intent.putExtra("restaurant_id", restro_id_cart);
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("houseno", houseno);
                 intent.putExtra("landmark", landmark);
                 intent.putExtra("title", address_title);
-                intent.putExtra("location",location);
+                intent.putExtra("location", location);
                 startActivityForResult(intent, 4);
             }
         }

@@ -41,6 +41,7 @@
     <string name="valid_msg_address_required">Street Address is required.</string>
     <string name="valid_msg_address_length_required">Street Address should be minimum 4 characters.</string>
     <string name="valid_msg_location_required">Location is required.</string>
+    <string name="valid_msg_required">required</string>
     <string name="valid_msg_location_length_required">Location should be minimum 4 characters.</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>

@@ -205,9 +205,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     String TAG = "CartFragment";
     String language = "";
 
-    ArrayList<String> permissionToAsk=new ArrayList<>();
-    long click_time=0;
-    long delay=50;
+    ArrayList<String> permissionToAsk = new ArrayList<>();
+    long click_time = 0;
+    long delay = 50;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_view_cart, container, false);
@@ -234,19 +235,19 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         login_lyt.setVisibility(View.VISIBLE);
         btn_proceed.setText(getString(R.string.make_payment));
 
-        if (BaseApplication.getInstance().getSession().getAddress()!=null && !BaseApplication.getInstance().getSession().getAddress().equalsIgnoreCase("") ){
+        if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().equalsIgnoreCase("")) {
             try {
-                JSONObject dd=new JSONObject(BaseApplication.getInstance().getSession().getAddress());
-                txt_deleivery_address.setText(dd.getString("location"));
-                txt_deleivery_address.setText(dd.getString("location"));
+                JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
                 deleivery_charge = (float) dd.getDouble("deleivery_charge");
-                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
-                location=dd.getString("location");
-                houseno=dd.getString("houseno");
-                landmark=dd.getString("landmark");
-                address_title=dd.getString("address_title");
-                latitude=dd.getDouble("latitude");
-                longitude=dd.getDouble("longitude");
+                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
+                location = dd.getString("location");
+                houseno = dd.getString("houseno");
+                landmark = dd.getString("landmark");
+                address_title = dd.getString("address_title");
+                latitude = dd.getDouble("latitude");
+                longitude = dd.getDouble("longitude");
+                txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -479,8 +480,9 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     address_title = deliveryData.getString("address_title");
                     deleivery_charge = (float) deliveryData.getDouble("deleivery_charge");
 
-                    txt_deleivery_address.setText(location);
-                    txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
+//                    txt_deleivery_address.setText(location);
+                    txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                    txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
                 }
 
@@ -489,14 +491,14 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 toPay = (itemTotal + toppings_price + deleivery_charge) - (restroDiscount + couponDiscount);
 
                 Log.e(TAG, "toPay" + toPay);
-                txt_restro_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount));
-                txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount + couponDiscount));
-                txt_itemTotal.setText("€" + String.format(Locale.ENGLISH,"%.2f", itemTotal + toppings_price));
-                txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", toPay));
+                txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
+                txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+                txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", itemTotal + toppings_price));
+                txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPay));
 
-                Log.e("TAG","to pay "+txt_toPay.getText());
+                Log.e("TAG", "to pay " + txt_toPay.getText());
 
-                txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH,"%.2f", restroDiscount + couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+                txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
 
                 //
 
@@ -608,14 +610,14 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         Log.e(TAG, "diss length: " + diss[1]);
         float remaningDis = Float.parseFloat(diss[1]) - productDiscount;
 
-        txt_itemTotal.setText("€" + String.format(Locale.ENGLISH,"%.2f", Total_price));
-        txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", remaningDis));
-        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", remaningDis - couponDiscount));
+        txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price));
+        txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
+        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
         Log.e(TAG, "product disCount : " + productDiscount);
 
-        txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", Total_price + deleivery_charge - remaningDis));
-        Log.e("TAG","to pay "+txt_toPay.getText());
-        txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH,"%.2f", remaningDis)+" "+getResources().getString(R.string.on_this_bill));
+        txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price + deleivery_charge - remaningDis));
+        Log.e("TAG", "to pay " + txt_toPay.getText());
+        txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", remaningDis) + " " + getResources().getString(R.string.on_this_bill));
 
         if (Total_price == 0) {
             showcart.setVisibility(View.GONE);
@@ -639,7 +641,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             case R.id.txt_changeaddress:
 
 
-                if (BaseApplication.getInstance().getSession().getExit().equalsIgnoreCase("Exit")){
+                if (BaseApplication.getInstance().getSession().getExit().equalsIgnoreCase("Exit")) {
                     Intent intent = new Intent(getActivity(), Change_Address_Activity.class);
                     try {
                         intent.putExtra("restaurant_id", cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
@@ -652,11 +654,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     intent.putExtra("houseno", houseno);
                     intent.putExtra("landmark", landmark);
                     intent.putExtra("title", address_title);
-                    intent.putExtra("location",location);
+                    intent.putExtra("location", location);
                     Log.e(TAG, "onClick: location" + location);
                     startActivityForResult(intent, 4);
-                }
-                else askPermissions();
+                } else askPermissions();
 
                 try {
                     Log.e("view cart", "onClick: " + cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
@@ -680,42 +681,42 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 DateFormat formatter1 = new SimpleDateFormat("dd");
 
-                String datee1=   formatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String datee1 = formatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
                 int month1 = Calendar.getInstance().get(Calendar.MONTH);
-                String month_name1="";
-                if (month1==0)
-                    month_name1="Jan";
-                else if (month1==1)
-                    month_name1="Feb";
-                else if (month1==2)
-                    month_name1="Mar";
-                else if (month1==3)
-                    month_name1="Apr";
-                else if (month1==4)
-                    month_name1="May";
-                else if (month1==5)
-                    month_name1="Jun";
-                else if (month1==6)
-                    month_name1="Jul";
-                else if (month1==7)
-                    month_name1="Aug";
-                else if (month1==8)
-                    month_name1="Sep";
-                else if (month1==9)
-                    month_name1="Oct";
-                else if (month1==10)
-                    month_name1="Nov";
-                else if (month1==11)
-                    month_name1="Dec";
+                String month_name1 = "";
+                if (month1 == 0)
+                    month_name1 = "Jan";
+                else if (month1 == 1)
+                    month_name1 = "Feb";
+                else if (month1 == 2)
+                    month_name1 = "Mar";
+                else if (month1 == 3)
+                    month_name1 = "Apr";
+                else if (month1 == 4)
+                    month_name1 = "May";
+                else if (month1 == 5)
+                    month_name1 = "Jun";
+                else if (month1 == 6)
+                    month_name1 = "Jul";
+                else if (month1 == 7)
+                    month_name1 = "Aug";
+                else if (month1 == 8)
+                    month_name1 = "Sep";
+                else if (month1 == 9)
+                    month_name1 = "Oct";
+                else if (month1 == 10)
+                    month_name1 = "Nov";
+                else if (month1 == 11)
+                    month_name1 = "Dec";
 
 
                 DateFormat yearformatter1 = new SimpleDateFormat("yyyy");
 
-                String year1=   yearformatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String year1 = yearformatter1.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
 
 
-                String device_date1=datee1+" "+month_name1+" "+year1;
-                Log.e(TAG, "Device Date: "+device_date1 );
+                String device_date1 = datee1 + " " + month_name1 + " " + year1;
+                Log.e(TAG, "Device Date: " + device_date1);
 
 //                String gg1= "";
 //                try {
@@ -725,33 +726,32 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg1 );
 
-                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5,16))) {
+                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
 
 
-                String fff = txt_itemTotal.getText().toString();
-                String[] diss = fff.split("\\€");
+                    String fff = txt_itemTotal.getText().toString();
+                    String[] diss = fff.split("\\€");
 
-                float t = Float.parseFloat(diss[1]);
-                //     if (btn_proceed.getText() == "MAKE PAYMENT") {
+                    float t = Float.parseFloat(diss[1]);
+                    //     if (btn_proceed.getText() == "MAKE PAYMENT") {
 
-                    Log.e(TAG, "onClick: "+txt_deleivery_address.getText().toString() );
-                if (txt_deleivery_address.getText().toString().trim().isEmpty() || txt_deleivery_address.getText().toString().equalsIgnoreCase(getResources().getString(R.string.address_is_not_set))) {
-                    UiHelper.showToast(getActivity(), getString(R.string.pls_enter_shipping_address));
-                }  else if (t < minimum_order_amount) {
-                    UiHelper.showToast(getActivity(), getString(R.string.your_order_amount_is_less));
-                }
-                else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
-                    Intent intent1 = new Intent(getActivity(), CheckoutActivity.class);
+                    Log.e(TAG, "onClick: " + txt_deleivery_address.getText().toString());
+                    if (txt_deleivery_address.getText().toString().trim().isEmpty() || txt_deleivery_address.getText().toString().equalsIgnoreCase(getResources().getString(R.string.address_is_not_set))) {
+                        UiHelper.showToast(getActivity(), getString(R.string.pls_enter_shipping_address));
+                    } else if (t < minimum_order_amount) {
+                        UiHelper.showToast(getActivity(), getString(R.string.your_order_amount_is_less));
+                    } else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
+                        Intent intent1 = new Intent(getActivity(), CheckoutActivity.class);
 
-                    String fffs = txt_discount.getText().toString();
-                    Log.e(TAG, "onClick TextTOPAY: "+txt_toPay.getText());
-                    Log.e(TAG, "onClick TextTODiscount: "+txt_discount.getText());
-                    String toppaayy = txt_toPay.getText().toString();
-                    String[] disss = fffs.split("€");
-                    String[] sss = toppaayy.split("€");
+                        String fffs = txt_discount.getText().toString();
+                        Log.e(TAG, "onClick TextTOPAY: " + txt_toPay.getText());
+                        Log.e(TAG, "onClick TextTODiscount: " + txt_discount.getText());
+                        String toppaayy = txt_toPay.getText().toString();
+                        String[] disss = fffs.split("€");
+                        String[] sss = toppaayy.split("€");
 
-                    Log.e(TAG, "onClick: "+Float.parseFloat(sss[1] ));
-                  //  try{
+                        Log.e(TAG, "onClick: " + Float.parseFloat(sss[1]));
+                        //  try{
                         intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
                         intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
 
@@ -772,54 +772,54 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                         intent1.putExtra("restro_location", restro_location);
                         intent1.putExtra("restro_name", restro_name);
                         intent1.putExtra("restro_status", restro_status);
-                        intent1.putExtra("remarks",edt_remarks.getText().toString());
-                        intent1.putExtra("delivery_time",ed_timepicker.getText().toString());
-                        intent1.putExtra("cartfragment",false);
+                        intent1.putExtra("remarks", edt_remarks.getText().toString());
+                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
+                        intent1.putExtra("cartfragment", false);
 //                    }catch (ArrayIndexOutOfBoundsException e){
 //                        e.printStackTrace();
 //                    }
 
 
+                        startActivity(intent1);
+                    } else {
 
-                    startActivity(intent1);
+                        Intent intent1 = new Intent(getActivity(), Make_payment.class);
+
+
+                        String fffs = txt_discount.getText().toString();
+                        String toppaayy = txt_toPay.getText().toString();
+                        String[] disss = fffs.split("\\€");
+                        String[] sss = toppaayy.split("\\€");
+
+
+                        intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
+                        intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
+                        intent1.putExtra("delivery_charge", deleivery_charge);
+                        intent1.putExtra("is_promo_code_applied", isPromoApplied);
+                        intent1.putExtra("house_number", houseno);
+                        intent1.putExtra("landmark", landmark);
+                        intent1.putExtra("address", location);
+                        intent1.putExtra("latitude", latitude);
+                        intent1.putExtra("longitude", longitude);
+                        intent1.putExtra("restaurant_id", restaurant_id);
+                        intent1.putExtra("address_title", address_title);
+                        intent1.putExtra("coordinate_id", coordinate_id);
+                        intent1.putExtra("promo_code_id", promo_code_id);
+                        intent1.putExtra("promo_code_price", couponDiscount);
+
+                        intent1.putExtra("restro_image", restro_image);
+                        intent1.putExtra("restro_location", restro_location);
+                        intent1.putExtra("restro_name", restro_name);
+                        intent1.putExtra("restro_status", restro_status);
+                        intent1.putExtra("remarks", edt_remarks.getText().toString());
+                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
+                        Log.e(TAG, "onClick: " + address + latitude + longitude);
+
+                        startActivity(intent1);
+                    }
                 } else {
 
-                    Intent intent1 = new Intent(getActivity(), Make_payment.class);
-
-
-                    String fffs = txt_discount.getText().toString();
-                    String toppaayy = txt_toPay.getText().toString();
-                    String[] disss = fffs.split("\\€");
-                    String[] sss = toppaayy.split("\\€");
-
-
-                    intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
-                    intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
-                    intent1.putExtra("delivery_charge", deleivery_charge);
-                    intent1.putExtra("is_promo_code_applied", isPromoApplied);
-                    intent1.putExtra("house_number", houseno);
-                    intent1.putExtra("landmark", landmark);
-                    intent1.putExtra("address", location);
-                    intent1.putExtra("latitude", latitude);
-                    intent1.putExtra("longitude", longitude);
-                    intent1.putExtra("restaurant_id", restaurant_id);
-                    intent1.putExtra("address_title", address_title);
-                    intent1.putExtra("coordinate_id", coordinate_id);
-                    intent1.putExtra("promo_code_id", promo_code_id);
-                    intent1.putExtra("promo_code_price", couponDiscount);
-
-                    intent1.putExtra("restro_image", restro_image);
-                    intent1.putExtra("restro_location", restro_location);
-                    intent1.putExtra("restro_name", restro_name);
-                    intent1.putExtra("restro_status", restro_status);
-                    intent1.putExtra("remarks",edt_remarks.getText().toString());
-                    intent1.putExtra("delivery_time",ed_timepicker.getText().toString());
-                    Log.e(TAG, "onClick: " + address + latitude + longitude);
-
-                    startActivity(intent1);
-                }}else {
-
-                    UiHelper.showToast(getActivity(),getResources().getString(R.string.Please_check_your_time));
+                    UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
                 }
                 break;
             //  }
@@ -845,12 +845,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 float dis = Float.parseFloat(disss[1]);
                 float toPAy = Float.parseFloat(sss[1]);
 
-                String ddd = "€" + String.format(Locale.ENGLISH,"%.2f", dis - couponDiscount);
+                String ddd = "€" + String.format(Locale.ENGLISH, "%.2f", dis - couponDiscount);
                 txt_discount.setText(ddd);
 
                 //   txt_discount.setText("€"+String.format("%.2f",dis - couponDiscount));
-                txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", toPAy + couponDiscount));
-                txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH,"%.2f", dis - couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+                txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPAy + couponDiscount));
+                txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", dis - couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
                 couponDiscount = 0;
                 isPromoApplied = getString(R.string.no);
                 break;
@@ -860,43 +860,43 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 DateFormat formatter = new SimpleDateFormat("dd");
 
-                String datee=   formatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String datee = formatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
                 int month = Calendar.getInstance().get(Calendar.MONTH);
-                String month_name="";
-                if (month==0)
-                    month_name="Jan";
-                else if (month==1)
-                    month_name="Feb";
-                else if (month==2)
-                    month_name="Mar";
-                else if (month==3)
-                    month_name="Apr";
-                else if (month==4)
-                    month_name="May";
-                else if (month==5)
-                    month_name="Jun";
-                else if (month==6)
-                    month_name="Jul";
-                else if (month==7)
-                    month_name="Aug";
-                else if (month==8)
-                    month_name="Sep";
-                else if (month==9)
-                    month_name="Oct";
-                else if (month==10)
-                    month_name="Nov";
-                else if (month==11)
-                    month_name="Dec";
+                String month_name = "";
+                if (month == 0)
+                    month_name = "Jan";
+                else if (month == 1)
+                    month_name = "Feb";
+                else if (month == 2)
+                    month_name = "Mar";
+                else if (month == 3)
+                    month_name = "Apr";
+                else if (month == 4)
+                    month_name = "May";
+                else if (month == 5)
+                    month_name = "Jun";
+                else if (month == 6)
+                    month_name = "Jul";
+                else if (month == 7)
+                    month_name = "Aug";
+                else if (month == 8)
+                    month_name = "Sep";
+                else if (month == 9)
+                    month_name = "Oct";
+                else if (month == 10)
+                    month_name = "Nov";
+                else if (month == 11)
+                    month_name = "Dec";
 
 
                 DateFormat yearformatter = new SimpleDateFormat("yyyy");
 
-                String year=   yearformatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
+                String year = yearformatter.format(new Date(String.valueOf(Calendar.getInstance().getTime())));
 
 
-                String device_date=datee+" "+month_name+" "+year;
-                Log.e(TAG, "Device Date: "+device_date );
-                Log.e(TAG, "Internet Time: "+SplashActivity.InternetTime );
+                String device_date = datee + " " + month_name + " " + year;
+                Log.e(TAG, "Device Date: " + device_date);
+                Log.e(TAG, "Internet Time: " + SplashActivity.InternetTime);
 
 
 //                String gg= "";
@@ -907,7 +907,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg );
 
-                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5,16))) {
+                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
                     Log.e(TAG, "equals ");
 
 
@@ -937,52 +937,51 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                mTimePicker.show();
 
 
-                }
-                else {
-                    UiHelper.showToast(getActivity(),getResources().getString(R.string.Please_check_your_time));
+                } else {
+                    UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
                 }
                 break;
         }
     }
-    private void callAPiForTime(int time,int mints){
-        final ProgressDialog progressDialog= UiHelper.generateProgressDialog(getActivity(),false);
+
+    private void callAPiForTime(int time, int mints) {
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(getActivity(), false);
         progressDialog.show();
 
-        int currentDay=Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        String[]days = new String[]{"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        String[] days = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         String day = days[currentDay];
-        final String sTime = time +":"+String.valueOf(mints);
+        final String sTime = time + ":" + String.valueOf(mints);
 
-        Log.e(TAG, "callAPiForTime: "+day +"timee:"+sTime );
+        Log.e(TAG, "callAPiForTime: " + day + "timee:" + sTime);
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("time",sTime);
-        jsonObject.addProperty("day",day);
-        jsonObject.addProperty("restaurant_id",restaurant_id);
+        jsonObject.addProperty("time", sTime);
+        jsonObject.addProperty("day", day);
+        jsonObject.addProperty("restaurant_id", restaurant_id);
         //   jsonObject.addProperty("food_id", id);
         //  Log.e("food_id",""+id);
 
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkRestaurantStatus(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().checkRestaurantStatus(BaseApplication.getInstance().getSession().getToken(), jsonObject);
         new NetworkController().post(getActivity(), call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 //
-                            JSONObject jsonObject2=jsonObject1.getJSONObject("data");
-                            if (jsonObject2.getString("restaurant_status").equalsIgnoreCase("Closed")){
+                            JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                            if (jsonObject2.getString("restaurant_status").equalsIgnoreCase("Closed")) {
 
-                                UiHelper.showToast(getActivity(),"Restaurant don't Deleiver this time");
-                            }else
+                                UiHelper.showToast(getActivity(), "Restaurant don't Deleiver this time");
+                            } else
                                 ed_timepicker.setText(sTime);
-                        }
-                        else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")){
-                                Intent intent=new Intent(getActivity(),LoginActivity.class);
+                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")) {
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
 
                             }
@@ -997,7 +996,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
 //                UiHelper.showErrorMessage(mSnackView,error);
             }
@@ -1005,13 +1004,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
 //                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
                 }
                 Log.e("Tag", "isConnected : " + isConnected);
             }
-
 
 
         });
@@ -1065,9 +1063,9 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     float current_disc = Float.parseFloat(diss[1]);
                     float current_toPay = Float.parseFloat(sss[1]);
 
-                    txt_toPay.setText("€" + String.format(Locale.ENGLISH,"%.2f", current_toPay - couponDiscount));
-                    txt_discount.setText("€" + String.format(Locale.ENGLISH,"%.2f", current_disc + couponDiscount));
-                    txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH,"%.2f", current_disc + couponDiscount)+" "+getResources().getString(R.string.on_this_bill));
+                    txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", current_toPay - couponDiscount));
+                    txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", current_disc + couponDiscount));
+                    txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", current_disc + couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
                     isPromoApplied = getString(R.string.yes);
                     //Add Applied Coupon data to cart
                     JSONObject couponData = new JSONObject();
@@ -1096,13 +1094,14 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 address_title = data.getStringExtra("address_title");
                 deleivery_charge = data.getFloatExtra("deleivery_charge", 0);
                 minimum_order_amount = data.getFloatExtra("minimum_order_amount", 0);
-                txt_deleivery_address.setText(location);
+//                txt_deleivery_address.setText(location);
+                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
 
                 String fff = txt_toPay.getText().toString();
                 String[] diss = fff.split("\\€");
                 float current_toPay = Float.parseFloat(diss[1]);
 
-                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH,"%.2f", deleivery_charge));
+                txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
                 try {
 
@@ -1127,7 +1126,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     e.printStackTrace();
                 }
 
-                txt_toPay.setText("€"+String.valueOf(deleivery_charge + current_toPay));
+                txt_toPay.setText("€" + String.valueOf(deleivery_charge + current_toPay));
 
                 Log.e(TAG, "onActivityResult 4: " + location + "deleiver:-" + deleivery_charge + "houseno:-" + houseno + "landmarek:" + landmark + "longitude:" + longitude + "lati:-" + latitude + "addresstitl:-" + address_title);
             }
@@ -1210,9 +1209,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                                             }
                                         }
                                     }//matching array double loop
-                                }
-                                else
-                                    match =false;
+                                } else
+                                    match = false;
 
                                 //match found
                                 if (match) {
@@ -1224,7 +1222,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                                     items_array.put(k, toppingsArray);
                                     Log.e(TAG, "Toppings Price new old :" + toppings_price + " " + old_Toppings_price);
                                     cart.put("total_price", cart.getDouble("total_price") - (old_Toppings_price - toppings_price));
-                                }else {
+                                } else {
                                     Log.e(TAG, "View tem");
                                     //and new item copy
                                     old_Toppings_price = 0;
@@ -1232,23 +1230,23 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                                        old_Toppings_price = old_Toppings_price + (float) toppingsArray.getJSONObject(y).getDouble("price");
 //                                        Log.e(TAG, "LOOP PRICE: "+old_Toppings_price );
 //                                    }
-                                    items_array.put(pos,toppingsArray);
+                                    items_array.put(pos, toppingsArray);
 
                                     for (int y = 0; y < items_array.getJSONArray(k).length(); y++) {
                                         old_Toppings_price = old_Toppings_price + (float) items_array.getJSONArray(k).getJSONObject(y).getDouble("price");
-                                        Log.e(TAG, "LOOP PRICE: "+old_Toppings_price );
+                                        Log.e(TAG, "LOOP PRICE: " + old_Toppings_price);
                                     }
-                                    Log.e(TAG, "ITEMS Array: "+items_array +"Toppings Array:"+toppingsArray.toString() +"OLD ARRAY:"+oldArray.toString());
-                                    Log.e(TAG, "addProduct: "+cart.getDouble("total_price")+" toppingPrice:"+toppings_price+ "oldToppin:g"+old_Toppings_price );
+                                    Log.e(TAG, "ITEMS Array: " + items_array + "Toppings Array:" + toppingsArray.toString() + "OLD ARRAY:" + oldArray.toString());
+                                    Log.e(TAG, "addProduct: " + cart.getDouble("total_price") + " toppingPrice:" + toppings_price + "oldToppin:g" + old_Toppings_price);
 
-                                    float itemsPrice=(float)cart_product_object.getDouble("price") *(float) cart.getDouble("total_items");
-                                    Log.e(TAG, "addProduct:ITEMSPRICE: "+itemsPrice );
-                                    cart.put("total_price", itemsPrice+toppings_price+old_Toppings_price);
+                                    float itemsPrice = (float) cart_product_object.getDouble("price") * (float) cart.getDouble("total_items");
+                                    Log.e(TAG, "addProduct:ITEMSPRICE: " + itemsPrice);
+                                    cart.put("total_price", itemsPrice + toppings_price + old_Toppings_price);
 
                                 }
 //
                             }
-                            Log.e(TAG, "addProductBAHAR: "+cart.getDouble("total_price")+" toppingPrice:"+toppings_price+ "oldToppin:g"+old_Toppings_price );
+                            Log.e(TAG, "addProductBAHAR: " + cart.getDouble("total_price") + " toppingPrice:" + toppings_price + "oldToppin:g" + old_Toppings_price);
 
                         }
 
@@ -1282,31 +1280,32 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
 
     }
-    private void askPermissions(){
+
+    private void askPermissions() {
         permissionToAsk.clear();
-        for (String s : Constant.askForLocationPermission)
-        {
-            if (ContextCompat.checkSelfPermission(getActivity(), s) == PackageManager.PERMISSION_DENIED){
+        for (String s : Constant.askForLocationPermission) {
+            if (ContextCompat.checkSelfPermission(getActivity(), s) == PackageManager.PERMISSION_DENIED) {
                 permissionToAsk.add(s);
-                Log.e("tag", "if askPermissions: " );
+                Log.e("tag", "if askPermissions: ");
             }
 
         }
         if (!permissionToAsk.isEmpty()) {
             Log.e("tag", "if empty askPermissions: ");
             ActivityCompat.requestPermissions(getActivity(), permissionToAsk.toArray(new String[permissionToAsk.size()]), Constant.requestcodeForPermission);
-        } else{
-            Log.e("tag", "else access askPermissions: " );
+        } else {
+            Log.e("tag", "else access askPermissions: ");
             accessPermission();
         }
     }
+
     private void accessPermission() {
-        GPSTracker gpsTracker=new GPSTracker(getActivity());
-        if(gpsTracker.canGetLocation()){
-            Log.e("tag", "if can get locationaccessPermission: " );
+        GPSTracker gpsTracker = new GPSTracker(getActivity());
+        if (gpsTracker.canGetLocation()) {
+            Log.e("tag", "if can get locationaccessPermission: ");
             Intent intent = new Intent(getActivity(), Change_Address_Activity.class);
             try {
-                intent.putExtra("restaurant_id",cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
+                intent.putExtra("restaurant_id", cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -1315,19 +1314,19 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             intent.putExtra("houseno", houseno);
             intent.putExtra("landmark", landmark);
             intent.putExtra("title", address_title);
-            intent.putExtra("location",location);
-         //   Log.e(TAG, "onClick: restaurant_id" + restaurant_id);
+            intent.putExtra("location", location);
+            //   Log.e(TAG, "onClick: restaurant_id" + restaurant_id);
             startActivityForResult(intent, 4);
-        }
-        else {
-            Log.e("tag", "else cannot get locationaccessPermission: " );
+        } else {
+            Log.e("tag", "else cannot get locationaccessPermission: ");
 //            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 //            startActivity(intent);
             showDialog();
-            Log.e("tag","delivery_address :"+ BaseApplication.getInstance().getSession().getDeliveryAddress());
+            Log.e("tag", "delivery_address :" + BaseApplication.getInstance().getSession().getDeliveryAddress());
 
         }
     }
+
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.gpsTitle));
@@ -1338,7 +1337,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
-                Log.e("tag","delivery_address :"+ BaseApplication.getInstance().getSession().getDeliveryAddress());
+                Log.e("tag", "delivery_address :" + BaseApplication.getInstance().getSession().getDeliveryAddress());
 
             }
         });
@@ -1349,7 +1348,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
                 Intent intent = new Intent(getActivity(), Change_Address_Activity.class);
                 try {
-                    intent.putExtra("restaurant_id",cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
+                    intent.putExtra("restaurant_id", cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -1358,7 +1357,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("houseno", houseno);
                 intent.putExtra("landmark", landmark);
                 intent.putExtra("title", address_title);
-                intent.putExtra("location",location);
+                intent.putExtra("location", location);
                 startActivityForResult(intent, 4);
 
             }
@@ -1367,29 +1366,29 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         alertDialog.show();
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         permissionToAsk.clear();
-        if (requestCode==Constant.requestcodeForPermission){
-            boolean allGranted=true;
-            for (int i=0;i<grantResults.length;i++){
-                if (grantResults[i]==PackageManager.PERMISSION_DENIED) {
-                    Log.e("tag", "Permission denied onRequestPermissionsResult: " );
+        if (requestCode == Constant.requestcodeForPermission) {
+            boolean allGranted = true;
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    Log.e("tag", "Permission denied onRequestPermissionsResult: ");
                     allGranted = false;
 
                 }
             }
-            if (allGranted){
-                Log.e("tag", "All grantednRequestPermissionsResult: " );
+            if (allGranted) {
+                Log.e("tag", "All grantednRequestPermissionsResult: ");
                 accessPermission();
-            }
-            else {
+            } else {
                 //  finish();
                 BaseApplication.getInstance().getSession().setExit("Exit");
                 Intent intent = new Intent(getActivity(), Change_Address_Activity.class);
                 try {
-                    intent.putExtra("restaurant_id",cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
+                    intent.putExtra("restaurant_id", cart.getJSONArray("data").getJSONObject(0).getString("restro_id"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -1398,7 +1397,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("houseno", houseno);
                 intent.putExtra("landmark", landmark);
                 intent.putExtra("title", address_title);
-                intent.putExtra("location",location);
+                intent.putExtra("location", location);
                 startActivityForResult(intent, 4);
             }
         }

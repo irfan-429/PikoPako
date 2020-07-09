@@ -156,28 +156,6 @@
             android:layout_marginEnd="@dimen/default_margen_screen"
             android:layout_marginStart="@dimen/default_margen_screen">
 
-            <LinearLayout
-                android:id="@+id/add_more_lyt"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-
-                <Button
-                    android:id="@+id/btnApply"
-                    android:textAllCaps="true"
-                    android:textSize="12dp"
-                    android:text="@string/add"
-                    android:background="@drawable/login_drawable"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" />
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_marginStart="5dp"
@@ -198,6 +176,29 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_more_lyt"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/btnApply"
+                    android:textAllCaps="true"
+                    android:textSize="12dp"
+                    android:text="@string/add"
+                    android:background="@drawable/login_drawable"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
 
             </LinearLayout>
 
