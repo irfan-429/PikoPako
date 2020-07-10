@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +40,6 @@ import com.pikopako.Activity.CheckoutActivity;
 import com.pikopako.Activity.LoginActivity;
 import com.pikopako.Activity.Make_payment;
 import com.pikopako.Activity.SplashActivity;
-import com.pikopako.Activity.ViewCartActivity;
 import com.pikopako.Adapter.ViewCartAdapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
@@ -55,21 +53,13 @@ import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.Model.Ingrediants_modal;
 import com.pikopako.R;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -726,7 +716,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg1 );
 
-                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
+                if (device_date1.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
 
 
                     String fff = txt_itemTotal.getText().toString();
@@ -896,7 +886,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 String device_date = datee + " " + month_name + " " + year;
                 Log.e(TAG, "Device Date: " + device_date);
-                Log.e(TAG, "Internet Time: " + SplashActivity.InternetTime);
+                Log.e(TAG, "Internet Time: " + SplashActivity.InternetDate);
 
 
 //                String gg= "";
@@ -907,7 +897,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg );
 
-                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
+                if (device_date.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
                     Log.e(TAG, "equals ");
 
 

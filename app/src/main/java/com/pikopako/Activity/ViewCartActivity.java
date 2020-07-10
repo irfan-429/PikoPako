@@ -32,7 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.gson.JsonObject;
-import com.pikopako.Adapter.ExpandableListAdapter;
 import com.pikopako.Adapter.ViewCartAdapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
@@ -40,25 +39,16 @@ import com.pikopako.AppUtill.Constant;
 import com.pikopako.AppUtill.CustomEditTextBold;
 import com.pikopako.AppUtill.CustomTextViewBold;
 import com.pikopako.AppUtill.CustomTextViewNormal;
-import com.pikopako.AppUtill.CustomTimePickerDialog;
 import com.pikopako.AppUtill.GPSTracker;
 import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.Fragment.ProgressDialog;
-import com.pikopako.Model.FilterModel;
 import com.pikopako.Model.Ingrediants_modal;
 import com.pikopako.R;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -333,7 +323,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 try {
                     JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
 //                    txt_deleivery_address.setText(dd.getString("location"));
-                    Log.e(TAG, "buildSimplified_JSONArray: " );
+                    Log.e(TAG, "buildSimplified_JSONArray: ");
 //                    txt_deleivery_address.setText(dd.getString("location"));
                     deleivery_charge = (float) dd.getDouble("deleivery_charge");
                     txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
@@ -343,7 +333,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                     address_title = dd.getString("address_title");
                     latitude = dd.getDouble("latitude");
                     longitude = dd.getDouble("longitude");
-                    txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                    txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
 
                     Log.e(TAG, "Session me address: " + deleivery_charge);
                 } catch (JSONException e) {
@@ -561,9 +551,9 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
                 deleivery_charge = (float) deliveryData.getDouble("deleivery_charge");
 
 //                txt_deleivery_address.setText(location);
-                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
 
-                Log.e(TAG, "buildSimplified_JSONArray: IF" );
+                Log.e(TAG, "buildSimplified_JSONArray: IF");
                 txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
             }
@@ -817,11 +807,14 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                } catch (IndexOutOfBoundsException e) {
 //                    e.printStackTrace();
 //                }
-//                Log.e(TAG, "Internet time: "+gg1 );
+                Log.e("===>", "device_date1: "+device_date1 );
+                Log.e("===>", "sesion: "+BaseApplication.getInstance().getSession().getInternetTime() );
+                Log.e("===>", "sesion sub: "+BaseApplication.getInstance().getSession().getInternetTime());
 
-                if (device_date1.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
 
-                    Log.e(TAG, "onClick: " + device_date1 + " : " + SplashActivity.InternetTime.substring(5, 16));
+                if (device_date1.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
+
+//                    Log.e(TAG, "onClick: " + device_date1 + " : " + SplashActivity.InternetDate.substring(5, 16));
 
                     String fff = txt_itemTotal.getText().toString();
                     String[] diss = fff.split("\\€");
@@ -988,7 +981,7 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //                }
 //                Log.e(TAG, "Internet time: "+gg );
 
-                if (device_date.equalsIgnoreCase(SplashActivity.InternetTime.substring(5, 16))) {
+                if (device_date.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
                     Log.e(TAG, "equals ");
 
 
@@ -1196,11 +1189,11 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 
                 Log.e(TAG, "onActivityResult minimum_order_amount: " + minimum_order_amount);
 
-                Log.e(TAG, " :" + houseno+ " landmark "+ landmark+ " location "+ location);
+                Log.e(TAG, " :" + houseno + " landmark " + landmark + " location " + location);
 
 //                txt_deleivery_address.setText("just sat Hi");
-                Log.e(TAG, "onActivityResult: " );
-                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                Log.e(TAG, "onActivityResult: ");
+                txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
 
                 String fff = txt_toPay.getText().toString();
                 String[] diss = fff.split("\\€");

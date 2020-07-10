@@ -319,5 +319,29 @@ public class SessionManager {
         return pref.getString("fcmtoken", "");
     }
 
+
+
+
+
+    public void setIsToppingAvble ( boolean flag){
+        editor.putBoolean("topping",flag);
+        editor.commit();
+    }
+
+    public  boolean getIsToppingAvble(){
+        boolean topping=pref.getBoolean("topping",false);
+        return topping;
+    }
+
+    public void setInternetTime(String s) {
+        editor.putString("time", s);
+        editor.commit();
+    }
+
+    public String getInternetTime() {
+        return pref.getString("time", null);
+    }
+
+
 }
 

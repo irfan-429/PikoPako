@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.JsonObject;
-import com.pikopako.Activity.FoodDetailActivity;
+import com.pikopako.aaa.FoodDetailActivity;
 import com.pikopako.Adapter.ExpandableListAdapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;

@@ -168,102 +168,106 @@ public class ConfirmedOrder extends BaseActivity {
                             progressDialog.dismiss();
                         final JSONObject jsonObject1=new JSONObject(jsonObject.toString());
                         Log.e("restrodetailitemjson",jsonObject1.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
-
-
-                  //          if (!getIntent().getStringExtra("delivery_time").equalsIgnoreCase("") && getIntent().getStringExtra("delivery_time")!=null ) {
-
-                          //      if (getIntent().hasExtra("delivery_time")){
-
-                                    if (!getIntent().getStringExtra("delivery_time").equalsIgnoreCase("") && getIntent().getStringExtra("delivery_time")!=null ) {
-                                String delivery_time = getIntent().getStringExtra("delivery_time");
-                                txt_meet.setText(getResources().getString(R.string.our_deleivery_boy_meet_you_at));
-                                String user_time=getIntent().getStringExtra("delivery_time");
-                                String restro_time=jsonObject1.getJSONObject("data").getString("maximum_time_delivery");
-                              //  txt_time.setText(getIntent().getStringExtra("delivery_time"));
-
-                                int user_hour,user_minute,restro_hour,restro_minute,tot_hour,tot_minute;
-                                String orderDeliveryTime="";
-
-                                String s[]=user_time.split(":");
-                                user_hour= Integer.parseInt(s[0]);
-                                user_minute= Integer.parseInt(s[1]);
-
-                                String ss[]=restro_time.split(":");
-                                restro_hour=Integer.parseInt(ss[0]);
-                                restro_minute=Integer.parseInt(ss[1]);
-
-                                Log.e("TAG", "hour:- "+user_hour +" minute:- "+user_minute);
-
-                                tot_minute=user_minute+restro_minute;
-                                tot_hour=user_hour + restro_hour;
-                                if (tot_minute<60){
-                                    orderDeliveryTime=tot_hour+":"+tot_minute;
-                                    Log.e("TAG", "delivered time: "+orderDeliveryTime );
-                                }else {
-
-                                    if (tot_minute==60){
-                                        tot_hour=tot_hour+1;
-                                        orderDeliveryTime=tot_hour+":"+"00";
-                                        Log.e("TAG", "delivered time: "+orderDeliveryTime );
-                                    }else {
-                                        tot_minute=tot_minute-60;
-                                        tot_hour=tot_hour+1;
-                                        orderDeliveryTime=tot_hour+":"+tot_minute;
-                                        Log.e("TAG", "delivered time: "+orderDeliveryTime );
-                                    }
-
-                                }
-
-                                txt_time.setText(orderDeliveryTime);
-                            }
-                            else
-                            txt_time.setText(jsonObject1.getJSONObject("data").getString("maximum_time_delivery")+getString(R.string.minutes));
-
-
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
+//                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 //
-//                                    if (BaseApplication.getInstance().getSession().isLoggedIn()) {
-////                                        final Intent mainIntent = new Intent(ConfirmedOrder.this, Rating_reviews_Activity.class);
-////                                        mainIntent.putExtra("restaurant_id", restaurant_id);
-////                                        mainIntent.putExtra("restro_image", restro_image);
-////                                        mainIntent.putExtra("restro_location", restro_location);
-////                                        mainIntent.putExtra("restro_name", restro_name);
-////                                        mainIntent.putExtra("restro_status", restro_status);
-////                                        ConfirmedOrder.this.startActivity(mainIntent);
 //
-//                                        Intent inn=new Intent(ConfirmedOrder.this, MainActivity.class);
-//                                        inn.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                                        inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                        inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                        startActivity(inn);
-//                                        finish();
+//                  //          if (!getIntent().getStringExtra("delivery_time").equalsIgnoreCase("") && getIntent().getStringExtra("delivery_time")!=null ) {
 //
-//                                    } else {
-//                                        try {
-//                                            UiHelper.showToast(ConfirmedOrder.this, jsonObject1.getString("message"));
-//                                        } catch (JSONException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    Intent inn = new Intent(ConfirmedOrder.this, DefaultActivity.class);
-//                                    inn.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                                    inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                    inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                    startActivity(inn);
-//                                    finish();
+//                          //      if (getIntent().hasExtra("delivery_time")){
+//
+//                                    if (!getIntent().getStringExtra("delivery_time").equalsIgnoreCase("") && getIntent().getStringExtra("delivery_time")!=null ) {
+//                                String delivery_time = getIntent().getStringExtra("delivery_time");
+//                                txt_meet.setText(getResources().getString(R.string.our_deleivery_boy_meet_you_at));
+//                                String user_time=getIntent().getStringExtra("delivery_time");
+//                                String restro_time=jsonObject1.getJSONObject("data").getString("maximum_time_delivery");
+//                              //  txt_time.setText(getIntent().getStringExtra("delivery_time"));
+//
+//                                int user_hour,user_minute,restro_hour,restro_minute,tot_hour,tot_minute;
+//                                String orderDeliveryTime="";
+//
+//                                String s[]=user_time.split(":");
+//                                user_hour= Integer.parseInt(s[0]);
+//                                user_minute= Integer.parseInt(s[1]);
+//
+//                                String ss[]=restro_time.split(":");
+//                                restro_hour=Integer.parseInt(ss[0]);
+//                                restro_minute=Integer.parseInt(ss[1]);
+//
+//                                Log.e("TAG", "hour:- "+user_hour +" minute:- "+user_minute);
+//
+//                                tot_minute=user_minute+restro_minute;
+//                                tot_hour=user_hour + restro_hour;
+//                                if (tot_minute<60){
+//                                    orderDeliveryTime=tot_hour+":"+tot_minute;
+//                                    Log.e("TAG", "delivered time: "+orderDeliveryTime );
+//                                }else {
+//
+//                                    if (tot_minute==60){
+//                                        tot_hour=tot_hour+1;
+//                                        orderDeliveryTime=tot_hour+":"+"00";
+//                                        Log.e("TAG", "delivered time: "+orderDeliveryTime );
+//                                    }else {
+//                                        tot_minute=tot_minute-60;
+//                                        tot_hour=tot_hour+1;
+//                                        orderDeliveryTime=tot_hour+":"+tot_minute;
+//                                        Log.e("TAG", "delivered time: "+orderDeliveryTime );
+//                                    }
+//
 //                                }
 //
-//                                //    ConfirmedOrder.this.finish();
-//                                }
-//                            }, 5000);
-
-
-                        }
-                        else {
-                            UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                        }
+//                                txt_time.setText(orderDeliveryTime);
+//                            }
+//                            else
+//                            txt_time.setText(jsonObject1.getJSONObject("data").getString("maximum_time_delivery")+getString(R.string.minutes));
+//
+//
+//
+//
+//
+//
+////                            new Handler().postDelayed(new Runnable() {
+////                                @Override
+////                                public void run() {
+////
+////                                    if (BaseApplication.getInstance().getSession().isLoggedIn()) {
+//////                                        final Intent mainIntent = new Intent(ConfirmedOrder.this, Rating_reviews_Activity.class);
+//////                                        mainIntent.putExtra("restaurant_id", restaurant_id);
+//////                                        mainIntent.putExtra("restro_image", restro_image);
+//////                                        mainIntent.putExtra("restro_location", restro_location);
+//////                                        mainIntent.putExtra("restro_name", restro_name);
+//////                                        mainIntent.putExtra("restro_status", restro_status);
+//////                                        ConfirmedOrder.this.startActivity(mainIntent);
+////
+////                                        Intent inn=new Intent(ConfirmedOrder.this, MainActivity.class);
+////                                        inn.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+////                                        inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+////                                        inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                                        startActivity(inn);
+////                                        finish();
+////
+////                                    } else {
+////                                        try {
+////                                            UiHelper.showToast(ConfirmedOrder.this, jsonObject1.getString("message"));
+////                                        } catch (JSONException e) {
+////                                            e.printStackTrace();
+////                                        }
+////                                    Intent inn = new Intent(ConfirmedOrder.this, DefaultActivity.class);
+////                                    inn.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+////                                    inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+////                                    inn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                                    startActivity(inn);
+////                                    finish();
+////                                }
+////
+////                                //    ConfirmedOrder.this.finish();
+////                                }
+////                            }, 5000);
+//
+//
+//                        }
+//                        else {
+//                            UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
+//                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
