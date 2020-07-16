@@ -17,8 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pikopako.LocalStorage.SessionManager;
-import com.pikopako.aaa.Choose_topping_Activity;
+import com.pikopako.Activity.Choose_topping_Activity;
 import com.pikopako.Activity.ViewCartActivity;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppUtill.CustomTextViewBold;
@@ -27,7 +26,6 @@ import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.Fragment.CartFragment;
 import com.pikopako.Model.Ingrediants_modal;
 import com.pikopako.R;
-import com.pikopako.aaa.FoodDetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -716,9 +716,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg1 );
 
-                if (device_date1.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
-
-
+                //INTERNET DATE
+//                if (device_date1.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
                     String fff = txt_itemTotal.getText().toString();
                     String[] diss = fff.split("\\€");
 
@@ -807,10 +806,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                         startActivity(intent1);
                     }
-                } else {
+//                } else UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
 
-                    UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
-                }
                 break;
             //  }
             case R.id.img_coupnclose:
@@ -897,10 +894,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                }
 //                Log.e(TAG, "Internet time: "+gg );
 
-                if (device_date.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
+
+                //INTERNET DATE
+//                if (device_date.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
                     Log.e(TAG, "equals ");
-
-
                     Calendar mcurrentTime = Calendar.getInstance();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                     int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -927,9 +924,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 //                mTimePicker.show();
 
 
-                } else {
-                    UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
-                }
+//                } else UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
+
                 break;
         }
     }

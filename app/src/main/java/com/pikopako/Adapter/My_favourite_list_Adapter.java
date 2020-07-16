@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.JsonObject;
-import com.pikopako.aaa.FoodDetailActivity;
+import com.pikopako.Activity.FoodDetailActivity;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
 import com.pikopako.AppUtill.Constant;

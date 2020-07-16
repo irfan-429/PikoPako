@@ -44,7 +44,6 @@ public class UiHelper {
     public static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     public static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     public static final String OUT_JSON = "/json";
-    public static final String API_KEY = "AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A";
     public static final String COUNTRY_RESTRICTION = "de"; //germany
 
     public static void applyFontToMenuItem(Context context,MenuItem mi) {

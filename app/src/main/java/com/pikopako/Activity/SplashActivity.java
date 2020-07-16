@@ -83,24 +83,26 @@ public class SplashActivity extends BaseActivity {
             showDialogForGPS();
         } else {
             startConnectivityReceiver();
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            callInitApi();
 
 
-                    if (BaseApplication.getInstance().getSession().getInternetTime() == null) {
-                        getDateAndTime();
-                    } else {
-                        if (BaseApplication.getInstance().getSession().getInternetTime()
-                                .equals(formatDateTimeFromTS(System.currentTimeMillis(), "dd MMM yyyy"))) {
-                            callInitApi();
-                        } else getDateAndTime();
-
-                    }
-
-                }
-            }).start();
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//
+//                    if (BaseApplication.getInstance().getSession().getInternetTime() == null) {
+//                        getDateAndTime();
+//                    } else {
+//                        if (BaseApplication.getInstance().getSession().getInternetTime()
+//                                .equals(formatDateTimeFromTS(System.currentTimeMillis(), "dd MMM yyyy"))) {
+//                            callInitApi();
+//                        } else getDateAndTime();
+//
+//                    }
+//
+//                }
+//            }).start();
 
         }
     }
@@ -118,14 +120,13 @@ public class SplashActivity extends BaseActivity {
 
 
     private void callInitApi() {
-        CheckUserIsLoginOrNot();
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //
-//            }
-//        }, SPLASH_TIME_OUT);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CheckUserIsLoginOrNot();
+            }
+        }, SPLASH_TIME_OUT);
 
     }
 

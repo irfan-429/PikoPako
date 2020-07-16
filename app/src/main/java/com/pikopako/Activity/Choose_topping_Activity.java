@@ -1,4 +1,4 @@
-package com.pikopako.aaa;
+package com.pikopako.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonObject;
-import com.pikopako.Activity.BaseActivity;
-import com.pikopako.Activity.LoginActivity;
-import com.pikopako.Activity.ViewCartActivity;
 import com.pikopako.Adapter.Choose_topping_adapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;

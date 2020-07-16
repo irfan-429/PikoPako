@@ -253,7 +253,7 @@ public class CommonSearchActivity extends BaseActivity implements PlaceHistoryAd
 
         try {
             StringBuilder sb = new StringBuilder(UiHelper.PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
-            sb.append("?key=" + UiHelper.API_KEY);
+            sb.append("?key=" + getString(R.string.google_api_key1));
             //sb.append("&types=(regions)");
       //      sb.append("&components=country:de|country:in|country:us");
            // sb.append("&components=country:in");

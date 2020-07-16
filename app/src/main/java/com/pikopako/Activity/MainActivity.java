@@ -451,7 +451,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent1 = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-                                .setCountry(UiHelper.COUNTRY_RESTRICTION) //restriction on specific country (UAE) ae
+                                .setCountry(UiHelper.COUNTRY_RESTRICTION) //restriction on specific country
                                 .build(MainActivity.this);
                         startActivityForResult(intent1, AUTOCOMPLETE_REQUEST_CODE);
 

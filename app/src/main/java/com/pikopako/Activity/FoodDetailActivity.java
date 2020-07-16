@@ -1,4 +1,4 @@
-package com.pikopako.aaa;
+package com.pikopako.Activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,9 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.JsonObject;
-import com.pikopako.Activity.BaseActivity;
-import com.pikopako.Activity.LoginActivity;
-import com.pikopako.Activity.ViewCartActivity;
 import com.pikopako.Adapter.FoodDetailAdapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
@@ -32,7 +29,6 @@ import com.pikopako.AppUtill.CustomTextViewBold;
 import com.pikopako.AppUtill.CustomTextViewNormal;
 import com.pikopako.AppUtill.UiHelper;
 import com.pikopako.Fragment.ProgressDialog;
-import com.pikopako.LocalStorage.SessionManager;
 import com.pikopako.Model.Ingrediants_modal;
 import com.pikopako.R;
 

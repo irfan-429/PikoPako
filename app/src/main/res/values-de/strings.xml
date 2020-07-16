@@ -77,7 +77,6 @@
     <string name="timeIcon">&#xf017;</string>
     <string name="icon_minus">&#xf068;</string>
     <string name="icon_plus">&#xf067;</string>
-    <string name="google_api_key1">AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A</string>
 
     <string name="please_login_first_msg">Bitte melden Sie sich zuerst mit Ihrem Konto an</string>
     <string name="cancel">Stornieren</string>
