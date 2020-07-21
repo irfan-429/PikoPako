@@ -106,7 +106,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
     String language = "";
 
     boolean move = false;
-    private String TAG="==ConfirmLoc";
+    private String TAG = "==ConfirmLoc";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
         }
         proceedAfterPermission();
 
-        Log.e(TAG, "onMapReady: " );
+        Log.e(TAG, "onMapReady: ");
     }
 
     private void proceedAfterPermission() {
@@ -181,7 +181,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
     }
 
     private void locationget() {
-        Log.e(TAG, "locationget: " );
+        Log.e(TAG, "locationget: ");
         // Intent mServiceIntent = new Intent(ConfirmLocationActivity.this, LocationService.class);
         //startService(mServiceIntent);
         GPSTracker gpsTracker = new GPSTracker(this);
@@ -194,7 +194,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
         googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
-                Log.e(TAG, "onCameraIdle: " );
+                Log.e(TAG, "onCameraIdle: ");
                 LatLng location = googleMap.getCameraPosition().target;
                 addressFromGeocode.start(ConfirmLocationActivity.this, location, false);
 
@@ -204,7 +204,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
         googleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
             @Override
             public void onCameraMoveStarted(int i) {
-                Log.e(TAG, "onCameraMoveStarted: " );
+                Log.e(TAG, "onCameraMoveStarted: ");
             }
         });
 
@@ -221,7 +221,11 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
     }
 
     private void getAddress(final LatLng latLng) {
-        Log.e(TAG, "getAddress: " );
+        latitude= latLng.latitude;
+        longitude=latLng.longitude;
+
+
+        Log.e(TAG, "getAddress: ");
         Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
         try {
             List<Address> addresses;
@@ -316,6 +320,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
                     intent.putExtra("latitude", latitude);
                     intent.putExtra("longitude", longitude);
 
+                    Log.e(TAG, "onClick: " + latitude + " -lng:  " + longitude);
                     startActivity(intent);
 //                    finish();
                     overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
@@ -492,7 +497,6 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
                     }
                 });
     }
-
 
 
 }
