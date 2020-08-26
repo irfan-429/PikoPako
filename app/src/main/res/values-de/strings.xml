@@ -79,7 +79,7 @@
     <string name="icon_plus">&#xf067;</string>
 
     <string name="please_login_first_msg">Bitte melden Sie sich zuerst mit Ihrem Konto an</string>
-    <string name="cancel">Stornieren</string>
+    <string name="cancel">Abbrechen</string>
 
     <string name="update">Aktualisieren</string>
     <string name="emailaddress">E-Mail-Addresse</string>
@@ -158,7 +158,7 @@
     <string name="description">Beschreibung</string>
     <string name="edit">Bearbeiten</string>
     <string name="change_password">Passwort ändern</string>
-    <string name="open">Öffnen</string>
+    <string name="open">Geöffnet</string>
 
     <string name="apply_coupon">Gutschein einlösen</string>
     <string name="restaurant_bill">Restaurantrechnung</string>
@@ -188,7 +188,7 @@
     <string name="yes">Ja</string>
     <string name="ratings">Lieferzeit</string>
     <string name="deleivery_time">Lieferzeit</string>
-    <string name="minorder">Min Auftrag</string>
+    <string name="minorder">Mindestbestellwert</string>
     <string name="alcohol">Alkohol</string>
     <string name="seating">Sitzplätze</string>
     <string name="services">Dienstleistungen</string>
@@ -206,7 +206,7 @@
     <string name="pls_provide_valid_email">Bitte geben Sie eine gültige E-Mail Adresse an.</string>
     <string name="pls_enter_contact_no">Bitte Telefonnummer eingeben</string>
     <string name="pls_entr_subject">Bitte Betreff eingeben</string>
-    <string name="cancel_order">Bestellung stornieren</string>
+    <string name="cancel_order">Bestellung Abbrechen</string>
     <string name="order_not_received">Bestellung nicht erhalten</string>
     <string name="Are_u_sure_to_logout">Möchten Sie sich wirklich abmelden?</string>
     <string name="filter">Filter</string>
@@ -243,7 +243,7 @@
     <string name="pls_enter_shipping_address">Bitte Lieferadresse eingeben</string>
     <string name="your_order_amount_is_less">Ihre Bestellmenge ist zu klein. Bestellung nicht möglich</string>
     <string name="pls_check_your_internet">Bitte prüfen Ihre Internet-Verbindung</string>
-    <string name="restaurant_menu">Restaurant-Menü</string>
+    <string name="restaurant_menu">Speisekarte</string>
     <string name="restaurant_detail">Restaurant-Details</string>
     <string name="customized">ANGEPASST</string>
     <string name="off">Aus</string>
@@ -277,7 +277,7 @@
     <string name="deselectAll">DeSelect All</string>
     <string name="cart">Cart</string>
     <string name="coupon">Coupon</string>
-    <string name="address_is_not_set">Address is not set</string>
+    <string name="address_is_not_set">Adresse eingeben</string>
     <string name="password_should_be_atleast">Password should be at least 6 characters</string>
     <string name="on_this_bill">on this bill</string>
     <string name="pls_enter_address">Please Enter Address</string>

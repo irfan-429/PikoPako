@@ -135,7 +135,16 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
 //        btnConfirmLocation.setClickable(false);
         profileData = BaseApplication.getInstance().getSession().getProfileData();
 
-        setCurrentLoc();
+        //set location
+        String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
+        String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
+        String savedLoc=  BaseApplication.getInstance().getSession().getPreviousLocationTitle();
+        if ((savedLat!=null && !savedLat.isEmpty()) && (savedLng!=null && !savedLng.isEmpty())){
+            mEditLocation.setText(savedLoc);
+            latitude=Double.parseDouble(savedLat);
+            longitude=Double.parseDouble(savedLng);
+        }
+        else setCurrentLoc();
     }
 
     private void setCurrentLoc() {
@@ -175,19 +184,53 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             return;
         }
         googleMap.setMyLocationEnabled(true);
-        locationget();
-        //We've got the permission, now we can proceed further
-        Log.e("aa", "" + "We got the LocationActivity Permission");
+
+        String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
+        String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
+        String savedLoc=  BaseApplication.getInstance().getSession().getPreviousLocationTitle();
+        if ((savedLat!=null && !savedLat.isEmpty()) && (savedLng!=null && !savedLng.isEmpty())){
+            mEditLocation.setText(savedLoc);
+            latitude=Double.parseDouble(savedLat);
+            longitude=Double.parseDouble(savedLng);
+
+            LatLng coordinate = new LatLng(latitude, longitude);
+            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
+            googleMap.animateCamera(yourLocation);
+            onMarkerDragging();
+        }
+        else locationget();
+
     }
 
     private void locationget() {
         Log.e(TAG, "locationget: ");
         // Intent mServiceIntent = new Intent(ConfirmLocationActivity.this, LocationService.class);
         //startService(mServiceIntent);
+
+
+
+
+
         GPSTracker gpsTracker = new GPSTracker(this);
         LatLng coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
         googleMap.animateCamera(yourLocation);
+
+        onMarkerDragging();
+
+//        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+//            @Override
+//            public boolean onMyLocationButtonClick() {
+//                proceedAfterPermission();
+//                return true;
+//            }
+//        });
+
+
+        getAddress(coordinate);
+    }
+
+    private void onMarkerDragging() {
         if (googleMap != null) {
             googleMap.clear();
         }
@@ -208,17 +251,8 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             }
         });
 
-//        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-//            @Override
-//            public boolean onMyLocationButtonClick() {
-//                proceedAfterPermission();
-//                return true;
-//            }
-//        });
-
-
-        getAddress(coordinate);
     }
+
 
     private void getAddress(final LatLng latLng) {
         latitude= latLng.latitude;
@@ -302,6 +336,12 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
                     BaseApplication.getInstance().getSession().setDeliveryAddress(mEditLocation.getText().toString());
                     BaseApplication.getInstance().getSession().setDeliveryLatitude(String.valueOf(latitude));
                     BaseApplication.getInstance().getSession().setDeliveryLongitude(String.valueOf(longitude));
+
+                    //save loc
+                    BaseApplication.getInstance().getSession().setPreviousLocationTitle(mEditLocation.getText().toString().trim());
+                    BaseApplication.getInstance().getSession().setDeliveryLatitudeSet(String.valueOf(latitude));
+                    BaseApplication.getInstance().getSession().setDeliveryLongitudeSet(String.valueOf(longitude));
+
 
                     JSONObject jsonObject = new JSONObject();
                     try {
@@ -444,6 +484,11 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
                             jsonObject2.put("longitude", longitude);
                             jsonObject2.put("address", mEditLocation.getText().toString().trim());
                             BaseApplication.getInstance().getSession().setProfileData(String.valueOf(jsonObject2));
+
+                            //save loc
+                            BaseApplication.getInstance().getSession().setPreviousLocationTitle(mEditLocation.getText().toString().trim());
+                            BaseApplication.getInstance().getSession().setDeliveryLatitudeSet(String.valueOf(latitude));
+                            BaseApplication.getInstance().getSession().setDeliveryLongitudeSet(String.valueOf(longitude));
 
                             startActivity(intent);
                             finish();

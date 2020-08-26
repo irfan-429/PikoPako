@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">PikoPako</string>
     <string name="channel_id">my_channel_01</string>
+
+    <string name="google_api_key1">AIzaSyAAObiXFZqEsmxODjgh2nAkEhNGUZpTvPc</string>
+
     //login_activity
     <string name="string_enter_your_email">Enter Email address</string>
     <string name="string_password">Enter Password</string>
@@ -73,7 +76,6 @@
     <string name="close_string">&#xf410;</string>
     <string name="timeIcon">&#xf017;</string>
 
-    <string name="google_api_key1">AIzaSyA9cmOCu_m48VD55IMO2ALr0eopt0D4-E0</string>
     <string name="please_login_first_msg">Please login first to your account</string>
     <string name="cancel">Cancel</string>
 
