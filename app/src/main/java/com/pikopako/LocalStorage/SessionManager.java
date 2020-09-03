@@ -343,5 +343,48 @@ public class SessionManager {
     }
 
 
+    public void setProfileLat(String profileLat) {
+        editor.putString("profile_lat", profileLat);
+        editor.commit();
+    }
+
+    public String getProfileLat() {
+        String flag = pref.getString("profile_lat", "");
+        editor.commit();
+        return flag;
+    }
+
+    public void setProfileLng(String profileLng) {
+        editor.putString("profile_lng", profileLng);
+        editor.commit();
+    }
+
+    public String getProfileLng() {
+        String flag = pref.getString("profile_lng", "");
+        editor.commit();
+        return flag;
+    }
+
+    public void setProfileLoc(String profileLoc) {
+        editor.putString("profile_loc", profileLoc);
+        editor.commit();
+    }
+
+    public String getProfileLoc() {
+        String flag = pref.getString("profile_loc", "");
+        editor.commit();
+        return flag;
+    }
+
+    public void setDeliveryTime(String deliveryTime) {
+        editor.putString("deliveryTime", deliveryTime);
+        editor.commit();
+    }
+
+    public String getDeliveryTime() {
+        String flag = pref.getString("deliveryTime", "");
+        editor.commit();
+        return flag;
+    }
 }
 

@@ -12,6 +12,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,6 +21,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -27,13 +30,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.snackbar.Snackbar;
 import com.pikopako.Activity.BaseActivity;
 import com.pikopako.Fragment.ProgressDialog;
 import com.pikopako.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -205,4 +211,28 @@ public class UiHelper {
         return false;
     }
 
+    public static String getAddress(Context context, double latitude, double longitude) {
+        Geocoder geocoder;
+        List<Address> address;
+        String locationAddress = null;
+        try {
+            geocoder = new Geocoder(context, Locale.getDefault());
+            address = geocoder.getFromLocation(latitude, longitude, 1);
+
+            if (address != null && address.size() > 0) { // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                String myAddress = address.get(0).getAddressLine(0); // If any additional getAddress line present than only, check with max available getAddress lines by getMaxAddressLineIndex()
+                String city = address.get(0).getLocality();
+                String state = address.get(0).getAdminArea();
+                String country = address.get(0).getCountryName();
+                String postalCode = address.get(0).getPostalCode();
+
+                locationAddress = myAddress;
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return locationAddress;
+    }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppUtill.CustomTextViewBold;
 import com.pikopako.AppUtill.CustomTextViewNormal;
 import com.pikopako.Model.ProductListModel;
@@ -63,6 +64,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         //   Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.restro);
       //  Bitmap circularBitmap = UiHelper.getRoundedCornerBitmap(bitmap, 100);
      //   holder.imageView.setImageBitmap(circularBitmap);
+
+
+        //set rest max delivery time
+        BaseApplication.getInstance().getSession().setDeliveryTime(productModel.cafe_deleiverytime);
 
 
         holder.mainView.setOnClickListener(new View.OnClickListener() {

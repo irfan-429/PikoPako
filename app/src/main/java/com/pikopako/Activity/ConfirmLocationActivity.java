@@ -143,8 +143,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             mEditLocation.setText(savedLoc);
             latitude=Double.parseDouble(savedLat);
             longitude=Double.parseDouble(savedLng);
-        }
-        else setCurrentLoc();
+        } else setCurrentLoc();
     }
 
     private void setCurrentLoc() {
@@ -401,14 +400,13 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.e("==>", "onActivityResult: " + place.getName());
-                mEditLocation.setText(String.valueOf(place.getName())); //set searched place to location field
                 LatLng latLngOrderDest = place.getLatLng(); //get lat lng of destination place
                 latitude = latLngOrderDest.latitude;
                 longitude = latLngOrderDest.longitude;
                 Log.e("==>", "lat: " + latitude + " lng " + longitude);
-
 //                latitude= 26.9124336;
 //                longitude=75.78727090000007;
+                mEditLocation.setText(UiHelper.getAddress(this, latitude, longitude)); //set searched place to location field
 
 
                 BaseApplication.getInstance().getSession().setDeliveryLatitude(String.valueOf(latitude));

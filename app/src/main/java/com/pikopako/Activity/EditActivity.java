@@ -291,11 +291,18 @@ public class EditActivity extends BaseActivity implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.e("==>", "onActivityResult: " + place.getName());
-                editaddress.setText(String.valueOf(place.getName())); //set searched place to location field
                 LatLng latLngOrderDest = place.getLatLng(); //get lat lng of destination place
                 latitude = latLngOrderDest.latitude;
                 longitude = latLngOrderDest.longitude;
                 Log.e("==>", "lat: " + latitude + " lng " + longitude);
+
+                String address= UiHelper.getAddress(this, latitude, longitude);
+                editaddress.setText(address); //set searched place to location field
+
+                //save to pref
+                BaseApplication.getInstance().getSession().setProfileLat(String.valueOf(latitude));
+                BaseApplication.getInstance().getSession().setProfileLng(String.valueOf(longitude));
+                BaseApplication.getInstance().getSession().setProfileLoc(address);
 
                 LatLng latLng = new LatLng(latitude, longitude);
                 if (googleMap != null) {

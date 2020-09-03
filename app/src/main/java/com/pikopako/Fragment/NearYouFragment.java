@@ -83,7 +83,7 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
     private GoogleMap googleMap;
     private GeocoderLocation addressFromGeocode;
     private LatLng latLng;
-    private final String TAG="NearYouFragment=> ";
+    private final String TAG = "NearYouFragment=> ";
 
     public static String mLat = "26.9124336", mLng = "75.78727090000007";
 
@@ -113,7 +113,7 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getActivity().getIntent().getStringExtra("address"));
             latitude = getActivity().getIntent().getDoubleExtra("latitude", 0);
             longitude = getActivity().getIntent().getDoubleExtra("longitude", 0);
-            Log.e(TAG, "lat and long "+latitude+" , "+longitude );
+            Log.e(TAG, "lat and long " + latitude + " , " + longitude);
 
 //            latitude = Double.parseDouble(mLat);
 //            longitude = Double.parseDouble(mLng);
@@ -123,25 +123,33 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
             callApi(makePayload());
         } else {
             //Set previous stored delivery location
-            String locationTitle = BaseApplication.getInstance().getSession().getPreviousLocationTitle();
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(locationTitle);
-            Log.d(TAG, "onCreateView: else " + locationTitle);
-            Log.d(TAG, "onCreateView: else " + locationTitle);
 
-            String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
-            String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
 
-            Log.d(TAG, " pre savedLat: " + savedLat);
+            String savedLat, savedLng, locationTitle;
 
-            if (savedLat.isEmpty() && savedLng.isEmpty()) {
-                GPSTracker gpsTracker=new GPSTracker(getContext());
-                if (gpsTracker.canGetLocation()){
-                    savedLat= String.valueOf(gpsTracker.getLatitude());
-                    savedLng= String.valueOf(gpsTracker.getLongitude());
+            if (BaseApplication.getInstance().getSession().isLoggedIn()) {
+                savedLat = BaseApplication.getInstance().getSession().getProfileLat();
+                savedLng = BaseApplication.getInstance().getSession().getProfileLng();
+                locationTitle = BaseApplication.getInstance().getSession().getProfileLoc();
+            } else {
+                savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
+                savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
+                locationTitle = BaseApplication.getInstance().getSession().getPreviousLocationTitle();
+            }
+            Log.d(TAG, " pre savedLat: " + locationTitle);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(locationTitle); //set loc title
+
+            if (savedLat != null && savedLng != null) {
+                if (savedLat.isEmpty() && savedLng.isEmpty()) {
+                    GPSTracker gpsTracker = new GPSTracker(getContext());
+                    if (gpsTracker.canGetLocation()) {
+                        savedLat = String.valueOf(gpsTracker.getLatitude());
+                        savedLng = String.valueOf(gpsTracker.getLongitude());
+                    }
+
+                    Log.d(TAG, " mid savedLat: " + savedLat);
+
                 }
-
-                Log.d(TAG, " mid savedLat: " + savedLat);
-
             }
 
             latitude = Double.parseDouble(savedLat);
@@ -205,7 +213,6 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
 
         Log.e("tag", "if can get locationaccessPermission: ");
         LatLng coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-
 
 
         getAddress(coordinate);
@@ -381,7 +388,6 @@ public class NearYouFragment extends Fragment implements ProductListAdapter.Clic
     }
 
     private void callApi(JsonObject payload) {
-
 
 
         final ProgressDialog progressDialog = UiHelper.generateProgressDialog(getActivity(), false);

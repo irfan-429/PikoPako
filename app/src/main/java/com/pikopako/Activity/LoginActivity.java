@@ -68,26 +68,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private String isEmailVerified;
 
-    String language="";
+    String language = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         listners();
-        Log.e("language", "onCreate: "+Locale.getDefault().getDisplayLanguage().toString());
+        Log.e("language", "onCreate: " + Locale.getDefault().getDisplayLanguage().toString());
 
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
+            language = "German";
+        } else
+            language = "English";
 
-       if (getIntent().hasExtra("cart") || getIntent().hasExtra("cartfragment")){
-           layout_signup.setVisibility(View.VISIBLE);
-       }else
-           layout_signup.setVisibility(View.GONE);
+        if (getIntent().hasExtra("cart") || getIntent().hasExtra("cartfragment")) {
+            layout_signup.setVisibility(View.VISIBLE);
+        } else
+            layout_signup.setVisibility(View.GONE);
     }
 
     private void listners() {
@@ -124,7 +124,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.view_forgot:
                 forgotPasswordView();
                 break;
@@ -132,12 +132,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 callLoginEvent();
                 break;
             case R.id.txt_signup:
-                boolean item=false;
-                Intent nntt=new Intent(this,RegisterActivity.class);
+                boolean item = false;
+                Intent nntt = new Intent(this, RegisterActivity.class);
                 if (getIntent().hasExtra("cart"))
-                nntt.putExtra("cart",item);
+                    nntt.putExtra("cart", item);
                 else
-                    nntt.putExtra("cartfragment",item);
+                    nntt.putExtra("cartfragment", item);
                 startActivity(nntt);
         }
     }
@@ -206,8 +206,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void callToForgot(final DialogInterface dialogInterface, final String email) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("email", email);
-        Log.e("tag", "callToForgot: "+language );
-        jsonObject.addProperty("language",language);
+        Log.e("tag", "callToForgot: " + language);
+        jsonObject.addProperty("language", language);
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().fotgotPassword(jsonObject);
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
@@ -215,11 +215,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (jsonObject != null) {
                     try {
                         dialogInterface.dismiss();
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)){
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                        }
-                        else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
                         }
 
@@ -228,14 +227,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 }
             }
+
             @Override
             public void Error(String error) {
-                UiHelper.showErrorMessage(mSnackView,error);
+                UiHelper.showErrorMessage(mSnackView, error);
             }
+
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    UiHelper.showNetworkError(LoginActivity.this,mSnackView);
+                    UiHelper.showNetworkError(LoginActivity.this, mSnackView);
                 }
                 Log.e("Tag", "isConnected : " + isConnected);
             }
@@ -245,7 +246,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
@@ -259,19 +260,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             return;
         }
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("token",BaseApplication.getInstance().getSession().getFCMToken());
-        jsonObject.addProperty("device_token",BaseApplication.getInstance().getSession().getDeviceToken());
+        jsonObject.addProperty("token", BaseApplication.getInstance().getSession().getFCMToken());
+        jsonObject.addProperty("device_token", BaseApplication.getInstance().getSession().getDeviceToken());
         jsonObject.addProperty("device_type", Constant.DIVICE_TYPE);
         jsonObject.addProperty("email", mEditEmail.getText().toString().trim());
         jsonObject.addProperty("password", mEditPass.getText().toString().trim());
-        Log.e("tag", "callLoginEvent: "+language );
+        Log.e("tag", "callLoginEvent: " + language);
         jsonObject.addProperty("language", language);
         Log.e("tag", "pare login" + jsonObject.toString());
         callToLogin(jsonObject);
 
     }
+
     private void callToLogin(JsonObject jsonObject) {
-        final ProgressDialog  progressDialog= UiHelper.generateProgressDialog(this,false);
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().login(BaseApplication.getInstance().getSession().getToken(), jsonObject);
 
@@ -281,58 +283,63 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        Log.e("login ", "jsonObject1: " + jsonObject1);
+
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
                             //BaseApplication.getInstance().getSession().setIsLoggedIn();
                             BaseApplication.getInstance().getSession().setToken(jsonObject1.getJSONObject("data").getString("token"));
                             BaseApplication.getInstance().getSession().setProfileData(String.valueOf(jsonObject1.getJSONObject("data")));
-                            Intent intent=new Intent();
+                            Intent intent = new Intent();
 
-                          JSONObject jsonObject2=jsonObject1.getJSONObject("data");
-
-                            Log.e("TAG", "latitude succes me: "+jsonObject2.getString("latitude") );
-                          if (jsonObject2.getString("latitude").equalsIgnoreCase("null") && BaseApplication.getInstance().getSession().getDeliveryLatitude().isEmpty()) {
-                              intent = new Intent(LoginActivity.this, ConfirmLocationActivity.class);
-                              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                              intent.putExtra(Constant.IS_SIGNUP, true);
-                          } //  startActivity(intent);
+                            JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
 
 
-                              BaseApplication.getInstance().getSession().setIsLoggedIn();
 
-                               if (getIntent().hasExtra("cart")){
-//                                Log.e("login extra", "Success: "+getIntent().getStringExtra("cart") );
-                                  boolean items=false;
-                                   Log.e("TAG", "Login ViewCart " );
-                                  intent=new Intent(LoginActivity.this,MainActivity.class);
-                                  intent.putExtra("viewcart",items);
-                                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                  intent.putExtra(Constant.IS_SIGNUP,true);
 
-                              }
-                              else if (getIntent().hasExtra("cartfragment")){
-                                  Log.e("login extra", "Success: ");
-                                  boolean items=false;
-                                  intent=new Intent(LoginActivity.this,MainActivity.class);
-                                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                   intent.putExtra("cartfragment",items);
-                                  intent.putExtra(Constant.IS_SIGNUP,true);
-                              }
+//                            Log.e("TAG", "latitude succes me: "+jsonObject2.getString("latitude") );
+                            if (jsonObject2.getString("latitude").equalsIgnoreCase("null") && BaseApplication.getInstance().getSession().getDeliveryLatitude().isEmpty()) {
+                                intent = new Intent(LoginActivity.this, ConfirmLocationActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
+                            } else {
+                                //save profile loc data
+                                BaseApplication.getInstance().getSession().setProfileLat(jsonObject2.getString("latitude"));
+                                BaseApplication.getInstance().getSession().setProfileLng(jsonObject2.getString("longitude"));
+                                BaseApplication.getInstance().getSession().setProfileLoc(jsonObject2.getString("address"));
+                            }
 
-                              else {
-                                   Log.e("TAG", "Login Simple " );
-                                  intent = new Intent(LoginActivity.this, MainActivity.class);
-                                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                   intent.putExtra(Constant.IS_SIGNUP, true);
-                              }
 
-                              startActivity(intent);
-                              finish();
-                              Log.e("tag","data:-"+jsonObject1.getJSONObject("data"));
-                              overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                            BaseApplication.getInstance().getSession().setIsLoggedIn();
 
-                        }
-                        else if (jsonObject1.getString("error_code").equalsIgnoreCase("otp_screen")){
+                            if (getIntent().hasExtra("cart")) {
+                                boolean items = false;
+                                Log.e("TAG", "Login ViewCart ");
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("viewcart", items);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
+
+                            } else if (getIntent().hasExtra("cartfragment")) {
+                                Log.e("login extra", "Success: ");
+                                boolean items = false;
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra("cartfragment", items);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
+                            } else {
+                                Log.e("TAG", "Login Simple ");
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
+                            }
+
+                            startActivity(intent);
+                            finish();
+                            Log.e("tag", "data:-" + jsonObject1.getJSONObject("data"));
+                            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
+                        } else if (jsonObject1.getString("error_code").equalsIgnoreCase("otp_screen")) {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setTitle(getString(R.string.app_name));
@@ -341,9 +348,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    Intent   intent = new Intent(LoginActivity.this, OtpVerificationActivity.class);
-                                    Constant.isComingFromLogin=true;
-                                    intent.putExtra("email",mEditEmail.getText().toString().trim());
+                                    Intent intent = new Intent(LoginActivity.this, OtpVerificationActivity.class);
+                                    Constant.isComingFromLogin = true;
+                                    intent.putExtra("email", mEditEmail.getText().toString().trim());
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
                                 }
@@ -358,8 +365,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             alertDialog.show();
 
 
-
-                        }else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
                         }
 
@@ -368,18 +374,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 }
             }
+
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
-                UiHelper.showErrorMessage(mSnackView,error);
+                UiHelper.showErrorMessage(mSnackView, error);
             }
+
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
-                    UiHelper.showNetworkError(LoginActivity.this,mSnackView);
+                    UiHelper.showNetworkError(LoginActivity.this, mSnackView);
                 }
                 Log.e("Tag", "isConnected : " + isConnected);
             }

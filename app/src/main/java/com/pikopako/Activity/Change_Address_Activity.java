@@ -126,6 +126,12 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
 
         Intent intent = getIntent();
 
+//        if (BaseApplication.getInstance().getSession().isLoggedIn()) {
+//            mEditLocation.setText(BaseApplication.getInstance().getSession().getProfileLoc());
+//        } else {
+//
+//        }
+
         if (intent.hasExtra("location")) {
             mEditLocation.setText(intent.getStringExtra("location"));
             Log.e("TAGG", "onCreate: " + getIntent().getStringExtra("location"));
@@ -157,7 +163,13 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
                 else
                     radioButton_work.setChecked(true);
 
-                mEditLocation.setText(dd.getString("location"));
+//                if (BaseApplication.getInstance().getSession().isLoggedIn()) {
+//                    mEditLocation.setText(BaseApplication.getInstance().getSession().getProfileLoc());
+//                } else
+
+                    mEditLocation.setText(dd.getString("location"));
+
+
                 latitude = dd.getDouble("latitude");
                 longitude = dd.getDouble("longitude");
                 Log.e("dd", "onCreate: " + dd.toString());
@@ -392,11 +404,11 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.e("==>", "onActivityResult: " + place.getName());
-                mEditLocation.setText(String.valueOf(place.getName())); //set searched place to location field
                 LatLng latLngOrderDest = place.getLatLng(); //get lat lng of destination place
                 latitude = latLngOrderDest.latitude;
                 longitude = latLngOrderDest.longitude;
                 Log.e("==>", "lat: " + latitude + " lng " + longitude);
+                mEditLocation.setText(UiHelper.getAddress(this, latitude, longitude)); //set searched place to location field
 
 //                latitude= 26.9124336;
 //                longitude=75.78727090000007;

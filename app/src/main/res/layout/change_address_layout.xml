@@ -112,7 +112,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:hint="@string/house_flat_no"
-                    android:imeOptions="actionDone"
+                    android:ems="10"
+                    android:maxLines="1"
+                    android:inputType="textNoSuggestions"
+                    android:imeOptions="actionNext"
                     android:paddingRight="10dp" />
 
             </com.pikopako.AppUtill.CustomTextInputLayout>
@@ -124,6 +127,9 @@
                     style="@style/EditTextStyle"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
+                    android:inputType="textNoSuggestions"
+                    android:ems="10"
+                    android:maxLines="1"
                     android:hint="@string/landmark"
                     android:imeOptions="actionDone"
                     android:paddingRight="10dp" />
