@@ -242,12 +242,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <receiver android:name=".AppUtill.ConnectivityReceiver">
-            <intent-filter>
-                <action android:name="com.amcbr.AN_INTENT" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+<!--        force user to enable GPS-->
+<!--        <receiver android:name=".AppUtill.ConnectivityReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.amcbr.AN_INTENT" />-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 
 </manifest>

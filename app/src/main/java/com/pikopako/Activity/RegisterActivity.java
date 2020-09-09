@@ -67,12 +67,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+
 
     }
     private void listners() {

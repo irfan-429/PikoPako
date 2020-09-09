@@ -53,15 +53,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Jhon Carton"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                />
 
             <com.pikopako.AppUtill.CustomTextViewBold
                 android:id="@+id/website"
                 android:padding="2.5dp"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 android:text="jhon@mailinator.com" />
+
+            <com.pikopako.AppUtill.CustomTextViewBold
+                android:id="@+id/donatedWaterForAfrica"
+                android:textColor="@color/holo_green_dark"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:padding="2.5dp"
+                android:layout_height="wrap_content"
+                android:text="@string/donated_water_for_africa" />
+
         </LinearLayout>
 
     </RelativeLayout>

@@ -47,19 +47,18 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tvTitle)
     CustomTextViewBold mTitle;
     RestroInfoAdapter productListAdapter;
-    String language="";
+    String language = "";
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_recycler_rating);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
-            callApi();
+        callApi();
     }
 
 
@@ -73,40 +72,38 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-
-    private void callApi(){
-        final ProgressDialog progressDialog= UiHelper.generateProgressDialog(this,false);
+    private void callApi() {
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
         TimeZone tz = TimeZone.getDefault();
         JsonObject jsonObject = new JsonObject();
 
         jsonObject.addProperty("restaurant_id", getIntent().getExtras().getString("id"));
         jsonObject.addProperty("coordinate_id", getIntent().getExtras().getString("coordinate_id"));
-        jsonObject.addProperty("timezone",tz.getID());
-        jsonObject.addProperty("language",language);
+        jsonObject.addProperty("timezone", tz.getID());
+        jsonObject.addProperty("language", language);
 
 
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getReviews(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getReviews(BaseApplication.getInstance().getSession().getToken(), jsonObject);
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
                             JSONArray categoriesArray = jsonObject1.getJSONObject("data").getJSONArray("review_list");
-                         String image=   jsonObject1.getJSONObject("data").getString("profile_image_base_url");
-                            Log.e("base url", "Success: "+  jsonObject1.getJSONObject("data").getString("profile_image_base_url"));
+                            String image = jsonObject1.getJSONObject("data").getString("profile_image_base_url");
+                            Log.e("base url", "Success: " + jsonObject1.getJSONObject("data").getString("profile_image_base_url"));
                             mRecycleview.setLayoutManager(new LinearLayoutManager(RestroRatingActivity.this));
-                            productListAdapter    =new RestroInfoAdapter(RestroRatingActivity.this,categoriesArray,image);
+                            productListAdapter = new RestroInfoAdapter(RestroRatingActivity.this, categoriesArray, image);
                             mRecycleview.setAdapter(productListAdapter);
 
-                        }
-                        else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")){
-                                Intent intent=new Intent(RestroRatingActivity.this,LoginActivity.class);
+                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")) {
+                                Intent intent = new Intent(RestroRatingActivity.this, LoginActivity.class);
                                 startActivity(intent);
 
                             }
@@ -121,7 +118,7 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
 //                UiHelper.showErrorMessage(mSnackView,error);
             }
@@ -129,7 +126,7 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
 //                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
                 }
@@ -137,19 +134,14 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
             }
 
 
-
         });
 
     }
 
 
-
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
@@ -157,6 +149,7 @@ public class RestroRatingActivity extends BaseActivity implements View.OnClickLi
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onClick(View view) {
 

@@ -282,8 +282,10 @@
     <string name="on_this_bill">on this bill</string>
     <string name="pls_enter_address">Please Enter Address</string>
 
-
     <string name="thankyou_for_your_order_please_follow_your_email_for_delivery_updates">Dankeschön für Ihre Bestellung. Bitte folgen Sie die email für Ihre Bestellung Updates.</string>
-
-
+    <string name="payment_by_cash">Cash</string>
+    <string name="payment_by_paypal">Paypal</string>
+    <string name="payment_by_card">Stripe</string>
+    <string name="enable_location">Aktiviere Standort</string>
+    <string name="donated_water_for_africa">Gesamt Wasser für Afrika gespendet:&#160;</string>
 </resources>

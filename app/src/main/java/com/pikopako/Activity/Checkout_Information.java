@@ -68,7 +68,6 @@ public class Checkout_Information extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.checkout_information_layout);
         ButterKnife.bind(this);
 
-
         if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
             language = "German";
         } else

@@ -1,5 +1,6 @@
 package com.pikopako.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
@@ -42,6 +44,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonObject;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.pikopako.Adapter.My_Offers_list_Adapter;
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppDelegate.NetworkController;
 import com.pikopako.AppUtill.Constant;
@@ -89,7 +92,7 @@ public class MainActivity extends BaseActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
     private boolean isLogout=false;
-
+    CustomTextViewBold waterForAfrica;
     String language="";
     private int AUTOCOMPLETE_REQUEST_CODE = 1;
     List<Place.Field> fields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.NAME);
@@ -102,16 +105,17 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         Places.initialize(this, getResources().getString(R.string.google_api_key1)); //init auto complete places API
         ButterKnife.bind(this);
+
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         setSupportActionBar(toolbar);
         mHandler = new Handler();
         activityTitles = getResources().getStringArray(R.array.ld_activityScreenTitles);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        getTotalDonatedWater(); //api call
 
         Menu m = navigationView.getMenu();
         for (int i=0;i<m.size();i++) {
@@ -206,6 +210,7 @@ public class MainActivity extends BaseActivity {
             CircularImageView userImage = (CircularImageView) view.findViewById(R.id.img_profile);
             CustomTextViewBold name = (CustomTextViewBold) view.findViewById(R.id.name);
             CustomTextViewBold website = (CustomTextViewBold) view.findViewById(R.id.website);
+             waterForAfrica = (CustomTextViewBold) view.findViewById(R.id.donatedWaterForAfrica);
             name.setText(jsonObject.getString("name"));
             Log.e("TAG", "setNavigationHeader: "+jsonObject.toString() );
             website.setText(jsonObject.getString("email"));
@@ -623,5 +628,39 @@ public class MainActivity extends BaseActivity {
         });
 
     }
+
+    private void getTotalDonatedWater() {
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getTotalDonatedWater(BaseApplication.getInstance().getSession().getToken());
+        new NetworkController().post(this, call, new NetworkController.APIHandler() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void Success(Object jsonObject) {
+                if (jsonObject != null) {
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                            waterForAfrica.setText(getString(R.string.donated_water_for_africa)+ jsonObject1.getJSONObject("data").getString("total_donated_water")+"L");
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void Error(String error) {
+            }
+
+            @Override
+            public void isConnected(boolean isConnected) {
+            }
+
+
+        });
+
+    }
+
 
 }

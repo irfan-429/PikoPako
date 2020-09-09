@@ -52,12 +52,11 @@ public class My_offers  extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycleview_with_toolbar);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
         callApi();
 
     }

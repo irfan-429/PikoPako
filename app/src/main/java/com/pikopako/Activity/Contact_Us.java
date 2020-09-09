@@ -90,11 +90,9 @@ public class Contact_Us extends BaseActivity implements View.OnClickListener, Ad
                 ButterKnife.bind(this);
                 setActionBarTitle();
 
-                if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-                        language="German";
-                }
-                else
-                        language="English";
+                if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+                        language = "German";
+                else language = "English";
 
                 List<String> categories = new ArrayList<String>();
                 categories.add(getString(R.string.general));

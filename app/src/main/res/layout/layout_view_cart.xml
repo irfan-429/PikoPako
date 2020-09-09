@@ -465,16 +465,17 @@
 
 
                 <LinearLayout
+                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="5dp">
+                    >
 
                 <com.pikopako.AppUtill.CustomTextViewBold
+                    android:padding="5dp"
                     android:id="@+id/txt_changeaddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="@string/add"
                     android:textColor="@color/colorPrimary" />
 
@@ -482,7 +483,6 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="8dp"
                     android:src="@drawable/righttick"/>
                 </LinearLayout>
 

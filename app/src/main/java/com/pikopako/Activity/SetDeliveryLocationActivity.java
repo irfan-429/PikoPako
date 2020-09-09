@@ -1,6 +1,7 @@
 package com.pikopako.Activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -109,6 +111,7 @@ public class SetDeliveryLocationActivity extends BaseActivity implements View.On
             language = "German";
         } else
             language = "English";
+
         initilizeMap();
         listners();
     }
@@ -150,17 +153,68 @@ public class SetDeliveryLocationActivity extends BaseActivity implements View.On
             }
         });
 
+
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
+        this.googleMap.setMyLocationEnabled(true);
 
         if (addressFromGeocode == null) {
             addressFromGeocode = new GeocoderLocation();
             addressFromGeocode.recieved = SetDeliveryLocationActivity.this;
         }
+
         proceedAfterPermission();
+
+        this.googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                LatLng location = googleMap.getCameraPosition().target;
+                addressFromGeocode.start(SetDeliveryLocationActivity.this, location, false);
+
+            }
+        });
+
+        this.googleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
+            @Override
+            public void onCameraMoveStarted(int i) {
+
+            }
+        });
+
+        this.googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                GPSTracker gps = new GPSTracker(SetDeliveryLocationActivity.this);
+                if (gps.canGetLocation()) {
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+                    getAddress(new LatLng(latitude, longitude));
+                    setMap();
+                }else Toast.makeText(SetDeliveryLocationActivity.this, R.string.enable_location, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        this.googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+
+            }
+        });
     }
 
     private void proceedAfterPermission() {
@@ -168,65 +222,39 @@ public class SetDeliveryLocationActivity extends BaseActivity implements View.On
             // TODO: Consider calling
             return;
         }
-        googleMap.setMyLocationEnabled(true);
-        locationget();
+
+        //set location
+        String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
+        String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
+        String savedLoc = BaseApplication.getInstance().getSession().getPreviousLocationTitle();
+        Log.i("==>", " " + savedLoc);
+        if ((savedLat != null && !savedLat.isEmpty()) && (savedLng != null && !savedLng.isEmpty())) {
+            mEditLocation.setText(savedLoc);
+            latitude = Double.parseDouble(savedLat);
+            longitude = Double.parseDouble(savedLng);
+            setMap();
+        } else {
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.canGetLocation()) {
+                latitude = gps.getLatitude();
+                longitude = gps.getLongitude();
+                getAddress(new LatLng(latitude, longitude));
+                setMap();
+            }
+        }
+
+
         //We've got the permission, now we can proceed further
         Log.e("aa", "" + "We got the LocationActivity Permission");
     }
 
-    private void locationget() {
-        GPSTracker gps = new GPSTracker(this);
-        if (gps.canGetLocation()) {
-            LatLng coordinate = new LatLng(gps.getLatitude(), gps.getLongitude());
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
-            googleMap.animateCamera(yourLocation);
-            if (googleMap != null) {
-                googleMap.clear();
-            }
-            googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-                @Override
-                public void onCameraIdle() {
-                    LatLng location = googleMap.getCameraPosition().target;
-                    addressFromGeocode.start(SetDeliveryLocationActivity.this, location, false);
-
-                }
-            });
-
-            googleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
-                @Override
-                public void onCameraMoveStarted(int i) {
-
-                }
-            });
-
-            googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-                @Override
-                public boolean onMyLocationButtonClick() {
-                    proceedAfterPermission();
-                    return true;
-                }
-            });
-
-            googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-                @Override
-                public void onMarkerDragStart(Marker marker) {
-
-                }
-
-                @Override
-                public void onMarkerDrag(Marker marker) {
-
-                }
-
-                @Override
-                public void onMarkerDragEnd(Marker marker) {
-
-                }
-            });
-
-            getAddress(coordinate);
-        } else {
-            showDialog();
+    private void setMap() {
+//        if (gps.canGetLocation()) {
+        LatLng coordinate = new LatLng(latitude, longitude);
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
+        googleMap.animateCamera(yourLocation);
+        if (googleMap != null) {
+            googleMap.clear();
         }
     }
 

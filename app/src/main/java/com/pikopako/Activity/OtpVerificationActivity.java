@@ -64,6 +64,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
 
         setActionBarTitle();
         edt_otp = findViewById(R.id.edt_otp);
@@ -73,34 +76,28 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
             Log.i("TAG", "coming from " + getIntent().getStringExtra("cart") + " , " + getIntent().getStringExtra("cartfragment"));
             user_email = getIntent().getStringExtra("email");
-            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) +"<b>" + " "+user_email+"</b>"));
+            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) + "<b>" + " " + user_email + "</b>"));
             user_name = getIntent().getStringExtra("name");
             user_contact = getIntent().getStringExtra("contact_number");
 
 
-        }
-        else if (Constant.isComingFromRegister || getIntent().hasExtra("SetLocation")){
+        } else if (Constant.isComingFromRegister || getIntent().hasExtra("SetLocation")) {
 
-          //  Log.i("TAG", "coming from " + getIntent().getStringExtra("cart") + " , " + getIntent().getStringExtra("cartfragment"));
+            //  Log.i("TAG", "coming from " + getIntent().getStringExtra("cart") + " , " + getIntent().getStringExtra("cartfragment"));
             user_email = getIntent().getStringExtra("email");
 
 
-            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) +"<b>"+" "+user_email+"</b>"));
+            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) + "<b>" + " " + user_email + "</b>"));
             user_name = getIntent().getStringExtra("name");
             user_contact = getIntent().getStringExtra("contact_number");
 
-        }
-
-        else {
+        } else {
 
             getData();
-            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) + "<b>"+" "+user_email+"</b>"));
+            txt_email.setText(Html.fromHtml(getResources().getString(R.string.sendto) + "<b>" + " " + user_email + "</b>"));
         }
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
+
     }
 
     private void setActionBarTitle() {
@@ -131,7 +128,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
             case R.id.btn_submit:
 
-                if (Constant.isComingFromRegister ||  Constant.isComingFromLogin || getIntent().hasExtra("SetLocation")){
+                if (Constant.isComingFromRegister || Constant.isComingFromLogin || getIntent().hasExtra("SetLocation")) {
 
 
                     if (edt_otp.getText().toString().trim().length() < 4) {
@@ -142,14 +139,14 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                         jsonObject.addProperty("email", user_email);
                         jsonObject.addProperty("otp", edt_otp.getText().toString().trim());
                         jsonObject.addProperty("language", language);
-                        jsonObject.addProperty("device_token",BaseApplication.getInstance().getSession().getDeviceToken());
+                        jsonObject.addProperty("device_token", BaseApplication.getInstance().getSession().getDeviceToken());
                         jsonObject.addProperty("device_type", Constant.DIVICE_TYPE);
                         Log.i("TAG", "request for otp: " + jsonObject.toString());
                         postVerifyOtpForRegister(jsonObject);
                     }
 
 
-                }else {
+                } else {
                     if (edt_otp.getText().toString().trim().length() < 4) {
                         UiHelper.showToast(OtpVerificationActivity.this, getResources().getString(R.string.pls_enter_otp));
                     } else {
@@ -168,13 +165,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
             case R.id.textView4:
 
-                if (Constant.isComingFromRegister){
+                if (Constant.isComingFromRegister) {
                     callApiforResendForRegister();
 
-                }else {
+                } else {
                     callApiforResend();
                 }
-
 
 
                 break;
@@ -206,7 +202,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
                         if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 
-                                 UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
+                            UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
 
                         } else {
                             UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
@@ -258,62 +254,58 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                             BaseApplication.getInstance().getSession().setProfileData(String.valueOf(jsonObject1.getJSONObject("data")));
                             BaseApplication.getInstance().getSession().setToken(jsonObject1.getJSONObject("data").getString("token"));
 
-                                Intent intent=new Intent();
-                                if (getIntent().hasExtra("viewcart")) {
-                                    Constant.isComingFromRegister=false;
-                                    Constant.isComingFromLogin=false;
+                            Intent intent = new Intent();
+                            if (getIntent().hasExtra("viewcart")) {
+                                Constant.isComingFromRegister = false;
+                                Constant.isComingFromLogin = false;
 //                                  Log.e("login extra", "Success: "+getIntent().getStringExtra("cart") );
-                                    boolean items = false;
-                                    intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
-                                    intent.putExtra("viewcart", items);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.putExtra(Constant.IS_SIGNUP, true);
+                                boolean items = false;
+                                intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
+                                intent.putExtra("viewcart", items);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
 
-                                } else if (getIntent().hasExtra("cartfragment")) {
+                            } else if (getIntent().hasExtra("cartfragment")) {
 
-                                    Constant.isComingFromRegister=false;
-                                    Constant.isComingFromLogin=false;
+                                Constant.isComingFromRegister = false;
+                                Constant.isComingFromLogin = false;
 
-                                    Log.e("login extra", "Success: ");
-                                    boolean items = false;
-                                    intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
-                                    intent.putExtra("cartfragment", items);
-                                    intent.putExtra(Constant.IS_SIGNUP, true);
+                                Log.e("login extra", "Success: ");
+                                boolean items = false;
+                                intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
+                                intent.putExtra("cartfragment", items);
+                                intent.putExtra(Constant.IS_SIGNUP, true);
 
-                                }
+                            } else if (getIntent().hasExtra("SetLocation")) {
 
-                                else if (getIntent().hasExtra("SetLocation")){
-
-                                    Intent intent4 = new Intent(OtpVerificationActivity.this, MainActivity.class);
-                                    intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent4.putExtra(Constant.IS_SIGNUP, true);
-                                    startActivity(intent4);
-                                    finishAffinity();
-                                    overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-
-                                }
-
-                                else
-                                {
-                                    if (Constant.isComingFromRegister){
-
-                                        Constant.isComingFromRegister=false;
-                                        intent = new Intent(OtpVerificationActivity.this, ConfirmLocationActivity.class);
-                                        intent.putExtra(Constant.IS_SIGNUP,true);
-
-                                    }if (Constant.isComingFromLogin){
-
-                                    Constant.isComingFromLogin=false;
-                                    intent = new Intent(OtpVerificationActivity.this, ConfirmLocationActivity.class);
-                                    intent.putExtra(Constant.IS_SIGNUP,true);
-                                }
-
-                                }
-
-                                startActivity(intent);
+                                Intent intent4 = new Intent(OtpVerificationActivity.this, MainActivity.class);
+                                intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent4.putExtra(Constant.IS_SIGNUP, true);
+                                startActivity(intent4);
                                 finishAffinity();
-                                //Log.e("tag","data:-"+jsonObject1.getJSONObject("data"));
                                 overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
+                            } else {
+                                if (Constant.isComingFromRegister) {
+
+                                    Constant.isComingFromRegister = false;
+                                    intent = new Intent(OtpVerificationActivity.this, ConfirmLocationActivity.class);
+                                    intent.putExtra(Constant.IS_SIGNUP, true);
+
+                                }
+                                if (Constant.isComingFromLogin) {
+
+                                    Constant.isComingFromLogin = false;
+                                    intent = new Intent(OtpVerificationActivity.this, ConfirmLocationActivity.class);
+                                    intent.putExtra(Constant.IS_SIGNUP, true);
+                                }
+
+                            }
+
+                            startActivity(intent);
+                            finishAffinity();
+                            //Log.e("tag","data:-"+jsonObject1.getJSONObject("data"));
+                            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
                         } else {
                             UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));

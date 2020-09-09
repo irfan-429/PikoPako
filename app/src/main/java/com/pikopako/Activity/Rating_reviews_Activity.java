@@ -70,13 +70,12 @@ public class Rating_reviews_Activity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rating_layout);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         btnSubmit.setOnClickListener(this);
         txt_skip.setOnClickListener(this);
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
 
         Intent intent=getIntent();
         restro_image=getIntent().getStringExtra("restro_image");

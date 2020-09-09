@@ -60,6 +60,7 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.internal.Utils;
 import retrofit2.Call;
 
 public class ViewCartActivity extends BaseActivity implements View.OnClickListener {
@@ -196,12 +197,12 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_view_cart);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
         context = this;
         hh.setVisibility(View.VISIBLE);
 
@@ -279,7 +280,8 @@ public class ViewCartActivity extends BaseActivity implements View.OnClickListen
 //       }
 
         String deliveryTime = BaseApplication.getInstance().getSession().getDeliveryTime();
-        ed_timepicker.setText(deliveryTime + " " + getString(R.string.minutes)); // show time by adding x min in it
+        Log.e(TAG, "deliveryTime: "+ deliveryTime );
+        ed_timepicker.setText(addMinutesInDate(deliveryTime)); // show time by adding x min in it
     }
 
     public String addMinutesInDate(String addedMinutes) {

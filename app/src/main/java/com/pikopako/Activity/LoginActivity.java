@@ -75,14 +75,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
         Log.e("language", "onCreate: " + Locale.getDefault().getDisplayLanguage().toString());
 
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
 
         if (getIntent().hasExtra("cart") || getIntent().hasExtra("cartfragment")) {
             layout_signup.setVisibility(View.VISIBLE);

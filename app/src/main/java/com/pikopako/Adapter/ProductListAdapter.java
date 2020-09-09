@@ -66,14 +66,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
      //   holder.imageView.setImageBitmap(circularBitmap);
 
 
-        //set rest max delivery time
-        BaseApplication.getInstance().getSession().setDeliveryTime(productModel.cafe_deleiverytime);
+
 
 
         holder.mainView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("tag","ff"+position +" data" +arrayList.toString());
+                BaseApplication.getInstance().getSession().setDeliveryTime(arrayList.get(position).cafe_deleiverytime);//set rest max delivery time
                 clickItemEvent.onClickItem(arrayList.get(position).cafe_id, String.valueOf(position));
 
                 Log.e("adaptertag","" +position);

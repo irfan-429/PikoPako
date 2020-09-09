@@ -65,11 +65,10 @@ public class ConfirmedOrder extends BaseActivity {
         setContentView(R.layout.order_confirmed_layout);
         ButterKnife.bind(this);
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         getData();
         restaurant_id=getIntent().getStringExtra("restaurant_id");
         restro_image=getIntent().getStringExtra("restro_image");

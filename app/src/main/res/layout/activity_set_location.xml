@@ -59,7 +59,7 @@
                     style="@style/EditTextStyle"
                     android:paddingRight="10dp"
                     android:drawableRight="@mipmap/icons_location"
-                    android:inputType="textPersonName"
+                    android:inputType="textNoSuggestions"
                     android:hint="@string/string_location"/>
 
             </com.pikopako.AppUtill.CustomTextInputLayout>

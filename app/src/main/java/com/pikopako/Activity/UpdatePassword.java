@@ -58,11 +58,9 @@ public class UpdatePassword extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.change_password_activity);
         ButterKnife.bind(this);
         setActionBarTitle();
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
     }
 
 

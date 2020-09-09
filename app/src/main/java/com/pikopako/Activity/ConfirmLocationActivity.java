@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -115,6 +116,10 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
         Places.initialize(this, getResources().getString(R.string.google_api_key1)); //init auto complete places API
 
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         // progressBar4.setIndeterminate(true);
         initilizeMap();
         if (getIntent().getExtras() != null) {
@@ -126,10 +131,7 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             }
         }
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
+
 
         listners();
 //        btnConfirmLocation.setClickable(false);
@@ -183,6 +185,20 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
             return;
         }
         googleMap.setMyLocationEnabled(true);
+        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                GPSTracker gps = new GPSTracker(ConfirmLocationActivity.this);
+                if (gps.canGetLocation()) {
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+                    getAddress(new LatLng(latitude, longitude));
+                    setMap();
+                }else Toast.makeText(ConfirmLocationActivity.this, R.string.enable_location, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
 
         String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
         String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
@@ -199,6 +215,17 @@ public class ConfirmLocationActivity extends BaseActivity implements View.OnClic
         }
         else locationget();
 
+    }
+
+
+    private void setMap() {
+//        if (gps.canGetLocation()) {
+        LatLng coordinate = new LatLng(latitude, longitude);
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
+        googleMap.animateCamera(yourLocation);
+        if (googleMap != null) {
+            googleMap.clear();
+        }
     }
 
     private void locationget() {

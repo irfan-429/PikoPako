@@ -60,11 +60,11 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
     RecyclerView recyclerView;
 
     My_Offers_list_Adapter my_favourite_list_adapter;
-    float price=0;
+    float price = 0;
 
-    ArrayList<CouponCodeModel> codeDetailsModelArrayList=new ArrayList<>();
+    ArrayList<CouponCodeModel> codeDetailsModelArrayList = new ArrayList<>();
 
-    String language="";
+    String language = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,27 +73,23 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
         ButterKnife.bind(this);
 
 
-
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
 
 
-        Intent intent=getIntent();
-        String fff= String.valueOf(intent.getStringExtra("price"));
-        String [] diss=fff.split("\\€");
-        Log.e("Tag", "diss length: "+diss[1]);
+        Intent intent = getIntent();
+        String fff = String.valueOf(intent.getStringExtra("price"));
+        String[] diss = fff.split("\\€");
+        Log.e("Tag", "diss length: " + diss[1]);
 
-        price= Float.parseFloat(diss[1]);
-        Log.e("coupon price to check", "onCreate: "+price );
-        Log.e("token", "onCreate: "+BaseApplication.getInstance().getSession().getToken().toString());
+        price = Float.parseFloat(diss[1]);
+        Log.e("coupon price to check", "onCreate: " + price);
+        Log.e("token", "onCreate: " + BaseApplication.getInstance().getSession().getToken().toString());
         setActionBarTitle();
 
         callApi();
     }
-
 
 
     private void setActionBarTitle() {
@@ -108,11 +104,12 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
         btnUpdatecode.setOnClickListener(this);
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
-                    onBackPressed();
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -120,14 +117,13 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnUpdatecode:
 
 
-                if(ed_apply_code.getText().toString().trim().equalsIgnoreCase("")) {
-                    UiHelper.showToast(this,getString(R.string.please_enter_coupon));
-                }
-                else {
+                if (ed_apply_code.getText().toString().trim().equalsIgnoreCase("")) {
+                    UiHelper.showToast(this, getString(R.string.please_enter_coupon));
+                } else {
                     applyCoupon(ed_apply_code.getText().toString().trim());
                 }
                 break;
@@ -139,8 +135,8 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
         final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("language",language);
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getAllCouponDetails(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        jsonObject.addProperty("language", language);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getAllCouponDetails(BaseApplication.getInstance().getSession().getToken(), jsonObject);
 
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
 
@@ -154,15 +150,15 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
                         if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 
-                            JSONArray jsonArray=jsonObject1.getJSONArray("data");
-                            Log.e("data",""+jsonArray.toString());
-                            codeDetailsModelArrayList=new ArrayList<CouponCodeModel>();
+                            JSONArray jsonArray = jsonObject1.getJSONArray("data");
+                            Log.e("data", "" + jsonArray.toString());
+                            codeDetailsModelArrayList = new ArrayList<CouponCodeModel>();
                             codeDetailsModelArrayList.clear();
-                            CouponCodeModel coupenCodeDetailsModel=new CouponCodeModel();
+                            CouponCodeModel coupenCodeDetailsModel = new CouponCodeModel();
                             coupenCodeDetailsModel.getAllCoupenCodeDetails(jsonArray);
                             codeDetailsModelArrayList.addAll(coupenCodeDetailsModel.codeDetailsModelArrayList);
 
-                            UiHelper.showToast(Apply_Coupon.this,jsonObject1.getString("message"));
+                            UiHelper.showToast(Apply_Coupon.this, jsonObject1.getString("message"));
 
                             applyCoupon(couponCode);
 
@@ -188,34 +184,34 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
             }
         });
     }
-    private void callApi(){
-        final ProgressDialog progressDialog= UiHelper.generateProgressDialog(this,false);
+
+    private void callApi() {
+        final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
 
-             JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("language",language);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("language", language);
         //   jsonObject.addProperty("food_id", id);
         //  Log.e("food_id",""+id);
 
-        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getOfferDetail(BaseApplication.getInstance().getSession().getToken(),jsonObject);
+        Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getOfferDetail(BaseApplication.getInstance().getSession().getToken(), jsonObject);
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {
-                        JSONObject jsonObject1=new JSONObject(jsonObject.toString());
-                        if(jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                        if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
                             JSONArray categoriesArray = jsonObject1.getJSONArray("data");
                             recyclerView.setLayoutManager(new LinearLayoutManager(Apply_Coupon.this));
-                            my_favourite_list_adapter=new My_Offers_list_Adapter(Apply_Coupon.this,categoriesArray,price);
+                            my_favourite_list_adapter = new My_Offers_list_Adapter(Apply_Coupon.this, categoriesArray, price);
                             recyclerView.setAdapter(my_favourite_list_adapter);
 
-                        }
-                        else {
+                        } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));
-                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")){
-                                Intent intent=new Intent(Apply_Coupon.this,LoginActivity.class);
+                            if (jsonObject1.getString("message").equalsIgnoreCase("Session expired.")) {
+                                Intent intent = new Intent(Apply_Coupon.this, LoginActivity.class);
                                 startActivity(intent);
 
                             }
@@ -230,7 +226,7 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void Error(String error) {
-                if(progressDialog!=null)
+                if (progressDialog != null)
                     progressDialog.dismiss();
 //                UiHelper.showErrorMessage(mSnackView,error);
             }
@@ -238,13 +234,12 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
             @Override
             public void isConnected(boolean isConnected) {
                 if (!isConnected) {
-                    if(progressDialog!=null)
+                    if (progressDialog != null)
                         progressDialog.dismiss();
 //                    UiHelper.showNetworkError(FoodDetailActivity.this,mSnackView);
                 }
                 Log.e("Tag", "isConnected : " + isConnected);
             }
-
 
 
         });
@@ -262,7 +257,7 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
         jsonObject.addProperty("coupon", ed_apply_code);
         jsonObject.addProperty("price", price);
 
-        jsonObject.addProperty("language",language);
+        jsonObject.addProperty("language", language);
         Log.e("tag", "json object apply coupn " + jsonObject.toString());
 
 
@@ -279,20 +274,20 @@ public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
                         if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
 
-                            String id=jsonObject1.getJSONObject("data").getString("id");
-                            String couponCode=jsonObject1.getJSONObject("data").getString("coupon_code");
-                            String discount_percentage=jsonObject1.getJSONObject("data").getString("discount_percentage");
-                            String status=jsonObject1.getJSONObject("data").getString("status");
+                            String id = jsonObject1.getJSONObject("data").getString("id");
+                            String couponCode = jsonObject1.getJSONObject("data").getString("coupon_code");
+                            String discount_percentage = jsonObject1.getJSONObject("data").getString("discount_percentage");
+                            String status = jsonObject1.getJSONObject("data").getString("status");
 
-                            Intent intent=new Intent();
-                            intent.putExtra("id",id);
-                            intent.putExtra("couponCode",couponCode);
-                            intent.putExtra("discount",discount_percentage);
-                            setResult(Activity.RESULT_OK,intent);
+                            Intent intent = new Intent();
+                            intent.putExtra("id", id);
+                            intent.putExtra("couponCode", couponCode);
+                            intent.putExtra("discount", discount_percentage);
+                            setResult(Activity.RESULT_OK, intent);
 
                             //         BaseApplication.getInstance().getSession().setProfileData(String.valueOf(jsonObject1.getJSONObject("data").toString()));
-                            Log.e("tag","Coupon Updated Successfully"+id+"coupon Code:-"+couponCode);
-                            UiHelper.showToast(Apply_Coupon.this,jsonObject1.getString("message"));
+                            Log.e("tag", "Coupon Updated Successfully" + id + "coupon Code:-" + couponCode);
+                            UiHelper.showToast(Apply_Coupon.this, jsonObject1.getString("message"));
                             finish();
                         } else {
                             UiHelper.showErrorMessage(mSnackView, jsonObject1.getString("message"));

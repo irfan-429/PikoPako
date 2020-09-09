@@ -138,6 +138,7 @@ public interface ApiInterface {
     @POST("users/resend_otp")
     Call<JsonObject>postResendOtpForRegister(@Body JsonObject jsonObject);
 
-
+    @GET("users/getTotalDonatedWater")
+    Call<JsonObject>getTotalDonatedWater(@Header("token") String token);
 
 }

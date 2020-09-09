@@ -59,7 +59,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
 
-        checkConnectivity();
+        callInitApi();
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -82,7 +82,7 @@ public class SplashActivity extends BaseActivity {
         if (!UiHelper.isGPSConnected(this)) {
             showDialogForGPS();
         } else {
-            startConnectivityReceiver();
+            startConnectivityReceiver(); //force user to enable GPS
             callInitApi();
 
 

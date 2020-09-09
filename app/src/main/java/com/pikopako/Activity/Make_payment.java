@@ -94,8 +94,7 @@ public class Make_payment extends BaseActivity {
 
         if (!BaseApplication.getInstance().getSession().isLoggedIn()){
             user_type="Guest";
-        }else
-            user_type="Site";
+        }else user_type="Site";
 
         houseno=intent.getStringExtra("house_number");
         landmark=intent.getStringExtra("landmark");
@@ -209,17 +208,16 @@ public class Make_payment extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.make_payment);
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
 
          payPalConfiguration = new PayPalConfiguration()
                 .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
                 .clientId(PAYPAL_CLIENT_ID);
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
 
         getCartData();
 
@@ -248,7 +246,7 @@ public class Make_payment extends BaseActivity {
                 btn_makePayment.setText(R.string.pay_using_paypal);
                 rb_creditcard.setChecked(false);
 
-                radioButton_checked=getString(R.string.paypal);
+                radioButton_checked=getString(R.string.payment_by_paypal);
                 Log.e("radio button paypal", "onCreate: "+radioButton_checked );
             }
         });
@@ -267,7 +265,7 @@ public class Make_payment extends BaseActivity {
                 rb_paypal.setChecked(false);
                 rb_creditcard.setChecked(false);
 
-                radioButton_checked=getString(R.string.cash);
+                radioButton_checked=getString(R.string.payment_by_cash);
                 Log.e("radio button cash", "onCreate: "+radioButton_checked );
             }
         });
@@ -286,12 +284,10 @@ public class Make_payment extends BaseActivity {
                 rb_paypal.setChecked(false);
                 rb_creditcard.setChecked(true);
 
-                radioButton_checked = getString(R.string.credit_debitcard);
+                radioButton_checked = getString(R.string.payment_by_card);
                 Log.e("radio button credit", "onCreate: "+radioButton_checked );
             }
         });
-
-
 
 
         if (rb_paypal.isChecked())
@@ -402,6 +398,7 @@ public class Make_payment extends BaseActivity {
 
     private void callApi() {
 
+        Log.e("TAG", "callApi: cash "+ payload );
         final ProgressDialog progressDialog = UiHelper.generateProgressDialog(this, false);
         progressDialog.show();
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().addCart(BaseApplication.getInstance().getSession().getToken(), payload);
@@ -409,6 +406,7 @@ public class Make_payment extends BaseActivity {
             @Override
             public void Success(Object jsonObject) {
 
+                Log.e("TAG", "Success: "+ jsonObject );
                 progressDialog.dismiss();
                 if (jsonObject != null) {
                     try {

@@ -273,4 +273,9 @@
     <string name="on_this_bill">on this bill</string>
     <string name="pls_enter_address">Please Enter Address</string>
     <string name="thankyou_for_your_order_please_follow_your_email_for_delivery_updates">Thank you for your order. Please follow your email for delivery updates.</string>
+    <string name="payment_by_cash">Cash</string>
+    <string name="payment_by_paypal">Paypal</string>
+    <string name="payment_by_card">Stripe</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="donated_water_for_africa">Total Donated Water For Africa:&#160;</string>
 </resources>

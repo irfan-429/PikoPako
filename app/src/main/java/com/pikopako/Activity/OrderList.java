@@ -99,11 +99,10 @@ public class OrderList extends BaseActivity {
         setContentView(R.layout.orderlist_activity);
         ButterKnife.bind(this);
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")){
-            language="German";
-        }
-        else
-            language="English";
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         callApi();
 
             setSupportActionBar(toolbar);

@@ -158,14 +158,17 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
         super.onCreate(bundle);
         setContentView(R.layout.layout_food_detail);
         ButterKnife.bind(this);
+
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         listners();
         initialize();
 
+        Log.e(TAG, "lng==: "+  Locale.getDefault().getDisplayLanguage());
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
@@ -485,7 +488,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
 
 
                 Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST", (Serializable) List_of_list);
+                args.putSerializable("ARRAYLIST", List_of_list);
                 Log.e(TAG, "onClick: " + List_of_list.toString());
                 intent.putExtra("BUNDLE", args);
 
@@ -545,7 +548,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
                     }
 
 
-                    tv_total_price.setText("€" + String.valueOf(total_price));
+                    tv_total_price.setText("€" + total_price);
 
 
 //                        Log.e("bug", "on remove after onClick: is =>" + foodDetailAdapter.adapter_arraylist.get(0).isIngredient_add);
@@ -585,7 +588,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
                                 }
 
                                 total_price = total_price - (toppings_price + Float.parseFloat(productModel.getProductPrice()));
-                                tv_total_price.setText("€" + String.valueOf(total_price));
+                                tv_total_price.setText("€" + total_price);
 
                                 total_items--;
                                 //Update cart data
@@ -615,8 +618,8 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
                     }
                 }
 
-                tv_snackview_totalQuantity.setText(String.valueOf(total_items) + " " + getResources().getString(R.string.item));
-                tv_total_price.setText("€" + String.valueOf(total_price));
+                tv_snackview_totalQuantity.setText(total_items + " " + getResources().getString(R.string.item));
+                tv_total_price.setText("€" + total_price);
 
                 if (total_items == 0) {
                     snackbar_layout.setVisibility(View.GONE);
@@ -734,10 +737,10 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
         dialog.setContentView(R.layout.custom_dialog_customization);
         dialog.show();
 
-        Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
-        Button btn_Choose = (Button) dialog.findViewById(R.id.btn_Choose);
-        Button btn_repeatLast = (Button) dialog.findViewById(R.id.btnRepeatLast);
-        CustomTextViewNormal txt_toppings = (CustomTextViewNormal) dialog.findViewById(R.id.textDial);
+        Button declineButton = dialog.findViewById(R.id.declineButton);
+        Button btn_Choose = dialog.findViewById(R.id.btn_Choose);
+        Button btn_repeatLast = dialog.findViewById(R.id.btnRepeatLast);
+        CustomTextViewNormal txt_toppings = dialog.findViewById(R.id.textDial);
 
         Log.e(TAG, "inside add dialog List of List size: " + List_of_list.size() + "   total items" + total_items);
         //find Old toppings if added
@@ -844,7 +847,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
 
         total_price = total_price + toppings_price + Float.parseFloat(productModel.getProductPrice());
 
-        tv_total_price.setText("€" + String.valueOf(total_price));
+        tv_total_price.setText("€" + total_price);
         total_items++;
         //Update cart data
         setCartData(true);
@@ -1040,7 +1043,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
         } else
             jsonObject.addProperty("food_id", id);
         jsonObject.addProperty("language", language);
-        Log.e(TAG, "" + id);
+        Log.e(TAG, "jsonObject" + jsonObject);
 
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getIngredients(BaseApplication.getInstance().getSession().getToken(), jsonObject);
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
@@ -1187,7 +1190,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
 
                 Log.e(TAG, "when getting data: " + total_items);
                 tv_snackview_totalQuantity.setText(total_items + " " + getResources().getString(R.string.item));
-                tv_total_price.setText("€" + String.valueOf(total_price));
+                tv_total_price.setText("€" + total_price);
 
                 //product detail
                 JSONArray all_items_array = cartItemsObject.getJSONArray("data");
@@ -1239,7 +1242,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
                     }
                 }
 
-                Log.e(TAG, "old Cart item data :=>" + cartdata.toString());
+                Log.e(TAG, "old Cart item data :=>" + cartdata);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1556,7 +1559,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
         Log.e(TAG, "when clicking add total items: " + total_items);
         total_items++;
 
-        tv_total_price.setText("€" + String.valueOf(total_price));
+        tv_total_price.setText("€" + total_price);
 
         //add to List of List
         List_of_list.clear();
@@ -1564,7 +1567,7 @@ public class FoodDetailActivity extends BaseActivity implements View.OnClickList
 
         set_ingridiants_Adapter();
 
-        tv_snackview_totalQuantity.setText(String.valueOf(total_items) + " " + getString(R.string.item));
+        tv_snackview_totalQuantity.setText(total_items + " " + getString(R.string.item));
 
         //Update cart data
         setCartData(true);

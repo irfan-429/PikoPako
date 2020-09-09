@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -113,24 +114,20 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
         setContentView(R.layout.change_address_layout);
         Places.initialize(this, getResources().getString(R.string.google_api_key1)); //init auto complete places API
         ButterKnife.bind(this);
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
+            language = "German";
+        else language = "English";
+
         if (getIntent().hasExtra("location")) {
             move = true;
         } else move = false;
         initilizeMap();
         listners();
 
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
-            language = "German";
-        } else
-            language = "English";
+
 
         Intent intent = getIntent();
 
-//        if (BaseApplication.getInstance().getSession().isLoggedIn()) {
-//            mEditLocation.setText(BaseApplication.getInstance().getSession().getProfileLoc());
-//        } else {
-//
-//        }
 
         if (intent.hasExtra("location")) {
             mEditLocation.setText(intent.getStringExtra("location"));
@@ -142,7 +139,6 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
 //        if (intent.hasExtra("houseno")&& intent.hasExtra("landmark")&& intent.hasExtra("title")){
 //            ed_flatno.setText(intent.getStringExtra("houseno"));
 //            ed_landmark.setText(intent.getStringExtra("landmark"));
-//            mEditLocation.setText(intent.getStringExtra("location"));
 //            String title=intent.getStringExtra("title");
 //
 //            if (title.equalsIgnoreCase("Home"))
@@ -163,10 +159,6 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
                 else
                     radioButton_work.setChecked(true);
 
-//                if (BaseApplication.getInstance().getSession().isLoggedIn()) {
-//                    mEditLocation.setText(BaseApplication.getInstance().getSession().getProfileLoc());
-//                } else
-
                     mEditLocation.setText(dd.getString("location"));
 
 
@@ -178,6 +170,30 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             }
         }
         Log.e("id restro", "onCreate: " + restaurant_id);
+
+
+    }
+
+    private void initLocation() {
+        //set location
+        String savedLat = BaseApplication.getInstance().getSession().getDeliveryLatitudeSet();
+        String savedLng = BaseApplication.getInstance().getSession().getDeliveryLongitudeSet();
+        String savedLoc = BaseApplication.getInstance().getSession().getPreviousLocationTitle();
+        Log.i("==>", " " + savedLoc);
+        if ((savedLat != null && !savedLat.isEmpty()) && (savedLng != null && !savedLng.isEmpty())) {
+            mEditLocation.setText(savedLoc);
+            latitude = Double.parseDouble(savedLat);
+            longitude = Double.parseDouble(savedLng);
+            setMap();
+        } else {
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.canGetLocation()) {
+                latitude = gps.getLatitude();
+                longitude = gps.getLongitude();
+                getAddress(new LatLng(latitude, longitude));
+                setMap();
+            }
+        }
     }
 
 
@@ -191,6 +207,13 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            return;
+        }
+        this.googleMap.setMyLocationEnabled(true);
+
         int height = getWindowManager().getDefaultDisplay().getHeight();
         height = height / 3;
         height = height + 100;
@@ -200,50 +223,11 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             addressFromGeocode = new GeocoderLocation();
             addressFromGeocode.recieved = Change_Address_Activity.this;
         }
-        proceedAfterPermission();
-    }
 
-    private void proceedAfterPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            return;
-        }
-        googleMap.setMyLocationEnabled(true);
-        locationget();
-        //We've got the permission, now we can proceed further
-        Log.e("aa", "" + "We got the LocationActivity Permission");
-    }
+        initLocation();
 
 
-    private void locationget() {
-        GPSTracker gpsTracker = new GPSTracker(this);
-
-        LatLng coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-        if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
-            try {
-                JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
-                if (dd.has("latitude") && dd.getString("latitude") != null) {
-                    coordinate = new LatLng(dd.getDouble("latitude"), dd.getDouble("longitude"));
-                } else
-                    coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else
-            coordinate = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-
-
-        latitude = gpsTracker.getLatitude();
-        longitude = gpsTracker.getLongitude();
-
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
-        Log.e("TAG", "YOUR LOCATION: " + yourLocation + "Coordinate:" + coordinate);
-        googleMap.animateCamera(yourLocation);
-        if (googleMap != null) {
-            googleMap.clear();
-        }
-        googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+        this.googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
                 LatLng location = googleMap.getCameraPosition().target;
@@ -252,20 +236,56 @@ public class Change_Address_Activity extends BaseActivity implements View.OnClic
             }
         });
 
-        googleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
+        this.googleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
             @Override
             public void onCameraMoveStarted(int i) {
 
             }
         });
 
-        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+        this.googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-                proceedAfterPermission();
+                GPSTracker gps = new GPSTracker(Change_Address_Activity.this);
+                if (gps.canGetLocation()) {
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+                    getAddress(new LatLng(latitude, longitude));
+                    setMap();
+                }else Toast.makeText(Change_Address_Activity.this, R.string.enable_location, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
+    }
+
+
+    private void setMap() {
+
+        LatLng coordinate = new LatLng(latitude,longitude);
+        if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
+            try {
+                JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
+                if (dd.has("latitude") && dd.getString("latitude") != null) {
+                    coordinate = new LatLng(dd.getDouble("latitude"), dd.getDouble("longitude"));
+                } else
+                    coordinate = new LatLng(latitude, longitude);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else
+            coordinate = new LatLng(latitude, longitude);
+
+
+
+
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
+        Log.e("TAG", "YOUR LOCATION: " + yourLocation + "Coordinate:" + coordinate);
+        googleMap.animateCamera(yourLocation);
+        if (googleMap != null) {
+            googleMap.clear();
+        }
+
 //        Log.e("coordinate 2", "locationget: "+new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()) );
 //        coordinate=new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 //        latitude=gpsTracker.getLatitude();

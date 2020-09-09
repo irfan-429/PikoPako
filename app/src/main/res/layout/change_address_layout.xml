@@ -94,6 +94,7 @@
                     android:id="@+id/setshippinglocation"
                     style="@style/EditTextStyle"
                     android:layout_marginEnd="16dp"
+                    android:inputType="textNoSuggestions"
                     android:layout_marginStart="16dp"
                     android:focusable="false"
                     android:hint="@string/string_location"

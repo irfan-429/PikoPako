@@ -72,12 +72,11 @@ public class Choose_topping_Activity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_topping_activity);
         ButterKnife.bind(this);
-        listners();
-
-        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch")) {
+        if (Locale.getDefault().getDisplayLanguage().toString().equalsIgnoreCase("Deutsch"))
             language = "German";
-        } else
-            language = "English";
+        else language = "English";
+
+        listners();
 
         food_id = getIntent().getStringExtra("food_id");
 
