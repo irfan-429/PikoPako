@@ -1,5 +1,6 @@
 package com.pikopako.AppUtill;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -24,7 +25,7 @@ public class GeocoderLocation {
     public GeocoderLocation() {
     }
 
-    public void start(BaseActivity context, final LatLng latLng, final boolean needCamera) {
+    public void start(Context context, final LatLng latLng, final boolean needCamera) {
         try {
 
             Call<JsonObject> call= BaseApplication.getInstance().getApiClient1().geocode(latLng.latitude + "," + latLng.longitude,

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonObject;
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class UpdatePassword extends BaseActivity implements View.OnClickListener{
+public class UpdatePassword extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.toplinear)
     LinearLayout mSnackView;
 

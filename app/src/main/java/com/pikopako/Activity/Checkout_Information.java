@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonObject;
@@ -32,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Checkout_Information extends BaseActivity implements View.OnClickListener {
+public class Checkout_Information extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 

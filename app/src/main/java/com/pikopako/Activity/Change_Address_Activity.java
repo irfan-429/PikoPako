@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
@@ -59,7 +60,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Change_Address_Activity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
+public class Change_Address_Activity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

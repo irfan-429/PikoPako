@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 
 
-public class OrderList extends BaseActivity {
+public class OrderList extends AppCompatActivity {
 
     private static final String TAG = "OrderList";
     @BindView(R.id.showcart)

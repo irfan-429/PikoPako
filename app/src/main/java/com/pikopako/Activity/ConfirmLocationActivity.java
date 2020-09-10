@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
@@ -58,7 +59,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 
 
-public class ConfirmLocationActivity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
+public class ConfirmLocationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
 
     @BindView(R.id.btnAddMore)
     Button mBtnAddMore;

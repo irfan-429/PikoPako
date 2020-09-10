@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.pikopako.AppDelegate.BaseApplication;
 import com.pikopako.AppUtill.ConnectivityReceiver;
@@ -44,7 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2000;
     ArrayList<String> permissionToAsk = new ArrayList<>();
     public static String InternetDate = "";

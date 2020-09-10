@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,7 +46,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 
 
-public class FoodDetailActivity extends BaseActivity implements View.OnClickListener {
+public class FoodDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.topsnackview)
     AppBarLayout mSnackView;

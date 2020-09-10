@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonObject;
@@ -37,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Contact_Us extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class Contact_Us extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
         @BindView(R.id.toplinear)
         LinearLayout mSnackView;
 

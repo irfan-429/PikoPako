@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -63,7 +64,7 @@ import butterknife.ButterKnife;
 import butterknife.internal.Utils;
 import retrofit2.Call;
 
-public class ViewCartActivity extends BaseActivity implements View.OnClickListener {
+public class ViewCartActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.recyclevieww)
     RecyclerView mRecycleview;
 

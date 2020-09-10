@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class My_Favourites_list extends BaseActivity {
+public class My_Favourites_list extends AppCompatActivity {
 
     @BindView(R.id.fragment_container)
     RelativeLayout mSnackView;

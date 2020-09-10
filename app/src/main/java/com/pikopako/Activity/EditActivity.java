@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -58,7 +59,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 
-public class EditActivity extends BaseActivity implements View.OnClickListener {
+public class EditActivity extends AppCompatActivity implements View.OnClickListener {
     public final static String[] permissionForProfile = new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int PICK_IMAGE_ID = 10;
     private static final int requestcode_Camera_Permission = 11;

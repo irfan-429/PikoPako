@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
@@ -61,7 +62,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 
 
-public class SetDeliveryLocationActivity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
+public class SetDeliveryLocationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback, GeocoderLocation.AddressRecieved {
 
     @BindView(R.id.scroolView)
     ScrollView mScroolView;

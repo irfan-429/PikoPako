@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonArray;
@@ -40,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Make_payment extends BaseActivity {
+public class Make_payment extends AppCompatActivity {
 
     @BindView(R.id.rb_cashondeleivery)
     RadioButton rb_casOnDeleivery;

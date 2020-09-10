@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.JsonArray;
@@ -50,13 +51,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Card_detailActivity extends BaseActivity implements View.OnClickListener {
+public class Card_detailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String QUERY_CLIENT_SECRET = "src_client_secret_2W5tMszMDbtmR7j1HYibZ4SQ";
     private static final String QUERY_SOURCE_ID = "src_1GxZ6mKKZN07cdYUChUfkQBH";
 
 //    String PK_key = "pk_test_qfC5950mqdxZ4VnEWG0QaRoV00f7qDCGVz"; //test
-    String PK_key = "pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA";
+    String PK_key = "pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA"; //production
     String SK_key = "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";
 
     @BindView(R.id.toolbar)
@@ -76,8 +77,8 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
     String TAG = "Card Detail Activity";
     String language = "";
     private CardInputWidget mCardInputWidget;
-    private String mPublicKey = "";
-    private String mPrivateKey = "";
+    private String mPublicKey = "pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA";
+    private String mPrivateKey = "sk_test_1V4T5UXM2odNyjEHAqBA9vt8";
     private String houseno, landmark, location, address_title, coordinate_id, user_type, remarks, delivery_time;
     private double latitude, longitude;
     private float deleivery_charge, promo_code_id, promo_code_price, discount_amount, paid_amount;
@@ -115,8 +116,6 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
 
         listners();
         getCartData();
-        mPublicKey = " pk_live_zWjNUYrdT7KnCy2JMstP5ggQ00UbdxiKmA";
-        mPrivateKey = "sk_test_1V4T5UXM2odNyjEHAqBA9vt8";
 
 
     }
@@ -410,20 +409,19 @@ public class Card_detailActivity extends BaseActivity implements View.OnClickLis
                         Log.e(TAG, "Success: "+ jsonObject );
 
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
-                        if (jsonObject1.getString("success").equalsIgnoreCase("true")) {
-
+                        if (jsonObject1.getString("status").equalsIgnoreCase("success")) {
 
                             UiHelper.showToast(Card_detailActivity.this, jsonObject1.getString("message"));
 
                             Intent intent = new Intent(Card_detailActivity.this, ConfirmedOrder.class);
-                            intent.putExtra("restro_image", restro_image);
-                            intent.putExtra("restro_location", restro_location);
-                            intent.putExtra("restro_name", restro_name);
-                            intent.putExtra("restro_status", restro_status);
-                            intent.putExtra("restaurant_id", restaurant_id);
-                            intent.putExtra("delivery_time", delivery_time);
-                            BaseApplication.getInstance().getSession().setCartItmes("");
-                            BaseApplication.getInstance().getSession().setSimplifiedCartData("");
+//                            intent.putExtra("restro_image", restro_image);
+//                            intent.putExtra("restro_location", restro_location);
+//                            intent.putExtra("restro_name", restro_name);
+//                            intent.putExtra("restro_status", restro_status);
+//                            intent.putExtra("restaurant_id", restaurant_id);
+//                            intent.putExtra("delivery_time", delivery_time);
+//                            BaseApplication.getInstance().getSession().setCartItmes("");
+//                            BaseApplication.getInstance().getSession().setSimplifiedCartData("");
 
                             startActivity(intent);
                             finish();

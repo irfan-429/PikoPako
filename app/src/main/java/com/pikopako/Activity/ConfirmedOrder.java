@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.JsonObject;
 import com.pikopako.AppDelegate.BaseApplication;
@@ -35,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class ConfirmedOrder extends BaseActivity {
+public class ConfirmedOrder extends AppCompatActivity {
 
     @BindView(R.id.ff)
     ScrollView mSnackView;

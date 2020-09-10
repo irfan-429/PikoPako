@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Apply_Coupon extends BaseActivity implements View.OnClickListener {
+public class Apply_Coupon extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.ed_apply_code)
     CustomEditTextBold ed_apply_code;

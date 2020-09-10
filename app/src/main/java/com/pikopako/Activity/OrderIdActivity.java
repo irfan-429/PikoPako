@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class OrderIdActivity extends BaseActivity implements View.OnClickListener {
+public class OrderIdActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.snackView)
     LinearLayout mSnackView;

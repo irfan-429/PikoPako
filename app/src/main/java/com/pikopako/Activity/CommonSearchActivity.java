@@ -16,6 +16,7 @@ import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +55,7 @@ import butterknife.ButterKnife;
 
 
 
-public class CommonSearchActivity extends BaseActivity implements PlaceHistoryAdapter.OnSelectAddress, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class CommonSearchActivity extends AppCompatActivity implements PlaceHistoryAdapter.OnSelectAddress, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "CommonSearchActivity";
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";

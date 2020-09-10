@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
 
 import com.bumptech.glide.Glide;
@@ -31,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class Rating_reviews_Activity extends BaseActivity implements View.OnClickListener {
+public class Rating_reviews_Activity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.img_food)
     ImageView img_food;

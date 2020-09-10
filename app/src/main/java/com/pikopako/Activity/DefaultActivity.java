@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
@@ -55,7 +56,7 @@ import butterknife.ButterKnife;
 
 
 
-public class DefaultActivity  extends BaseActivity {
+public class DefaultActivity  extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

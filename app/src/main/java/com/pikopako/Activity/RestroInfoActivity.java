@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class RestroInfoActivity extends BaseActivity implements View.OnClickListener{
+public class RestroInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

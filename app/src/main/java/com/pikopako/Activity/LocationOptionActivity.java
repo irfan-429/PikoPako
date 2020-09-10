@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 
 
 
-public class LocationOptionActivity extends BaseActivity {
+public class LocationOptionActivity extends AppCompatActivity {
 
     @BindView(R.id.view_signin)
     LinearLayout view_signin;

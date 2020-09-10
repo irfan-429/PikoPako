@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 
-public class RestroRatingActivity extends BaseActivity implements View.OnClickListener {
+public class RestroRatingActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.recycleview_rating)
     RecyclerView mRecycleview;
 
