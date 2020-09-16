@@ -1,8 +1,8 @@
 # PikoPako
 
 KEYSTORE INFO:
-Alias: key
-Passwords: Warnerbros123
+\nAlias: key
+\nPasswords: Warnerbros123
 Name/Org: SuS-Security GmbH
 State/Province: Germany
 
