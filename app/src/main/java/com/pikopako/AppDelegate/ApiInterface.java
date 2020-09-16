@@ -99,6 +99,9 @@ public interface ApiInterface {
     @POST("restaurant/add_rating")
     Call<JsonObject> addRating(@Header("token") String token,@Body JsonObject jsonObject);
 
+    @POST("order/paypal_payment")
+    Call<JsonObject> apiPayPalPayment(@Header("token") String token,@Body JsonObject jsonObject);
+
     @POST("restaurant/skip_rating")
     Call<JsonObject> skip_rating(@Header("token") String token,@Body JsonObject jsonObject);
 

@@ -256,6 +256,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_rest_discount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -279,6 +280,7 @@
                 </LinearLayout>
                 <!---->
                 <LinearLayout
+                    android:id="@+id/layout_rest_totalDiscount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -331,6 +333,7 @@
                     android:background="@color/lighter_gray" />
 
                 <LinearLayout
+                    android:id="@+id/layout_rest_deliveryCharges"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"

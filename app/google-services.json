@@ -21,30 +21,39 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A"
+          "current_key": "AIzaSyBT4snlnb6ONBjDV2GwJT9_f3FcLQJzwV0"
+        },
+        {
+          "current_key": "AIzaSyCUzGOADFLJRI4GLJ5vGkGq-7-3IjBS7zk"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054796245815-m8b65vfsei2k5umukaghlfe464kvsf7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1054796245815:android:63aa6b8cffcc791c",
+        "mobilesdk_app_id": "1:1054796245815:android:0ad46342c8767ee63e88b2",
         "android_client_info": {
-          "package_name": "com.restaurant"
+          "package_name": "com.pikopako.restaurant"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1054796245815-ricm81ofhm5dpbl3b74mhtbfkrqb3m5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pikopako.restaurant",
+            "certificate_hash": "90338d4ddc19fb80d0e8b94d51bba778faf9123f"
+          }
+        },
         {
           "client_id": "1054796245815-m8b65vfsei2k5umukaghlfe464kvsf7l.apps.googleusercontent.com",
           "client_type": 3
@@ -52,19 +61,20 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2PJtE4c9BcEgFBb4Aja4-TyrOQkE0-3A"
+          "current_key": "AIzaSyBT4snlnb6ONBjDV2GwJT9_f3FcLQJzwV0"
+        },
+        {
+          "current_key": "AIzaSyCUzGOADFLJRI4GLJ5vGkGq-7-3IjBS7zk"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054796245815-m8b65vfsei2k5umukaghlfe464kvsf7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

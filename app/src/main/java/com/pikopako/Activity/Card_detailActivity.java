@@ -424,6 +424,7 @@ public class Card_detailActivity extends AppCompatActivity implements View.OnCli
 //                            BaseApplication.getInstance().getSession().setSimplifiedCartData("");
 
                             startActivity(intent);
+                            Toast.makeText(Card_detailActivity.this, R.string.str_order_successfully, Toast.LENGTH_SHORT).show();
                             finish();
 
                         } else {

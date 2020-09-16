@@ -121,51 +121,51 @@
 
             </com.pikopako.AppUtill.CustomTextInputLayout>
 
-            <com.pikopako.AppUtill.CustomTextInputLayout style="@style/TextInputLayoutStyle">
+<!--            <com.pikopako.AppUtill.CustomTextInputLayout style="@style/TextInputLayoutStyle">-->
 
-                <com.pikopako.AppUtill.CustomEditTextBold
-                    android:id="@+id/ed_landmark"
-                    style="@style/EditTextStyle"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"
-                    android:inputType="textNoSuggestions"
-                    android:ems="10"
-                    android:maxLines="1"
-                    android:hint="@string/landmark"
-                    android:imeOptions="actionDone"
-                    android:paddingRight="10dp" />
+<!--                <com.pikopako.AppUtill.CustomEditTextBold-->
+<!--                    android:id="@+id/ed_landmark"-->
+<!--                    style="@style/EditTextStyle"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:inputType="textNoSuggestions"-->
+<!--                    android:ems="10"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:hint="@string/landmark"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:paddingRight="10dp" />-->
 
-            </com.pikopako.AppUtill.CustomTextInputLayout>
-
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal"
-                android:padding="10dp">
+<!--            </com.pikopako.AppUtill.CustomTextInputLayout>-->
 
 
-                <RadioButton
-                    android:id="@+id/radiobutton_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/home" />
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radioGroup"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="10dp">-->
 
-                <RadioButton
-                    android:id="@+id/radioButton_work"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:text="@string/work" />
 
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radiobutton_home"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:checked="true"-->
+<!--                    android:text="@string/home" />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioButton_work"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="@string/work" />-->
+
+<!--            </RadioGroup>-->
 
             <Button
                 android:id="@+id/btnsaveandproceed"

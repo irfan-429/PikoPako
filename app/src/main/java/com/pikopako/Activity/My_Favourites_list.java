@@ -86,8 +86,6 @@ public class My_Favourites_list extends AppCompatActivity {
       //  Log.e("food_id",""+id);
 
         Call<JsonObject> call = BaseApplication.getInstance().getApiClient().getFavouriteFood(BaseApplication.getInstance().getSession().getToken(),jsonObject);
-
-
         new NetworkController().post(this, call, new NetworkController.APIHandler() {
             @Override
             public void Success(Object jsonObject) {

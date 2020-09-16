@@ -79,6 +79,13 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 
     @BindView(R.id.login_lyt)
     LinearLayout login_lyt;
+    @BindView(R.id.layout_rest_discount)
+    LinearLayout restDiscount_lyt;
+    @BindView(R.id.layout_rest_totalDiscount)
+    LinearLayout totalDiscount_lyt;
+    @BindView(R.id.layout_rest_deliveryCharges)
+    LinearLayout deliveryCharges_lyt;
+
 
     @BindView(R.id.layout_applyCoupon)
     LinearLayout layout_applyCoupon;
@@ -281,7 +288,7 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 //       }
 
         String deliveryTime = BaseApplication.getInstance().getSession().getDeliveryTime();
-        Log.e(TAG, "deliveryTime: "+ deliveryTime );
+        Log.e(TAG, "deliveryTime: " + deliveryTime);
         ed_timepicker.setText(addMinutesInDate(deliveryTime)); // show time by adding x min in it
     }
 
@@ -566,8 +573,15 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
             toPay = (itemTotal + toppings_price + deleivery_charge) - (restroDiscount + couponDiscount);
 
             Log.e(TAG, "toPay" + toPay);
-            txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
-            txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+            if (restroDiscount == 0.0)
+                restDiscount_lyt.setVisibility(View.GONE);
+            else
+                txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
+
+            if ((restroDiscount + couponDiscount) == 0.0)
+                totalDiscount_lyt.setVisibility(View.GONE);
+            else txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+
             txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", itemTotal + toppings_price));
             txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPay));
             txt_discountkey.setText(getString(R.string.you_have_saved) + " " + "€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount) + " " + getResources().getString(R.string.on_this_bill));
@@ -680,13 +694,21 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
     public void updateText(float Total_price, float productDiscount) {
         Log.e(TAG, "updateText: total_price " + Total_price);
         String fff = txt_discount.getText().toString();
+        Log.e(TAG, "diss fff: " + fff);
+        if (fff.equals("0") || fff.isEmpty()) fff = "€0";
         String[] diss = fff.split("\\€");
         Log.e(TAG, "diss length: " + diss[1]);
         float remaningDis = Float.parseFloat(diss[1]) - productDiscount;
         txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price));
-        txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
-        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
-        Log.e(TAG, "product disCount : " + productDiscount);
+
+        if ((remaningDis - couponDiscount) == 0.0)
+            restDiscount_lyt.setVisibility(View.GONE);
+        else
+            txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
+
+        if (remaningDis == 0.0)
+            totalDiscount_lyt.setVisibility(View.GONE);
+        else txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
 
         txt_toPay.setText("€" + String.format("%.2f", Total_price + deleivery_charge - remaningDis));
         txt_discountkey.setText(getString(R.string.you_have_saved) + " " + " €" + String.format(Locale.ENGLISH, "%.2f", remaningDis) + " " + getResources().getString(R.string.on_this_bill));
@@ -836,6 +858,7 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 
                     String fffs = txt_discount.getText().toString();
                     String toppaayy = txt_toPay.getText().toString();
+                    if (fffs.equals("0")|| fffs.isEmpty()) fffs = "€0";
                     String[] disss = fffs.split("\\€");
                     String[] sss = toppaayy.split("\\€");
 
@@ -869,6 +892,7 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 
                     String fffs = txt_discount.getText().toString();
                     String toppaayy = txt_toPay.getText().toString();
+                    if (fffs.equals("0")|| fffs.isEmpty()) fffs = "€0";
                     String[] disss = fffs.split("\\€");
                     String[] sss = toppaayy.split("\\€");
 
@@ -920,6 +944,7 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 
                 String fffss = txt_discount.getText().toString();
                 String toppaayys = txt_toPay.getText().toString();
+                if (fffss.equals("0")|| fffss.isEmpty()) fffss = "€0";
                 String[] disss = fffss.split("\\€");
                 String[] sss = toppaayys.split("\\€");
 
@@ -1148,6 +1173,7 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
 
                     String fff = txt_discount.getText().toString();
                     String toppaayy = txt_toPay.getText().toString();
+                    if (fff.equals("0")|| fff.isEmpty()) fff = "€0";
                     String[] diss = fff.split("\\€");
                     String[] sss = toppaayy.split("\\€");
 
@@ -1195,11 +1221,18 @@ public class ViewCartActivity extends AppCompatActivity implements View.OnClickL
                 txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
 
                 String fff = txt_toPay.getText().toString();
+                if (fff.equals("0")|| fff.isEmpty()) fff = "€0";
                 String[] diss = fff.split("\\€");
                 float current_toPay = Float.parseFloat(diss[1]);
 
 
+                Log.e(TAG, "=3 " + deleivery_charge);
+
+//                if (deleivery_charge == 0.0)
+//                    deliveryCharges_lyt.setVisibility(View.GONE);
+//                else
                 txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
+
 
                 try {
 

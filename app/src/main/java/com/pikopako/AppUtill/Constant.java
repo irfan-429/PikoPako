@@ -35,7 +35,7 @@ public class Constant {
     public static final String POS_PRIVACY_POLICY = "POS_PRIVACY_POLICY";
     public static final String POS_CONTACT_US = "POS_CONTACT_US";
     public static final String POS_LOGOUT = "POS_LOGOUT ";
-    public static final String BASE_URL = "http://pikopako.cellyclouds.com/api/customer/";
+    public static final String BASE_URL = "https://pikopako.de/api/customer/";
     public final static int requestcodeForPermission = 11;
     public static final String ADD_ERR = "Cant retrieve address";
     public static String GEOCODER_API_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";

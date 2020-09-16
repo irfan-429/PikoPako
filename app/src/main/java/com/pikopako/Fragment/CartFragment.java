@@ -86,6 +86,13 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.login_lyt)
     LinearLayout login_lyt;
+    @BindView(R.id.layout_rest_discount)
+    LinearLayout restDiscount_lyt;
+    @BindView(R.id.layout_rest_totalDiscount)
+    LinearLayout totalDiscount_lyt;
+    @BindView(R.id.layout_rest_deliveryCharges)
+    LinearLayout deliveryCharges_lyt;
+
 
     @BindView(R.id.layout_applyCoupon)
     LinearLayout layout_applyCoupon;
@@ -471,7 +478,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     deleivery_charge = (float) deliveryData.getDouble("deleivery_charge");
 
 //                    txt_deleivery_address.setText(location);
-                    txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                    txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
                     txt_deleiveryCharges.setText("€" + String.format(Locale.ENGLISH, "%.2f", deleivery_charge));
 
                 }
@@ -481,8 +488,17 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 toPay = (itemTotal + toppings_price + deleivery_charge) - (restroDiscount + couponDiscount);
 
                 Log.e(TAG, "toPay" + toPay);
-                txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
-                txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+
+                if (restroDiscount == 0.0)
+                    restDiscount_lyt.setVisibility(View.GONE);
+                else
+                    txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount));
+
+                if ((restroDiscount + couponDiscount) == 0.0)
+                    totalDiscount_lyt.setVisibility(View.GONE);
+                else
+                    txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", restroDiscount + couponDiscount));
+
                 txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", itemTotal + toppings_price));
                 txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", toPay));
 
@@ -596,13 +612,25 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         Log.e(TAG, "updateText: total_price " + Total_price);
 
         String fff = txt_discount.getText().toString();
+        Log.e(TAG, "fff: " + fff);
+
+        if (fff.equals("0")|| fff.isEmpty()) fff = "€0";  //if only 0 then add €
         String[] diss = fff.split("\\€");
         Log.e(TAG, "diss length: " + diss[1]);
         float remaningDis = Float.parseFloat(diss[1]) - productDiscount;
-
         txt_itemTotal.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price));
-        txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
-        txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
+
+        if ((remaningDis - couponDiscount) == 0.0)
+            restDiscount_lyt.setVisibility(View.GONE);
+        else
+            txt_restro_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis - couponDiscount));
+
+        Log.e(TAG, "remaningDis: " + remaningDis);
+        if (remaningDis == 0.0)
+            totalDiscount_lyt.setVisibility(View.GONE);
+        else txt_discount.setText("€" + String.format(Locale.ENGLISH, "%.2f", remaningDis));
+
+
         Log.e(TAG, "product disCount : " + productDiscount);
 
         txt_toPay.setText("€" + String.format(Locale.ENGLISH, "%.2f", Total_price + deleivery_charge - remaningDis));
@@ -718,94 +746,96 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 //INTERNET DATE
 //                if (device_date1.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
-                    String fff = txt_itemTotal.getText().toString();
-                    String[] diss = fff.split("\\€");
+                String fff = txt_itemTotal.getText().toString();
+                String[] diss = fff.split("\\€");
 
-                    float t = Float.parseFloat(diss[1]);
-                    //     if (btn_proceed.getText() == "MAKE PAYMENT") {
+                float t = Float.parseFloat(diss[1]);
+                //     if (btn_proceed.getText() == "MAKE PAYMENT") {
 
-                    Log.e(TAG, "onClick: " + txt_deleivery_address.getText().toString());
-                    if (txt_deleivery_address.getText().toString().trim().isEmpty() || txt_deleivery_address.getText().toString().equalsIgnoreCase(getResources().getString(R.string.address_is_not_set))) {
-                        UiHelper.showToast(getActivity(), getString(R.string.pls_enter_shipping_address));
-                    } else if (t < minimum_order_amount) {
-                        UiHelper.showToast(getActivity(), getString(R.string.your_order_amount_is_less));
-                    } else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
-                        Intent intent1 = new Intent(getActivity(), CheckoutActivity.class);
+                Log.e(TAG, "onClick: " + txt_deleivery_address.getText().toString());
+                if (txt_deleivery_address.getText().toString().trim().isEmpty() || txt_deleivery_address.getText().toString().equalsIgnoreCase(getResources().getString(R.string.address_is_not_set))) {
+                    UiHelper.showToast(getActivity(), getString(R.string.pls_enter_shipping_address));
+                } else if (t < minimum_order_amount) {
+                    UiHelper.showToast(getActivity(), getString(R.string.your_order_amount_is_less));
+                } else if (!BaseApplication.getInstance().getSession().isLoggedIn()) {
+                    Intent intent1 = new Intent(getActivity(), CheckoutActivity.class);
 
-                        String fffs = txt_discount.getText().toString();
-                        Log.e(TAG, "onClick TextTOPAY: " + txt_toPay.getText());
-                        Log.e(TAG, "onClick TextTODiscount: " + txt_discount.getText());
-                        String toppaayy = txt_toPay.getText().toString();
-                        String[] disss = fffs.split("€");
-                        String[] sss = toppaayy.split("€");
+                    String fffs = txt_discount.getText().toString();
+                    Log.e(TAG, "onClick TextTOPAY: " + txt_toPay.getText());
+                    Log.e(TAG, "onClick TextTODiscount: " + txt_discount.getText());
+                    String toppaayy = txt_toPay.getText().toString();
+                    String[] disss = fffs.split("€");
+                    String[] sss = toppaayy.split("€");
 
-                        Log.e(TAG, "onClick: " + Float.parseFloat(sss[1]));
-                        //  try{
-                        intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
-                        intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
+                    Log.e(TAG, "onClick: " + Float.parseFloat(sss[1]));
+                    //  try{
+                    intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
+                    intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
 
 
-                        intent1.putExtra("delivery_charge", deleivery_charge);
-                        intent1.putExtra("is_promo_code_applied", isPromoApplied);
-                        intent1.putExtra("house_number", houseno);
-                        intent1.putExtra("landmark", landmark);
-                        intent1.putExtra("address", location);
-                        intent1.putExtra("latitude", latitude);
-                        intent1.putExtra("longitude", longitude);
-                        intent1.putExtra("restaurant_id", restaurant_id);
-                        intent1.putExtra("address_title", address_title);
-                        intent1.putExtra("coordinate_id", coordinate_id);
-                        intent1.putExtra("promo_code_id", promo_code_id);
-                        intent1.putExtra("promo_code_price", couponDiscount);
-                        intent1.putExtra("restro_image", restro_image);
-                        intent1.putExtra("restro_location", restro_location);
-                        intent1.putExtra("restro_name", restro_name);
-                        intent1.putExtra("restro_status", restro_status);
-                        intent1.putExtra("remarks", edt_remarks.getText().toString());
-                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
-                        intent1.putExtra("cartfragment", false);
+                    intent1.putExtra("delivery_charge", deleivery_charge);
+                    intent1.putExtra("is_promo_code_applied", isPromoApplied);
+                    intent1.putExtra("house_number", houseno);
+                    intent1.putExtra("landmark", landmark);
+                    intent1.putExtra("address", location);
+                    intent1.putExtra("latitude", latitude);
+                    intent1.putExtra("longitude", longitude);
+                    intent1.putExtra("restaurant_id", restaurant_id);
+                    intent1.putExtra("address_title", address_title);
+                    intent1.putExtra("coordinate_id", coordinate_id);
+                    intent1.putExtra("promo_code_id", promo_code_id);
+                    intent1.putExtra("promo_code_price", couponDiscount);
+                    intent1.putExtra("restro_image", restro_image);
+                    intent1.putExtra("restro_location", restro_location);
+                    intent1.putExtra("restro_name", restro_name);
+                    intent1.putExtra("restro_status", restro_status);
+                    intent1.putExtra("remarks", edt_remarks.getText().toString());
+                    intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
+                    intent1.putExtra("cartfragment", false);
 //                    }catch (ArrayIndexOutOfBoundsException e){
 //                        e.printStackTrace();
 //                    }
 
 
-                        startActivity(intent1);
-                    } else {
+                    startActivity(intent1);
+                } else {
 
-                        Intent intent1 = new Intent(getActivity(), Make_payment.class);
+                    Intent intent1 = new Intent(getActivity(), Make_payment.class);
+
+                    String fffs = txt_discount.getText().toString();
+                    String toppaayy = txt_toPay.getText().toString();
+                    Log.e(TAG, "fffs: "+fffs );
+                    if (fffs.equals("0")|| fffs.isEmpty()) fffs = "€0";  //if only 0 then add €
+
+                    String[]  disss = fffs.split("\\€");
+                    String[] sss = toppaayy.split("\\€");
 
 
-                        String fffs = txt_discount.getText().toString();
-                        String toppaayy = txt_toPay.getText().toString();
-                        String[] disss = fffs.split("\\€");
-                        String[] sss = toppaayy.split("\\€");
+                    intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
+                    intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
+                    intent1.putExtra("delivery_charge", deleivery_charge);
+                    intent1.putExtra("is_promo_code_applied", isPromoApplied);
+                    intent1.putExtra("house_number", houseno);
+                    intent1.putExtra("landmark", landmark);
+                    intent1.putExtra("address", location);
+                    intent1.putExtra("latitude", latitude);
+                    intent1.putExtra("longitude", longitude);
+                    intent1.putExtra("restaurant_id", restaurant_id);
+                    intent1.putExtra("address_title", address_title);
+                    intent1.putExtra("coordinate_id", coordinate_id);
+                    intent1.putExtra("promo_code_id", promo_code_id);
+                    intent1.putExtra("promo_code_price", couponDiscount);
 
+                    intent1.putExtra("restro_image", restro_image);
+                    intent1.putExtra("restro_location", restro_location);
+                    intent1.putExtra("restro_name", restro_name);
+                    intent1.putExtra("restro_status", restro_status);
+                    intent1.putExtra("remarks", edt_remarks.getText().toString());
+                    intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
+                    Log.e(TAG, "onClick: " + address + latitude + longitude);
 
-                        intent1.putExtra("paid_amount", Float.parseFloat(sss[1]));
-                        intent1.putExtra("discount_amount", Float.parseFloat(disss[1]));
-                        intent1.putExtra("delivery_charge", deleivery_charge);
-                        intent1.putExtra("is_promo_code_applied", isPromoApplied);
-                        intent1.putExtra("house_number", houseno);
-                        intent1.putExtra("landmark", landmark);
-                        intent1.putExtra("address", location);
-                        intent1.putExtra("latitude", latitude);
-                        intent1.putExtra("longitude", longitude);
-                        intent1.putExtra("restaurant_id", restaurant_id);
-                        intent1.putExtra("address_title", address_title);
-                        intent1.putExtra("coordinate_id", coordinate_id);
-                        intent1.putExtra("promo_code_id", promo_code_id);
-                        intent1.putExtra("promo_code_price", couponDiscount);
-
-                        intent1.putExtra("restro_image", restro_image);
-                        intent1.putExtra("restro_location", restro_location);
-                        intent1.putExtra("restro_name", restro_name);
-                        intent1.putExtra("restro_status", restro_status);
-                        intent1.putExtra("remarks", edt_remarks.getText().toString());
-                        intent1.putExtra("delivery_time", ed_timepicker.getText().toString());
-                        Log.e(TAG, "onClick: " + address + latitude + longitude);
-
-                        startActivity(intent1);
-                    }
+                    startActivity(intent1);
+                }
 //                } else UiHelper.showToast(getActivity(), getResources().getString(R.string.Please_check_your_time));
 
                 break;
@@ -826,6 +856,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 String fffss = txt_discount.getText().toString();
                 String toppaayys = txt_toPay.getText().toString();
+                if (fffss.equals("0")|| fffss.isEmpty()) fffss = "€0";
                 String[] disss = fffss.split("\\€");
                 String[] sss = toppaayys.split("\\€");
 
@@ -897,20 +928,20 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 //INTERNET DATE
 //                if (device_date.equalsIgnoreCase(BaseApplication.getInstance().getSession().getInternetTime())) {
-                    Log.e(TAG, "equals ");
-                    Calendar mcurrentTime = Calendar.getInstance();
-                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                    int minute = mcurrentTime.get(Calendar.MINUTE);
-                    TimePickerDialog mTimePicker;
-                    mTimePicker = new CustomTimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                Log.e(TAG, "equals ");
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new CustomTimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
-                            callAPiForTime(i, i1);
-                        }
-                    }, hour, minute, true);
+                        callAPiForTime(i, i1);
+                    }
+                }, hour, minute, true);
 
-                    mTimePicker.show();
+                mTimePicker.show();
 //
 //                mTimePicker = new TimePickerDialog(ViewCartActivity.this,android.R.style.Theme_Holo_Light_Dialog, new TimePickerDialog.OnTimeSetListener() {
 //                    @Override
@@ -1043,6 +1074,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                     String fff = txt_discount.getText().toString();
                     String toppaayy = txt_toPay.getText().toString();
+                    if (fff.equals("0")|| fff.isEmpty()) fff = "€0";
                     String[] diss = fff.split("\\€");
                     String[] sss = toppaayy.split("\\€");
 
@@ -1081,9 +1113,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 deleivery_charge = data.getFloatExtra("deleivery_charge", 0);
                 minimum_order_amount = data.getFloatExtra("minimum_order_amount", 0);
 //                txt_deleivery_address.setText(location);
-                txt_deleivery_address.setText(houseno+ " "+ landmark+" "+ location);
+                txt_deleivery_address.setText(houseno + " " + landmark + " " + location);
 
                 String fff = txt_toPay.getText().toString();
+                if (fff.equals("0")|| fff.isEmpty()) fff = "€0";
                 String[] diss = fff.split("\\€");
                 float current_toPay = Float.parseFloat(diss[1]);
 

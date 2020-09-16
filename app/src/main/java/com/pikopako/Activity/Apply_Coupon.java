@@ -81,6 +81,7 @@ public class Apply_Coupon extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = getIntent();
         String fff = String.valueOf(intent.getStringExtra("price"));
+        if (fff.equals("0") || fff.isEmpty()) fff = "€0";
         String[] diss = fff.split("\\€");
         Log.e("Tag", "diss length: " + diss[1]);
 

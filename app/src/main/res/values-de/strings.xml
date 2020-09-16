@@ -248,7 +248,7 @@
     <string name="customized">ANGEPASST</string>
     <string name="off">Aus</string>
     <string name="general">Allgemeines</string>
-    <string name="checkout_as_guest">Als Gast abmelden</string>
+    <string name="checkout_as_guest">Als Gast Bestellen</string>
     <string name="checkout">Abmelden</string>
     <string name="submit">Abschicken</string>
     <string name="customize">Anpassen</string>
@@ -258,7 +258,7 @@
     <string name="original_ingredients">Original-Zutaten</string>
     <string name="pls_give_some_rating">Bitte vergeben Sie Bewertungssterne</string>
     <string name="skip_rating">Bewertung überspringen</string>
-    <string name="we_sent_you_a_code_to_verify_your_phone_number">Wir haben Ihnen eine E-Mail zur Bestätigung Ihrer E-Mail-Adresse gesendet. Bitte überprüfen Sie Ihren E-Mail-Eingang</string>
+    <string name="we_sent_you_a_code_to_verify_your_phone_number">Sie haben eine Bestätigungsemail erhalten. Bitte schauen Sie auch im Spam Ordner nach. </string>
     <string name="continuee">Fortsetzen</string>
     <string name="backtohome">Zurück zur Startseite</string>
     <string name="resend">Erneut senden</string>
@@ -288,4 +288,10 @@
     <string name="payment_by_card">Stripe</string>
     <string name="enable_location">Aktiviere Standort</string>
     <string name="donated_water_for_africa">Gesamt Wasser für Afrika gespendet:&#160;</string>
+    <string name="dont_hv_acc">Keine Konto?</string>
+    <string name="sign_up">hier registrieren</string>
+    <string name="str_order_successfully">Bestellung war erfolgreich.</string>
+    <string name="str_verify_email_by_otp">Sie haben eine Bestätigungsemail erhalten. Bitte schauen Sie auch im Spam Ordner nach. </string>
+    <string name="str_invalid_otp">Ungültige Sicherheitscode</string>
+    <string name="str_resent_otp">Der Sicherheitscode ist erneut gesendet</string>
 </resources>

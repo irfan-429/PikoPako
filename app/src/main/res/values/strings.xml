@@ -252,7 +252,7 @@
     <string name="original_ingredients">Original Ingredient</string>
     <string name="pls_give_some_rating">Please give some rating stars</string>
     <string name="skip_rating">SKIP RATING</string>
-    <string name="we_sent_you_a_code_to_verify_your_phone_number">We have sent you a email to verify your email id, Please check your mail</string>
+    <string name="we_sent_you_a_code_to_verify_your_phone_number">We have send you an Email for verify your email id, Please check your mail.</string>
     <string name="continuee">Continue</string>
     <string name="backtohome">Back To home page</string>
     <string name="resend">Resend</string>
@@ -278,4 +278,12 @@
     <string name="payment_by_card">Stripe</string>
     <string name="enable_location">Enable Location</string>
     <string name="donated_water_for_africa">Total Donated Water For Africa:&#160;</string>
+    <string name="dont_hv_acc">Don\'t have an Account</string>
+    <string name="sign_up">Sign up</string>
+    <string name="str_order_successfully">Order successfully.</string>
+    <string name="str_verify_email_by_otp">Please verify you email by enter OTP.</string>
+    <string name="str_invalid_otp">Invalid OTP</string>
+    <string name="str_resent_otp">OTP Resent successfully.</string>
+
+
 </resources>

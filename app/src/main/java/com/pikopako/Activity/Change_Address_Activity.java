@@ -77,20 +77,20 @@ public class Change_Address_Activity extends AppCompatActivity implements View.O
     @BindView(R.id.ed_flatno)
     CustomEditTextBold ed_flatno;
 
-    @BindView(R.id.ed_landmark)
-    CustomEditTextBold ed_landmark;
+//    @BindView(R.id.ed_landmark)
+//    CustomEditTextBold ed_landmark;
 
     @BindView(R.id.btnsaveandproceed)
     Button btnsaveandproceed;
 
-    @BindView(R.id.radiobutton_home)
-    RadioButton radioButton_home;
-
-    @BindView(R.id.radioGroup)
-    RadioGroup radioGroup;
-
-    @BindView(R.id.radioButton_work)
-    RadioButton radioButton_work;
+//    @BindView(R.id.radiobutton_home)
+//    RadioButton radioButton_home;
+//
+//    @BindView(R.id.radioGroup)
+//    RadioGroup radioGroup;
+//
+//    @BindView(R.id.radioButton_work)
+//    RadioButton radioButton_work;
 
     private Double latitude;
     private Double longitude;
@@ -151,14 +151,14 @@ public class Change_Address_Activity extends AppCompatActivity implements View.O
         if (BaseApplication.getInstance().getSession().getAddress() != null && !BaseApplication.getInstance().getSession().getAddress().trim().isEmpty()) {
             try {
                 JSONObject dd = new JSONObject(BaseApplication.getInstance().getSession().getAddress());
-                ed_landmark.setText(dd.getString("landmark"));
+//                ed_landmark.setText(dd.getString("landmark"));
                 ed_flatno.setText(dd.getString("houseno"));
-                String tit = dd.getString("address_title");
 
-                if (tit.equalsIgnoreCase("Home"))
-                    radioButton_home.setChecked(true);
-                else
-                    radioButton_work.setChecked(true);
+//                String tit = dd.getString("address_title");
+//                if (tit.equalsIgnoreCase("Home"))
+//                    radioButton_home.setChecked(true);
+//                else
+//                    radioButton_work.setChecked(true);
 
                     mEditLocation.setText(dd.getString("location"));
 
@@ -349,19 +349,21 @@ public class Change_Address_Activity extends AppCompatActivity implements View.O
         boolean valid = true;
         String location = mEditLocation.getText().toString().trim();
         String house = ed_flatno.getText().toString().trim();
-        String landmark = ed_landmark.getText().toString().trim();
+//        String landmark = ed_landmark.getText().toString().trim();
 
         if (location.isEmpty()) {
 //            mEditLocation.requestFocus()
             mEditLocation.setError(getString(R.string.valid_msg_location_required));
             valid = false;
-        } else if (house.isEmpty()) {
-            ed_flatno.setError(getString(R.string.valid_msg_required));
-            valid = false;
-        } else if (landmark.isEmpty()) {
-            ed_landmark.setError(getString(R.string.valid_msg_required));
-            valid = false;
-        } else if (location.length() < 3) {
+        }
+//        else if (house.isEmpty()) {
+//            ed_flatno.setError(getString(R.string.valid_msg_required));
+//            valid = false;
+//        } else if (landmark.isEmpty()) {
+//            ed_landmark.setError(getString(R.string.valid_msg_required));
+//            valid = false;
+//        }
+        else if (location.length() < 3) {
             mEditLocation.setError(getString(R.string.valid_msg_location_length_required));
             valid = false;
         }
@@ -527,17 +529,18 @@ public class Change_Address_Activity extends AppCompatActivity implements View.O
                             Intent intent1 = new Intent();
                             intent1.putExtra("location", mEditLocation.getText().toString());
                             intent1.putExtra("houseno", ed_flatno.getText().toString());
-                            intent1.putExtra("landmark", ed_landmark.getText().toString());
+                            intent1.putExtra("landmark", "");
                             intent1.putExtra("longitude", longitude);
                             intent1.putExtra("latitude", latitude);
                             intent1.putExtra("deleivery_charge", deleivery_charge);
                             intent1.putExtra("minimum_order_amount", minimum_order_amount);
-                            if (radioButton_home.isChecked())
-                                home = String.valueOf(radioButton_home.getText());
-                            else
-                                home = String.valueOf(radioButton_work.getText());
 
-                            intent1.putExtra("address_title", home);
+//                            if (radioButton_home.isChecked())
+//                                home = String.valueOf(radioButton_home.getText());
+//                            else
+//                                home = String.valueOf(radioButton_work.getText());
+
+                            intent1.putExtra("address_title", "Home");
 
                             Log.e("intent data", "onClick: " + intent1.toString());
                             setResult(Activity.RESULT_OK, intent1);

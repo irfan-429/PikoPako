@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         else language = "English";
 
         setActionBarTitle();
+        Toast.makeText(this, R.string.str_verify_email_by_otp, Toast.LENGTH_SHORT).show();
         edt_otp = findViewById(R.id.edt_otp);
 
 
@@ -359,7 +361,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     try {
                         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
                         if (jsonObject1.getString("status").equalsIgnoreCase(Constant.SUCCESS)) {
-
+                            Toast.makeText(OtpVerificationActivity.this, R.string.str_resent_otp, Toast.LENGTH_SHORT).show();
                             //     UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
 
                         } else {
@@ -446,7 +448,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
 
                         } else {
-                            UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
+                            Toast.makeText(OtpVerificationActivity.this, R.string.str_invalid_otp, Toast.LENGTH_SHORT).show();
+//                            UiHelper.showToast(OtpVerificationActivity.this, jsonObject1.getString("message"));
                         }
 
                     } catch (JSONException e) {
