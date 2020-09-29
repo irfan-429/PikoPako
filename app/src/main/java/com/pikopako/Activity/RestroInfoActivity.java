@@ -35,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class RestroInfoActivity extends AppCompatActivity implements View.OnClickListener{
+public class RestroInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -73,15 +73,16 @@ public class RestroInfoActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.tvTitle)
     CustomTextViewBold tvTitle;
 
-    ProductListModel productListModel=new ProductListModel();
+    ProductListModel productListModel = new ProductListModel();
     ProgressDialog progressDialog;
 
 
-    public String restro_image="";
-    public String restro_name="";
-    public String restro_location="";
-    public String restro_status="";
-    public String restro_id="";
+    public String restro_image = "";
+    public String restro_name = "";
+    public String restro_location = "";
+    public String restro_status = "";
+    public String restro_id = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,70 +94,71 @@ public class RestroInfoActivity extends AppCompatActivity implements View.OnClic
         tabLayout.setupWithViewPager(viewPager);
 
 
-
     }
 
     private void initialize() {
 
 
-        Intent intent=this.getIntent();
-        Bundle bundle=intent.getExtras();
-        ArrayList<ProductListModel> arrayList= (ArrayList<ProductListModel>) bundle.getSerializable("data");
-        String position= bundle.getString("position");
-        Log.e("tag"," Position data:- "+position);
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        ArrayList<ProductListModel> arrayList = (ArrayList<ProductListModel>) bundle.getSerializable("data");
+        String position = bundle.getString("position");
+        Log.e("tag", " Position data:- " + position);
 
-         productListModel = arrayList.get(Integer.parseInt(position));
+        productListModel = arrayList.get(Integer.parseInt(position));
 
-        if (productListModel.Pic_url!=null)
+        if (productListModel.Pic_url != null)
             Glide.with(this).load(productListModel.Pic_url).centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).priority(Priority.IMMEDIATE).dontAnimate().placeholder(this.getResources().getDrawable(R.drawable.profileicon)).into(cafe_image);
 
-            tvTitle.setText(productListModel.cafe_name);
-            Txt_cafename.setText(productListModel.cafe_name);
-            txt_address.setText(productListModel.cafe_address);
-            txt_status.setText(productListModel.cafe_status);
-        if (productListModel.cafe_status.equalsIgnoreCase(getResources().getString(R.string.closed))){
-           txt_status.setTextColor(getResources().getColor(R.color.red));
-        }
+        tvTitle.setText(productListModel.cafe_name);
+        Txt_cafename.setText(productListModel.cafe_name);
+        txt_address.setText(productListModel.cafe_address);
+//            txt_status.setText(productListModel.cafe_status);
+        if (productListModel.cafe_status.equalsIgnoreCase(getResources().getString(R.string.closed))) {
+            txt_status.setTextColor(getResources().getColor(R.color.red));
+            txt_status.setText(getResources().getString(R.string.closed));
+        } else txt_status.setText(getResources().getString(R.string.open));
 
-        txt_rating.setText(productListModel.cafe_rating+" ");
+
+        txt_rating.setText(productListModel.cafe_rating + " ");
 
 
-            //To store minimum order amount
-            BaseApplication.getInstance().getSession().setminimum_order_amount(productListModel.cafe_minorder);
+        //To store minimum order amount
+        BaseApplication.getInstance().getSession().setminimum_order_amount(productListModel.cafe_minorder);
 
-            txt_minorderprice.setText("€"+productListModel.cafe_minorder);
-            txt_minordertime.setText(productListModel.cafe_deleiverytime+" "+getString(R.string.minutes));
-        Log.e("tag", "initialize: "+productListModel.cafe_deleiverytime+getString(R.string.minutes) );
+        txt_minorderprice.setText("€" + productListModel.cafe_minorder);
+        txt_minordertime.setText(productListModel.cafe_deleiverytime + " " + getString(R.string.minutes));
+        Log.e("tag", "initialize: " + productListModel.cafe_deleiverytime + getString(R.string.minutes));
 
-        Log.e("TAG", "Total Reviews: "+productListModel.total_reviews );
-             txt_totalrating.setText(productListModel.total_reviews+" ");
+        Log.e("TAG", "Total Reviews: " + productListModel.total_reviews);
+        txt_totalrating.setText(productListModel.total_reviews + " ");
 
-             restro_image=productListModel.Pic_url;
-             restro_name=productListModel.cafe_name;
-             restro_location=productListModel.cafe_address;
-             restro_status=productListModel.cafe_status;
-             restro_id=productListModel.cafe_id;
+        restro_image = productListModel.Pic_url;
+        restro_name = productListModel.cafe_name;
+        restro_location = productListModel.cafe_address;
+        restro_status = productListModel.cafe_status;
+        restro_id = productListModel.cafe_id;
 
         BaseApplication.getInstance().getSession().setCoordinateId(productListModel.coordinate_id);
         BaseApplication.getInstance().getSession().setRestroId(productListModel.cafe_id);
-            Log.e("data to set"," "+productListModel.Pic_url +" name"+productListModel.cafe_name);
+        Log.e("data to set", " " + productListModel.Pic_url + " name" + productListModel.cafe_name);
     }
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        RestroDetailItemFragment restroDetailItemFragment=new RestroDetailItemFragment(productListModel.cafe_id,productListModel.coordinate_id);
+        RestroDetailItemFragment restroDetailItemFragment = new RestroDetailItemFragment(productListModel.cafe_id, productListModel.coordinate_id);
 
-        Bundle bundle=new Bundle();
-        bundle.putString("restro_image",restro_image);
-        bundle.putString("restro_name",restro_name);
-        bundle.putString("restro_location",restro_location);
-        bundle.putString("restro_status",restro_status);
-        bundle.putString("restro_id",restro_id);
+        Bundle bundle = new Bundle();
+        bundle.putString("restro_image", restro_image);
+        bundle.putString("restro_name", restro_name);
+        bundle.putString("restro_location", restro_location);
+        bundle.putString("restro_status", restro_status);
+        bundle.putString("restro_id", restro_id);
         restroDetailItemFragment.setArguments(bundle);
 
-        adapter.addFragment(restroDetailItemFragment,getString(R.string.restaurant_menu));
-        adapter.addFragment(new RestroInfoServices(productListModel.cafe_id,productListModel.coordinate_id),getString(R.string.restaurant_detail));
+        adapter.addFragment(restroDetailItemFragment, getString(R.string.restaurant_menu));
+        adapter.addFragment(new RestroInfoServices(productListModel.cafe_id, productListModel.coordinate_id), getString(R.string.restaurant_detail));
         viewPager.setAdapter(adapter);
     }
 
@@ -167,8 +169,8 @@ public class RestroInfoActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-    //    mTitle.setText("  ");
-     //   btn_menu.setOnClickListener(this);
+        //    mTitle.setText("  ");
+        //   btn_menu.setOnClickListener(this);
 
     }
 
@@ -200,9 +202,10 @@ public class RestroInfoActivity extends AppCompatActivity implements View.OnClic
             return mFragmentTitleList.get(position);
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);

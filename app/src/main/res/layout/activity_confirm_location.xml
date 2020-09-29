@@ -128,16 +128,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
-                <com.pikopako.AppUtill.CustomTextViewBold
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:textSize="10sp"
-                    android:layout_marginTop="3dp"
-                    android:textColor="@color/darker_gray"
-                    android:text="@string/for_faster_checkout"
-                    android:layout_height="wrap_content" />
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -158,14 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
-                <com.pikopako.AppUtill.CustomTextViewBold
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:textSize="10sp"
-                    android:layout_marginTop="3dp"
-                    android:textColor="@color/darker_gray"
-                    android:text="@string/to_quick_see_resto"
-                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
 

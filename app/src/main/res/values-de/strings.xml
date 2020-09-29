@@ -25,7 +25,7 @@
     <string name="string_mailid">E-Mail-Adresse</string>
     <string name="already_have_an_account">Haben Sie bereits ein Konto ?</string>
 
-    <string name="valid_msg_email">Geben Sie eine gültige E-Mail-Adresse ein </string>
+    <string name="valid_msg_email">Geben Sie eine gültige E-Mail Adresse ein </string>
 
 
 
@@ -53,10 +53,10 @@
     <string name="POS_ACCOUNT">Konto</string>
     <string name="POS_TOTAL_CART">Warenkorb</string>
     <string name="POS_EXPLORE">Erkunden</string>
-    <string name="POS_LOGOUT">Abmelden</string>
+    <string name="POS_LOGOUT">Anmelden</string>
     <string name="POS_LOGIN">Anmeldung</string>
     <string name="add_more_details">Fügen Sie weitere Details hinzu</string>
-    <string name="confirm_location">Bestätigen Sie den Standort</string>
+    <string name="confirm_location">Ihren Standort</string>
     <string name="string_address">Adresse eingeben</string>
 
 
@@ -82,7 +82,7 @@
     <string name="cancel">Abbrechen</string>
 
     <string name="update">Aktualisieren</string>
-    <string name="emailaddress">E-Mail-Addresse</string>
+    <string name="emailaddress">E-Mail Addresse</string>
     <string name="phonenumber">Telefonnummer</string>
     <string name="name">Vollständiger Name</string>
     <string name="string_search_location">Standort suchen</string>
@@ -118,10 +118,9 @@
     <string name="online_food_delivery">Online-Lieferung von Lebensmitteln</string>
 
     //set Deleivery location
-    <string name="string_order_from_a_wide_range">Bestellung aus einer breiten</string>
-    <string name="string_order_from_a_wide_restaurants">Auswahl an Restaurants</string>
+    <string name="string_order_from_a_wide_range">Wählen Sie eines der vielen Restaurants</string>
     <string name="string_ready_to_see_top_restrorents">Top-Restaurants <anzeigen></anzeigen></string>
-    <string name="string_set_delivery_location">Legen Sie den Lieferort fest</string>
+    <string name="string_set_delivery_location">Ihren</string>
     <string name="string_create_an_account">Ein Konto erstellen</string>
     <string name="string_cotact_number">Geben Sie die Kontaktnummer ein</string>
     <string name="dont_have_account">Haben Sie bereits ein Konto ?</string>
@@ -135,8 +134,8 @@
     <string name="landmark">Wahrzeichen</string>
     <string name="home">Zuhause</string>
     <string name="work">Arbeit</string>
-    <string name="email">Email</string>
-    <string name="contact_number">Kontakt Nummer</string>
+    <string name="email">E-Mail Adresse</string>
+    <string name="contact_number">Telefonnummer</string>
     <string name="subject">Betreff</string>
     <string name="write_your_message_here">Hier Nachrichtentext eingeben</string>
     <string name="order_id">Auftragsnummer</string>
@@ -179,7 +178,7 @@
     <string name="our_deleivery_boy_meet_you_in">Unser Lieferant trifft Sie in</string>
     <string name="details">Details</string>
     <string name="total">Gesamt</string>
-    <string name="rating">Bewertung</string>
+    <string name="rating">Bewertungen</string>
     <string name="write_your_review_here">Schreiben Sie Ihre Bewertung hier</string>
     <string name="submit_review">Bewertung abschicken</string>
     <string name="items_already_in_cart">Artikel bereits im Warenkorb</string>
@@ -202,13 +201,13 @@
     <string name="pls_enter_name">Bitte Name eingeben</string>
     <string name="name_should_3minimum_chrcters">Der Name sollte mindestens 3 Zeichen lang sein</string>
     <string name="name_cannot_exceed">Der Name darf nicht länger als 35 Zeichen sein</string>
-    <string name="pls_enter_email">E-Mail-Adresse eingeben</string>
+    <string name="pls_enter_email">E-Mail Adresse eingeben</string>
     <string name="pls_provide_valid_email">Bitte geben Sie eine gültige E-Mail Adresse an.</string>
     <string name="pls_enter_contact_no">Bitte Telefonnummer eingeben</string>
     <string name="pls_entr_subject">Bitte Betreff eingeben</string>
     <string name="cancel_order">Bestellung Abbrechen</string>
     <string name="order_not_received">Bestellung nicht erhalten</string>
-    <string name="Are_u_sure_to_logout">Möchten Sie sich wirklich abmelden?</string>
+    <string name="Are_u_sure_to_logout">Möchten Sie sich wirklich anmelden?</string>
     <string name="filter">Filter</string>
     <string name="pls_login_first">Bitte zuerst anmelden</string>
     <string name="you_are_not_allowed_toorder">Sie können nicht von einem anderen Restaurant aus bestellen</string>
@@ -249,7 +248,7 @@
     <string name="off">Aus</string>
     <string name="general">Allgemeines</string>
     <string name="checkout_as_guest">Als Gast Bestellen</string>
-    <string name="checkout">Abmelden</string>
+    <string name="checkout">Anmelden</string>
     <string name="submit">Abschicken</string>
     <string name="customize">Anpassen</string>
     <string name="remarks">Anmerkungen (optional)</string>
@@ -294,4 +293,5 @@
     <string name="str_verify_email_by_otp">Sie haben eine Bestätigungsemail erhalten. Bitte schauen Sie auch im Spam Ordner nach. </string>
     <string name="str_invalid_otp">Ungültige Sicherheitscode</string>
     <string name="str_resent_otp">Der Sicherheitscode ist erneut gesendet</string>
+    <string name="pay_using">Bezahlen</string>
 </resources>

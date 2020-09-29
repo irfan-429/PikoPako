@@ -88,7 +88,8 @@ public class Make_payment extends AppCompatActivity {
     //Paypal Configuration Object
     String cart_id;
     private static PayPalConfiguration payPalConfiguration;
-    String PAYPAL_CLIENT_ID = "AWenZtgj2qX5Z2je9ukBJuGNbEhgLvFWDZxsCqQhJ2nqvUUrXptFmMmEEjpW4LYDQbUIRGX23ayzjMhv";
+    String PAYPAL_CLIENT_ID = "AWenZtgj2qX5Z2je9ukBJuGNbEhgLvFWDZxsCqQhJ2nqvUUrXptFmMmEEjpW4LYDQbUIRGX23ayzjMhv"; //production
+//    String PAYPAL_CLIENT_ID = "ASaMWNhlWwZFvDFu38hetX3tDKftXAN1JGeuT1iQvlIRO_SkHJ2gmP04YPcYqfghQqBRiUTMtvc0D71l"; //sandbox
 
     private RadioButton radioButton;
 
@@ -368,7 +369,7 @@ public class Make_payment extends AppCompatActivity {
         paymentAmount = getIntent().getExtras().getString("paid_amount");
 
         //Creating a paypalpayment
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(paymentAmount), "USD", "Pika Pako food",
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(paymentAmount), "EUR", "Pika Pako food",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         //Creating Paypal Payment activity intent

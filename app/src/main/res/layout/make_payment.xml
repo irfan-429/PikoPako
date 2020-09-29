@@ -129,7 +129,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/login_drawable"
-                android:text="Pay USING CASH"
+                android:text="@string/pay_using"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/default_button_size" />

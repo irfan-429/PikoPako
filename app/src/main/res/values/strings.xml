@@ -116,8 +116,7 @@
     <string name="online_food_delivery">Online food delivery</string>
 
     //set Deleivery location
-    <string name="string_order_from_a_wide_range">Order from a wide</string>
-    <string name="string_order_from_a_wide_restaurants">range of restaurants</string>
+    <string name="string_order_from_a_wide_range">Order from a wide range of restaurants</string>
     <string name="string_ready_to_see_top_restrorents">Ready to see top restaurants to order ?</string>
     <string name="string_set_delivery_location">Set delivery location</string>
     <string name="string_create_an_account">Create an account</string>
@@ -284,6 +283,7 @@
     <string name="str_verify_email_by_otp">Please verify you email by enter OTP.</string>
     <string name="str_invalid_otp">Invalid OTP</string>
     <string name="str_resent_otp">OTP Resent successfully.</string>
+    <string name="pay_using">PAY USING</string>
 
 
 </resources>
